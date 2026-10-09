@@ -77,6 +77,20 @@
   ]
  },
  {
+  "slug": "airfield-roblox",
+  "name": "Little Airfield on Roblox",
+  "aliases": [
+   "airfield-roblox",
+   "roblox",
+   "airport-tycoon"
+  ],
+  "desc": "Little Airfield on Roblox: airport tycoon you can fly (waiting on Roblox to go public)",
+  "cats": [
+   "games",
+   "aviation"
+  ]
+ },
+ {
   "slug": "mixtape",
   "name": "Mixtape Drift",
   "aliases": [

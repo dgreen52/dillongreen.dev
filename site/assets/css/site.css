@@ -1746,6 +1746,7 @@ html:not(.js) .ws-feed > .ws-msg { margin: 0; height: auto; border: 0; }
 .thumb img.focus-linework { object-position: 50% 50%; }
 .thumb img.focus-fernwood { object-position: 50% 40%; }
 .thumb img.focus-airfield { object-position: 50% 45%; }
+.thumb img.focus-airfield-roblox { object-position: 50% 50%; }
 .thumb img.focus-mixtape { object-position: 50% 55%; }
 .thumb img.focus-dragonrealm { object-position: 50% 40%; }
 .thumb img.focus-butter { object-position: 50% 50%; }

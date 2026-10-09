@@ -38,8 +38,19 @@ def linework():
     card.paste(im, ((w - im.width) // 2, 0))
     save(card, "more/linework.webp", 960)
 
+def airfield_roblox():
+    # Little Airfield on Roblox: a clean in-game shot (no text) from that repo's photo shoot
+    # (airfield-rbx/tools/art), the Cub flying low over a busy Mega Hub.
+    src = EXTE / "airfield-rbx/art/portfolio/flyover.jpg"
+    if not src.exists():
+        print(f"!! {src.name} missing - see airfield-rbx/tools/art/README.md"); return
+    save(Image.open(src), "more/airfield-roblox.webp", 1376)
+
 if sys.argv[1:] == ["linework"]:
     linework()
+    sys.exit(0)
+if sys.argv[1:] == ["airfield-roblox"]:
+    airfield_roblox()
     sys.exit(0)
 
 def crumb_screen(name):
@@ -84,3 +95,4 @@ for name in ("rain", "boot", "hack"):
 
 # Linework: a crop of its own e2e screenshot (see linework() above).
 linework()
+airfield_roblox()
