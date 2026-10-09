@@ -201,6 +201,11 @@ const GAMES = {
     },
     async drive() {},
   },
+
+  // Little Airfield on Roblox can't run in a browser: its frames are recorded in Roblox Studio by
+  // ../airfield-rbx/tools/art/capture_clip.py (a chase-cam landing, see clip.server.luau there) straight into
+  // verify/clips-raw/airfield-roblox, then encoded here with --reencode.
+  "airfield-roblox": { studio: true, size: [640, 360] },
 };
 
 /* ------------------------------------------------------------------ helpers */
@@ -316,6 +321,7 @@ async function capture(browser, slug, g, ff) {
   for (const slug of slugs) {
     const g = GAMES[slug];
     if (!g) { console.log(`!! unknown game ${slug} (have: ${Object.keys(GAMES).join(", ")})`); bad++; continue; }
+    if (g.studio && !process.argv.includes("--reencode")) { console.log(`-- ${slug}: recorded in Roblox Studio (../airfield-rbx/tools/art/capture_clip.py), then --reencode`); continue; }
     if (process.argv.includes("--reencode")) {
       const dir = path.join(RAW, slug), n = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^f_\d+\.jpg$/.test(f)).length : 0;
       if (!n) { console.log(`!! ${slug}: no kept frames in ${dir} (capture with KEEP=1 first)`); bad++; continue; }
