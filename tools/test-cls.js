@@ -7,7 +7,7 @@ const { launch } = require("./pw");
 const args = process.argv.slice(2);
 const BASE = args.find((a) => /^https?:/.test(a)) || "http://127.0.0.1:8787/";
 const MAX = args.includes("--max") ? Number(args[args.indexOf("--max") + 1]) : 0.05;
-const PAGES = (process.env.PAGES || ",par.html,projects/,studio/,guestbook/,now/,privacy.html").split(",");
+const PAGES = (process.env.PAGES || ",par.html,projects/,arcade/,studio/,guestbook/,now/,privacy.html").split(",");
 
 const OBSERVER = () => {
   window.__shifts = [];

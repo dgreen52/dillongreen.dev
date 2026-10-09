@@ -9,7 +9,7 @@ const { launch, launchWebKit, devices } = require("./pw");
 
 const BASE = process.argv[2] || "http://127.0.0.1:8787/";
 const OUT = path.resolve(__dirname, "..", "verify");
-const PAGES = (process.env.PAGES || "index.html,par.html,projects/,studio/,guestbook/,now/,privacy.html,404.html").split(",");
+const PAGES = (process.env.PAGES || "index.html,par.html,projects/,arcade/,studio/,guestbook/,now/,privacy.html,404.html").split(",");
 const WIDTHS = (process.env.WIDTHS || "1440,430,390,360").split(",").map(Number);
 const THEMES = (process.env.THEMES || "light,dark").split(",");
 

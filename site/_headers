@@ -1,6 +1,8 @@
 # Cloudflare Pages headers. https://developers.cloudflare.com/pages/configuration/headers/
+# frame-src: only the arcade's game frames (/arcade/, assets/js/arcade.js), all on the owner's workers.dev
+# subdomain. frame-ancestors 'none' + X-Frame-Options DENY still keep this site itself out of anyone's frames.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-src https://*.dillon-eu-green.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

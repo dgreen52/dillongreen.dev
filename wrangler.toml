@@ -5,11 +5,13 @@ name = "dillongreen"
 pages_build_output_dir = "./site"
 compatibility_date = "2026-10-01"
 
-# Guestbook + studio waitlist. Schema: db/schema.sql (applied by hand, see README).
+# Guestbook + studio waitlist. Schema: db/schema.sql (a new database); changes since then live in
+# db/migrations/ (each safe to re-run): npx wrangler d1 migrations apply dillongreen-db --remote
 [[d1_databases]]
 binding = "DB"
 database_name = "dillongreen-db"
 database_id = "b7df916d-a816-4c76-9bd7-87c51d55584d"
+migrations_dir = "db/migrations"
 
 # ---------- Live status (functions/api/status.js) ----------
 # Service bindings to the Workers-hosted projects. A Pages Function fetching another Worker on the

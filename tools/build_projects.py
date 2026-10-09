@@ -5,6 +5,7 @@
 What it writes:
   * site/projects/index.html  the cards (between <!-- build:cards --> markers), the "Live on the web"
                               list (<!-- build:live -->) and the counts in the heading and filter line
+  * site/arcade/index.html    one cabinet per project with "arcade" (<!-- build:arcade -->), in arcade.order
   * every page in site/       any <a data-project="slug"> gets that project's current URL, and any
                               element with data-project-name="slug" gets its current name, so the
                               home cards, studio page and posts follow the JSON too. Links to a known
@@ -57,7 +58,7 @@ def thumb(p):
 CARD_SIZES = "(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px"
 
 
-def srcset(t):
+def srcset(t, sizes=CARD_SIZES):
     src = SITE / "assets" / "img" / t["src"]
     url = lambda f: f'/assets/img/{f.relative_to(SITE / "assets" / "img").as_posix()}?v={hashlib.sha256(f.read_bytes()).hexdigest()[:10]}'
     cands = [(src.with_name(f"{src.stem}-{w}.webp"), w) for w in (480, 960)]
@@ -65,7 +66,7 @@ def srcset(t):
     if not cands or t.get("fit") == "phone":
         return ""
     cands.append((url(src), t["w"]))
-    return f' srcset="{", ".join(f"{u} {w}w" for u, w in cands)}" sizes="{CARD_SIZES}"'
+    return f' srcset="{", ".join(f"{u} {w}w" for u, w in cands)}" sizes="{sizes}"'
 
 
 def focus_css():
@@ -199,6 +200,68 @@ def between(s, name, body):
     return s[:i] + "\n" + body + "      " + s[j:]
 
 
+# ---------- /arcade/ ----------
+# Games with "arcade": {"order": n} get a cabinet: the card picture (plus gameplay clip and status chip),
+# a "Play here" button that assets/js/arcade.js turns into a sandboxed <iframe>, and an "Open in new tab"
+# link. Only https://<name>.dillon-eu-green.workers.dev can be framed: that is the one frame-src the CSP
+# in site/_headers allows. Any other URL, or "embed": false (a site that refuses to be framed), gets the
+# new-tab link only. The overlay and action-row "Play here" buttons are shown by arcade.css only when JS
+# runs on a big enough screen; phones always open the game in its own tab.
+EMBED_HOST = re.compile(r"^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.dillon-eu-green\.workers\.dev/?$")
+ARCADE_SIZES = "(max-width: 719px) calc(100vw - 34px), (max-width: 899px) calc(100vw - 58px), 700px"
+PLAY_ICON = '<svg aria-hidden="true"><use href="#i-play"/></svg>'
+
+arcade_games = sorted((p for p in P if p.get("arcade")), key=lambda p: (p["arcade"].get("order", 99), p["name"].lower()))
+arcade_notes = []
+
+
+def arcade_img(p, eager):
+    t = p["thumb"]
+    v = hashlib.sha256((SITE / "assets" / "img" / t["src"]).read_bytes()).hexdigest()[:10]
+    lazy = "" if eager else ' loading="lazy"'
+    return (f'<img class="cover focus-{p["slug"]}" src="/assets/img/{t["src"]}?v={v}"{srcset(t, ARCADE_SIZES)} '
+            f'width="{t["w"]}" height="{t["h"]}"{lazy} decoding="async" alt="{e(t["alt"])}">')
+
+
+def cabinet(n, p):
+    url = p.get("url")
+    want = p["arcade"].get("embed", True)
+    embed = bool(url and want and EMBED_HOST.match(url))
+    if url and want and not embed:
+        arcade_notes.append(f'{p["slug"]}: {url} is outside frame-src (*.dillon-eu-green.workers.dev), new tab only')
+    name = e(p["name"])
+    attrs = f' data-embed="{e(url)}"' if embed else ""
+    poster = (f'<div class="cab-poster {thumb_class(p)}"{clip_attrs(p)}>{arcade_img(p, n <= 2)}{thumb_extras(p)}'
+              + (f'<span class="cab-insert" aria-hidden="true">{PLAY_ICON}<span>Play here</span></span>' if embed else "")
+              + "</div>")
+    acts = []
+    who = f'<span class="sr-only">: {name}</span>'  # visible text stays the start of each accessible name
+    if embed:
+        acts.append(f'<button class="btn btn-primary btn-sm cab-play" type="button" data-play>{PLAY_ICON}Play here{who}</button>')
+        acts.append(f'<button class="btn btn-sm cab-stop" type="button" data-stop><svg aria-hidden="true"><use href="#i-stop"/></svg>Stop{who}</button>')
+        acts.append(f'<button class="btn btn-sm cab-fs" type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Fullscreen{who}</button>')
+    if url:
+        acts.append(f'<a class="btn btn-primary btn-sm cab-open" href="{e(url)}" target="_blank" rel="noopener" data-project="{p["slug"]}">'
+                    f'<span class="lbl-wide">Open in new tab</span><span class="lbl-phone">Play in a new tab</span>{who} {NE}</a>')
+    note = ""
+    if not url:
+        note = f'<p class="cab-note">{e(p.get("unavailable") or "Not online right now.")}</p>'
+    elif not embed:
+        note = '<p class="cab-note">This one runs in its own tab only.</p>'
+    tags = "".join(f"<li>{e(t)}</li>" for t in p.get("tags", []))
+    return f'''        <li class="cab" id="{p["slug"]}" data-cab data-name="{name}"{attrs}>
+          <div class="cab-screen">{poster}<div class="cab-stage" data-stage></div></div>
+          <div class="cab-body">
+            <p class="cab-no"><span class="cab-n">CAB {n:02d}</span><span class="status {STATUS_CLASS[p["status"]]}">{e(p["status_label"])}</span></p>
+            <h2 class="cab-name"><span data-project-name="{p["slug"]}">{name}</span></h2>
+            <p class="cab-pitch">{e(p["pitch"])}</p>
+            <ul class="chips" aria-label="Technologies">{tags}</ul>
+            <div class="cab-act">{"".join(acts)}</div>{note}
+          </div>
+        </li>
+'''
+
+
 changed = []
 
 
@@ -222,6 +285,16 @@ s = between(s, "live", live_list())
 s = re.sub(r"Index · \d+ entries", f"Index · {len(P)} entries", s)
 s = re.sub(r"data-filter-count>\d+ projects<", f"data-filter-count>{len(P)} projects<", s)
 write(pp, old, s)
+
+# 1a. /arcade/
+ap = SITE / "arcade" / "index.html"
+if ap.exists():
+    old = ap.read_bytes().decode("utf-8")
+    s = between(old, "arcade", "".join(cabinet(n, p) for n, p in enumerate(arcade_games, 1)))
+    s = re.sub(r"Insert coin · \d+ cabinets", f"Insert coin · {len(arcade_games)} cabinets", s)
+    write(ap, old, s)
+for note in arcade_notes:
+    print("note: arcade " + note)
 
 # 1b. the per-card focal points (thumb.focus) as CSS: the CSP allows no inline styles
 cp = SITE / "assets" / "css" / "site.css"

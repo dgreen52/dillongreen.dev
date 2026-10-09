@@ -1,5 +1,5 @@
 {
-  "_readme": "Single source for every project: /projects/ cards + 'Live on the web' list, the home/studio/post links tagged data-project, and the terminal (assets/js/projects-data.js). Edit here, then run: python tools/build_projects.py && python tools/stamp_assets.py. 'url' is the live URL; an action href of '@url' means 'use url'. Set 'unavailable' to a short note to pull a project's link everywhere without deleting it. 'clip' names a gameplay loop in site/assets/clips/<clip>.webm/.mp4 (tools/capture_clips.js); live projects get a status chip automatically. thumb.fit: 'cover' (crop to the card box at thumb.focus, a CSS object-position), 'contain' (whole image on the tinted panel) or 'phone' (a portrait phone screen standing on the panel, running off the bottom edge).",
+  "_readme": "Single source for every project: /projects/ cards + 'Live on the web' list, the home/studio/post links tagged data-project, and the terminal (assets/js/projects-data.js). Edit here, then run: python tools/build_projects.py && python tools/stamp_assets.py. 'url' is the live URL; an action href of '@url' means 'use url'. Set 'unavailable' to a short note to pull a project's link everywhere without deleting it. 'clip' names a gameplay loop in site/assets/clips/<clip>.webm/.mp4 (tools/capture_clips.js); live projects get a status chip automatically. thumb.fit: 'cover' (crop to the card box at thumb.focus, a CSS object-position), 'contain' (whole image on the tinted panel) or 'phone' (a portrait phone screen standing on the panel, running off the bottom edge). 'arcade': {'order': n} puts a game on /arcade/ (n = position), where it can be played in a sandboxed frame on the page; add 'embed': false for a game whose site refuses to be framed (it then only gets 'Open in new tab'). Embeds must live on *.dillon-eu-green.workers.dev, the only frame-src the CSP in site/_headers allows.",
   "projects": [
     {
       "slug": "par",
@@ -75,6 +75,50 @@
       "desc": "ARINC 429 decoder (live: pocket429.dillongreen.dev)"
     },
     {
+      "slug": "linework",
+      "name": "Linework",
+      "aliases": [
+        "linework",
+        "cad"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "A lightweight CAD editor in your browser: open DXF and DGN drawings, measure, redline and edit them, then save back to DXF or DGN. Nothing ever leaves your device.",
+      "tags": [
+        "Canvas",
+        "Web Worker",
+        "Offline PWA",
+        "Open source"
+      ],
+      "thumb": {
+        "src": "more/linework.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "Linework in dark mode: a house floor plan with dimensions, room labels and red markup: revision clouds, arrows and a callout.",
+        "fit": "cover",
+        "focus": "50% 50%"
+      },
+      "url": "https://linework-c4u.pages.dev",
+      "live_label": "linework-c4u.pages.dev",
+      "actions": [
+        {
+          "text": "Open Linework",
+          "href": "@url",
+          "style": "btn"
+        },
+        {
+          "text": "Source",
+          "href": "https://github.com/dgreen52/linework",
+          "style": "link"
+        }
+      ],
+      "launch_line": "Opening Linework. Your drawings never leave this device.",
+      "desc": "CAD viewer + editor for DXF and DGN, in the browser (open linework)"
+    },
+    {
       "slug": "fernwood",
       "name": "Fernwood",
       "aliases": [
@@ -106,6 +150,9 @@
       "url": "https://fernwood.dillon-eu-green.workers.dev/",
       "live_label": "fernwood…workers.dev",
       "play": true,
+      "arcade": {
+        "order": 5
+      },
       "actions": [
         {
           "text": "Play",
@@ -151,6 +198,9 @@
       "url": "https://little-airfield.dillon-eu-green.workers.dev/",
       "live_label": "little-airfield…workers.dev",
       "play": true,
+      "arcade": {
+        "order": 4
+      },
       "actions": [
         {
           "text": "Play",
@@ -196,6 +246,9 @@
       "url": "https://mixtape-drift.dillon-eu-green.workers.dev/",
       "live_label": "mixtape-drift…workers.dev",
       "play": true,
+      "arcade": {
+        "order": 3
+      },
       "actions": [
         {
           "text": "Play",
@@ -384,6 +437,9 @@
       "url": "https://butter.dillon-eu-green.workers.dev",
       "live_label": "butter…workers.dev",
       "play": true,
+      "arcade": {
+        "order": 1
+      },
       "actions": [
         {
           "text": "Play",
@@ -422,6 +478,9 @@
       "url": "https://beepbeach.dillon-eu-green.workers.dev",
       "live_label": "beepbeach…workers.dev",
       "play": true,
+      "arcade": {
+        "order": 2
+      },
       "actions": [
         {
           "text": "Play",

@@ -1,0 +1,149 @@
+/* /arcade/: game cabinets (markup from tools/build_projects.py, behaviour in assets/js/arcade.js).
+   Each cabinet is a 16:9 screen (the card still + gameplay clip) and a body with the controls. Nothing
+   from the game loads until "Play here" swaps a sandboxed <iframe> into the screen; one at a time.
+
+   "Play here" exists only when JS runs AND the screen is big enough to play in a frame (the same media
+   query as EMBED_MQ in arcade.js): at least 720px wide, and either a mouse/trackpad or at least 501px
+   tall (a phone held sideways is wide but short). Everywhere else, and with JS off, the primary action
+   is the "Open in new tab" / "Play in a new tab" link. The screen box never changes size while a game
+   loads, so nothing shifts; a playing cabinet grows to the full width (after the click, by design). */
+
+.arcade-hero .lead { max-width: 740px; }
+.arcade-phone-note {
+  display: none; align-items: flex-start; gap: 10px; max-width: 640px; margin: 18px 0 0;
+  font: 500 0.8rem/1.5 var(--mono); letter-spacing: 0.02em; color: var(--ink-2);
+}
+.arcade-phone-note .lamp {
+  width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; flex: none;
+  background: var(--amber); box-shadow: 0 0 8px var(--amber);
+}
+@media (max-width: 719.98px), (pointer: coarse) and (max-height: 500px), (pointer: none) and (max-height: 500px) {
+  .arcade-phone-note { display: flex; }
+}
+
+.arcade { padding-top: 8px; }
+.cabs { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+
+.cab {
+  position: relative; display: grid; min-width: 0;
+  background: var(--bg-2); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); border-radius: var(--radius);
+}
+/* neon corner brackets, like the project cards */
+.cab::before {
+  content: ""; position: absolute; inset: -1px; z-index: 4; pointer-events: none;
+  --c: var(--accent);
+  background:
+    linear-gradient(var(--c), var(--c)) left top / 16px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 2px 16px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 16px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 2px 16px no-repeat;
+}
+.cab:nth-child(even)::before { --c: var(--accent-2); }
+.cab.is-playing { border-color: var(--accent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 34px color-mix(in srgb, var(--accent) 16%, transparent); }
+
+/* ---------- the screen ---------- */
+.cab-screen {
+  position: relative; aspect-ratio: 16 / 9; min-width: 0; overflow: hidden; align-self: start;
+  background: #05070a; border-bottom: 1px solid var(--line);
+}
+.cab .cab-poster { position: absolute; inset: 0; background: var(--bg-3); }
+.cab-poster .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cab.is-playing .cab-poster { display: none; } /* off-screen for clips.js too, so the loop pauses */
+
+.cab-insert {
+  position: absolute; left: 50%; top: 50%; z-index: 3; pointer-events: none;
+  display: none; align-items: center; gap: 9px; padding: 13px 20px 13px 17px; translate: -50% -50%;
+  font: 700 0.85rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+  color: #00161c; background: #2de2ff; box-shadow: 0 0 26px rgba(45, 226, 255, 0.55);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.cab-insert svg, .cab-act svg { width: 15px; height: 15px; flex: none; }
+
+.cab-stage { position: absolute; inset: 0; display: none; background: #05070a; }
+.cab.is-playing .cab-stage { display: block; }
+.cab-stage iframe { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+.cab-loading {
+  position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; margin: 0; text-align: center;
+  font: 600 0.8rem/1.4 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: #2de2ff;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 50% 50%, rgba(45, 226, 255, 0.12), transparent 60%);
+}
+.cab-loading small { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: none; color: #8aa3ad; }
+.cab-stage.is-loaded .cab-loading { visibility: hidden; }
+
+/* ---------- the body ---------- */
+.cab-body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; padding: 16px 18px 20px; }
+.cab-no { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; }
+.cab-n { font: 600 0.75rem/1 var(--mono); letter-spacing: 0.14em; color: var(--accent-2); }
+.cab-n::before { content: "// "; content: "// " / ""; }
+.cab-name { font-size: clamp(1.45rem, 1.2rem + 1vw, 1.95rem); font-stretch: 112%; }
+.cab-pitch { margin: 0; color: var(--ink-2); max-width: 60ch; }
+.cab-act { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 6px; }
+.cab-note { margin: 0; font: 500 0.8rem/1.5 var(--mono); color: var(--ink-3); }
+.lbl-phone { display: none; }
+
+/* JS-only controls: hidden unless the mode below turns them on */
+.cab [data-play], .cab [data-stop], .cab [data-fullscreen] { display: none; }
+
+/* embed mode (see the comment at the top; must match EMBED_MQ in arcade.js) */
+@media (min-width: 720px) and (pointer: fine), (min-width: 720px) and (min-height: 501px) {
+  html.js .cab[data-embed]:not(.is-playing) .cab-play { display: inline-flex; }
+  html.js .cab[data-embed]:not(.is-playing) .cab-insert { display: inline-flex; }
+  html.js .cab[data-embed]:not(.is-playing) .cab-poster { cursor: pointer; }
+  html.js .cab.is-playing [data-stop] { display: inline-flex; }
+  html.js .arcade.can-fs .cab.is-playing [data-fullscreen] { display: inline-flex; }
+  /* "Open in new tab" steps back to a secondary button next to "Play here" */
+  html.js .cab[data-embed] .cab-open {
+    clip-path: none; border-radius: 3px; color: var(--ink); background: var(--bg-2);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2));
+  }
+}
+@media (min-width: 720px) and (pointer: fine), (min-width: 720px) and (min-height: 501px) {
+  @media (hover: hover) {
+    html.js .cab[data-embed] .cab-open:hover { border-color: var(--accent); color: var(--accent); }
+    html.js .cab[data-embed]:not(.is-playing) .cab-poster:hover .cab-insert { box-shadow: 0 0 34px rgba(45, 226, 255, 0.8); }
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cab-poster .cover { transition: scale 0.35s cubic-bezier(.2, .7, .2, 1); }
+  html.js .cab[data-embed]:not(.is-playing) .cab-poster:hover .cover { scale: 1.03; }
+}
+
+/* phones (and short landscape phones): the link is the play button */
+@media (max-width: 719.98px), (pointer: coarse) and (max-height: 500px), (pointer: none) and (max-height: 500px) {
+  .lbl-wide { display: none; }
+  .lbl-phone { display: inline; }
+}
+
+/* ---------- layout ---------- */
+@media (min-width: 900px) {
+  .cab { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  .cab-screen { border-bottom: 0; border-right: 1px solid var(--line); }
+  .cab-body { align-self: center; padding: 26px 30px 28px; }
+  .cab:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
+  .cab:nth-child(even) .cab-screen { order: 2; border-right: 0; border-left: 1px solid var(--line); }
+  /* playing: the screen takes the whole width (capped so it fits under the header), controls below */
+  .cab.is-playing { grid-template-columns: minmax(0, 1fr); }
+  .cab.is-playing .cab-screen {
+    order: 0; justify-self: center; width: min(100%, calc((100vh - 170px) * 16 / 9));
+    border: 0; border-bottom: 1px solid var(--line);
+  }
+  .cab.is-playing .cab-body { align-self: stretch; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 16px 22px 18px; }
+  .cab.is-playing .cab-act { margin: 0 0 0 auto; }
+}
+.cab.is-playing .cab-pitch, .cab.is-playing .chips { display: none; }
+
+.arcade-foot { margin: 30px 0 0; max-width: 820px; font: 500 0.8rem/1.6 var(--mono); color: var(--ink-3); }
+.arcade-foot a { color: var(--accent); }
+
+@media (max-width: 719.98px) {
+  .cabs { gap: 18px; }
+  .cab-body { padding: 14px 14px 16px; gap: 8px; }
+  .cab-pitch { font-size: 0.95rem; line-height: 1.5; }
+  .cab .chips li:nth-child(n+4) { display: none; }
+  .cab-act { width: 100%; }
+  .cab-act .cab-open { flex: 1 1 auto; justify-content: center; }
+  .cab::before { background-size: 12px 2px, 2px 12px, 12px 2px, 2px 12px; }
+  .cab .sdot { right: 4px; top: 4px; padding: 3px 5px; gap: 4px; letter-spacing: 0.04em; }
+}

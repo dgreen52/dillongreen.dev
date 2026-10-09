@@ -6,7 +6,7 @@ const path = require("path");
 const { launch } = require("./pw");
 const BASE = process.argv[2] || "http://127.0.0.1:8787/";
 const OUT = path.resolve(__dirname, "..", "verify");
-const PAGES = ["", "projects/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
+const PAGES = ["", "projects/", "arcade/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
 const WIDTHS = (process.env.WIDTHS || "320,360,390,430").split(",").map(Number);
 let fails = 0;
 const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! ") + label); };
@@ -109,7 +109,7 @@ function audit() {
     check(await page.evaluate(() => getComputedStyle(document.documentElement).overflow === "hidden"), "page scroll is locked while open");
     check(await page.evaluate(() => !!document.activeElement.closest("dialog.menu")), "focus moves into the sheet");
     const links = await page.$$eval("dialog.menu .menu-nav a", (as) => as.map((a) => a.textContent));
-    check(["Projects", "Studio", "How I work", "Experience", "Guestbook", "Now"].every((t) => links.some((l) => l.includes(t))), "sheet lists the nav links: " + links.join(", "));
+    check(["Projects", "Arcade", "Studio", "How I work", "Experience", "Guestbook", "Now"].every((t) => links.some((l) => l.includes(t))), "sheet lists the nav links: " + links.join(", "));
     check(await page.isVisible('dialog.menu a[href$="Dillon_Green_Resume.pdf"]') && await page.isVisible('dialog.menu a[href^="mailto:"]'), "sheet has resume + email");
     check((await page.getAttribute('dialog.menu a[aria-current="page"]', "href")) === "/now/", "current page is marked");
     await page.screenshot({ path: path.join(OUT, "m-menu-open-390-dark.png") });
@@ -245,7 +245,7 @@ function audit() {
     const { ctx, page } = await newPage(390, "dark");
     await page.goto(BASE + "now/", { waitUntil: "load" });
     const got = (await page.innerText(".post-meta")).trim();
-    check(got === "Last updated October 3, 2026 · Seattle, WA" && (await page.getAttribute(".post-meta time", "datetime")) === "2026-10-03", `now/ date line: "${got}"`);
+    check(got === "Last updated October 8, 2026 · Seattle, WA" && (await page.getAttribute(".post-meta time", "datetime")) === "2026-10-08", `now/ date line: "${got}"`);
     await ctx.close();
   }
 

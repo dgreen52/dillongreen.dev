@@ -1,11 +1,12 @@
 /* Live network status widget (assets/js/status.js). Mounts into any [data-status-panel].
    Uses the site tokens from site.css (--bg-2, --line, --accent, --live, --amber, --accent-2, --mono ...).
    Height is reserved before the data arrives (fixed row heights + min-height), so nothing shifts.
-   Override per placement if needed: --ns-cols (columns) and --ns-rows (rows = ceil(nodes / cols)). */
+   Override per placement if needed: --ns-cols (columns) and --ns-rows (rows = ceil(nodes / cols)).
+   11 nodes today: 6 rows of 2 below 480px, 4 rows of 3 above. */
 
 [data-status-panel] {
   --ns-cols: 2;
-  --ns-rows: 5;
+  --ns-rows: 6;
   --ns-row: 46px;
   --ns-gap: 8px;
   display: block;

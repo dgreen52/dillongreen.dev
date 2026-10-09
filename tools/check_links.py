@@ -63,6 +63,24 @@ for css in SITE.rglob("*.css"):
         if u.startswith("data:"): continue
         if not (css.parent / u.split("?")[0]).resolve().exists(): problems.append(f"{css.name}: missing {u}")
 
+# arcade: frames only from the owner's workers.dev subdomain (and nothing broader), the site itself still
+# can't be framed, and every cabinet's embed URL is one the CSP allows; no frame is in the static HTML
+hdr = (SITE / "_headers").read_text(encoding="utf-8")
+csp = re.search(r"Content-Security-Policy: (.*)", hdr).group(1)
+fsrc = re.search(r"(?:^|;)\s*frame-src ([^;]+)", csp)
+if not fsrc or fsrc.group(1).split() != ["https://*.dillon-eu-green.workers.dev"]:
+    problems.append("_headers: frame-src must be exactly https://*.dillon-eu-green.workers.dev")
+if "frame-ancestors 'none'" not in csp or "X-Frame-Options: DENY" not in hdr:
+    problems.append("_headers: the site itself must stay unframeable (frame-ancestors 'none', X-Frame-Options: DENY)")
+arcade = SITE / "arcade" / "index.html"
+if arcade.exists():
+    at = arcade.read_text(encoding="utf-8")
+    for u in re.findall(r'data-embed="([^"]*)"', at):
+        if not re.match(r"^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.dillon-eu-green\.workers\.dev/?$", u):
+            problems.append(f"arcade/index.html: embed {u!r} is outside frame-src")
+    if "<iframe" in at.lower():
+        problems.append("arcade/index.html: no <iframe> in the static page (click-to-load only)")
+
 # every /assets/ reference must carry a current ?v= stamp (tools/stamp_assets.py)
 import subprocess
 r = subprocess.run([sys.executable, str(Path(__file__).with_name("stamp_assets.py")), "--check"], capture_output=True, text=True)

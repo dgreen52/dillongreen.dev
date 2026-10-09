@@ -3,6 +3,9 @@
 --   local:  npx wrangler d1 execute dillongreen-db --local  --file db/schema.sql
 --   remote: npx wrangler d1 execute dillongreen-db --remote --file db/schema.sql
 -- Timestamps are UTC text ('YYYY-MM-DD HH:MM:SS') so they compare correctly as strings.
+-- This file is the whole current schema, for a new database. An existing database is brought up to date
+-- by db/migrations/ (each one safe to re-run), e.g.
+--   npx wrangler d1 migrations apply dillongreen-db --remote
 
 CREATE TABLE IF NOT EXISTS guestbook (
   id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12,7 +15,9 @@ CREATE TABLE IF NOT EXISTS guestbook (
   status     TEXT    NOT NULL DEFAULT 'pending'
              CHECK (status IN ('pending', 'approved')),
   ip_hash    TEXT    NOT NULL,                       -- SHA-256(ip + salt), for rate limiting only
-  created_at TEXT    NOT NULL DEFAULT (datetime('now'))
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  country    TEXT                                    -- CF-IPCountry (2 letters) or NULL; never the IP (002)
+             CHECK (country IS NULL OR (length(country) = 2 AND country GLOB '[A-Z][A-Z]'))
 );
 -- public listing: approved entries, newest first
 CREATE INDEX IF NOT EXISTS idx_guestbook_status_created ON guestbook (status, created_at DESC);

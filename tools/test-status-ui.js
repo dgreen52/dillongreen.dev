@@ -27,6 +27,8 @@ const DEMO = `<!doctype html><html lang="en"><head><meta charset="utf-8">
 
 const NODES = [
   ["pocket429", "pocket429", "up", 182, "https://pocket429.dillongreen.dev"],
+  ["linework", "Linework", "up", 64, "https://linework-c4u.pages.dev"],
+  ["fernwood", "Fernwood", "up", 131, "https://fernwood.dillon-eu-green.workers.dev/"],
   ["airfield", "Little Airfield", "up", 96, "https://little-airfield.dillon-eu-green.workers.dev/"],
   ["mixtape", "Mixtape Drift", "up", 141, "https://mixtape-drift.dillon-eu-green.workers.dev/"],
   ["crumb", "Crumb", "up", 88, "https://crumb.dillon-eu-green.workers.dev"],
@@ -71,13 +73,13 @@ const payload = (nodes = NODES) => JSON.stringify({ checked_at: new Date(Date.no
     check(h0 === h1 && y0 === y1 && h0 > 100, `${width}px: reserved height ${h0}px, no layout shift after data (${h1}px)`);
     check(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${width}px: no sideways scroll`);
     const count = await page.textContent(".ns-count");
-    check(width < 360 ? /8\/9\s+(NODES )?ONLINE/.test(count) : /8\/9\s+NODES ONLINE/.test(count), `${width}px: header says 8/9 NODES ONLINE (8/9 ONLINE under 360px)`);
+    check(width < 360 ? /10\/11\s+(NODES )?ONLINE/.test(count) : /10\/11\s+NODES ONLINE/.test(count), `${width}px: header says 10/11 NODES ONLINE (10/11 ONLINE under 360px)`);
     check(await page.$eval(".ns-head", (h) => h.scrollWidth <= h.clientWidth + 1), `${width}px: header text fits`);
     check(await page.textContent(".ns-title") === "// NETWORK STATUS", `${width}px: // NETWORK STATUS title`);
     await page.screenshot({ path: path.join(OUT, `status-${width}.png`), clip: await page.$eval("[data-status-panel]", (p) => { const r = p.getBoundingClientRect(); return { x: Math.max(0, r.x - 8), y: r.y - 8, width: Math.min(window.innerWidth - Math.max(0, r.x - 8), r.width + 16), height: r.height + 16 }; }) });
     if (width === 390) {
       const states = await page.$$eval(".ns-node", (ns) => ns.map((n) => [n.dataset.state, n.querySelector(".ns-state").textContent, n.getAttribute("aria-label")]));
-      check(states.length === 9 && states.every(([s, label]) => label.toLowerCase() === s), "every node shows its state as text (Up/Slow/Down), not colour alone");
+      check(states.length === 11 && states.every(([s, label]) => label.toLowerCase() === s), "every node shows its state as text (Up/Slow/Down), not colour alone");
       check(states.find(([s]) => s === "down")[2] === "beepbeach: Down" && /Dragon Realm Online: Slow, 1\.9 s/.test(states.find(([s]) => s === "slow")[2]), "aria-labels: 'beepbeach: Down', 'Dragon Realm Online: Slow, 1.9 s'");
       check(/checked \d+s ago/.test(await page.textContent(".ns-foot")), "footer: checked Xs ago");
       check(await page.$eval('[data-status-slug="pocket429"]', (e) => e.dataset.state) === "up" && await page.$eval('[data-status-slug="little-airfield"]', (e) => e.dataset.state) === "up" && await page.$eval("#custom", (e) => e.dataset.state === "down" && e.textContent === "beepbeach"), "card lamps get data-state (slug or host alias); non-empty elements keep their text");
@@ -94,7 +96,7 @@ const payload = (nodes = NODES) => JSON.stringify({ checked_at: new Date(Date.no
   {
     const { ctx, page } = await open(390, { allUp: true });
     await page.waitForSelector(".ns-node:not(.is-skel)", { timeout: 8000 });
-    check(/9\/9/.test(await page.textContent(".ns-count")) && await page.$eval(".ns-lamp", (e) => getComputedStyle(e).animationName) !== "none", "9/9 up + motion allowed: header lamp pulses");
+    check(/11\/11/.test(await page.textContent(".ns-count")) && await page.$eval(".ns-lamp", (e) => getComputedStyle(e).animationName) !== "none", "11/11 up + motion allowed: header lamp pulses");
     await ctx.close();
   }
   // reduced motion: nothing animates

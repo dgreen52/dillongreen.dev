@@ -30,7 +30,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=8390797a30">
+<link rel="stylesheet" href="/assets/css/site.css?v=0f4cb6e512">
 <script src="/assets/js/theme.js?v=39ed3b7b76"></script>
 </head>
 <body>
@@ -52,6 +52,7 @@
     <a class="brand" href="/" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span>Dillon Green</span></a>
     <nav class="nav" aria-label="Primary">
       <a class="hide-sm" href="/projects/">Projects</a>
+      <a class="hide-md" href="/arcade/">Arcade</a>
       <a class="hide-sm" href="/studio/">Studio</a>
       <a class="hide-sm" href="/guestbook/">Guestbook</a>
       <a class="hide-lg" href="/#practice">How I work</a>
@@ -85,10 +86,15 @@
           <h2>Visiting the site</h2>
           <p>The site uses <strong>Cloudflare Web Analytics</strong> to count visits. It doesn't set cookies, doesn't use local storage for tracking, and doesn't follow you to other sites. What I see is aggregate: how many page views, which pages, which countries and browsers, roughly how fast pages loaded. I can't see who you are.</p>
           <p>The site is hosted on Cloudflare Pages, which keeps standard server logs to run and protect the service. There are no ads, no social widgets and no other third-party scripts.</p>
-          <p>A few small things are remembered in your own browser: your light or dark theme choice, so the next page matches, and, for the current tab session only, that you've already seen the boot animation. If you sign the guestbook, a copy of your own entry (name, site and message) is also kept in this browser so you can see it while it waits for approval; it's removed once the entry is approved, and after 60 days at most. None of these ever leave your device.</p>
+          <p>The "Latest from the workshop" list on the <a href="/now/">now page</a> is my own public GitHub activity. Your browser asks this site for it, and this site asks GitHub, so your visit isn't passed on to GitHub.</p>
+          <p>A few small things are remembered in your own browser: your light or dark theme choice, so the next page matches; for the current tab session only, that you've already seen the boot animation; and the last copy of the workshop list, so the now page can still show it when you're offline. If you sign the guestbook, a copy of your own entry (name, site and message) is also kept in this browser so you can see it while it waits for approval; it's removed once the entry is approved, and after 60 days at most. None of these ever leave your device.</p>
+
+          <h2>The arcade</h2>
+          <p>The games in the <a href="/arcade/">arcade</a> are separate little websites of mine (on *.dillon-eu-green.workers.dev). Nothing from them loads until you press Play; then the game runs in a sandboxed frame on the page, without being told which page it's on. Like when you open a game directly, it may keep your progress and settings in your browser.</p>
 
           <h2>The guestbook</h2>
           <p>When you sign the <a href="/guestbook/">guestbook</a>, I store what you type: your name, your site address if you give one, and your message. Approved entries are shown publicly, with the date. Your site address is shown as plain text, not as a link.</p>
+          <p>I also keep the <strong>country</strong> you signed from, as a two-letter code that Cloudflare works out from your connection and passes along with the request. It's not your IP address, and your IP address isn't stored for it. Countries of approved entries appear on the guestbook only all together, as a "signed from N countries" row of flags, never next to your name.</p>
           <p>I also store a <strong>salted hash of your IP address</strong> (for IPv6, of your network's address block). It's a one-way scramble made with a secret key that isn't stored with the data, so it can't be turned back into your IP. I use it only to limit how many entries can come from one place in an hour, which keeps spam out, and hashes older than two days are erased whenever a new entry comes in.</p>
 
           <h2>The studio form</h2>
@@ -120,13 +126,13 @@
     </div>
     <div class="colophon">
       <span>© 2026 Dillon Green · Seattle, WA</span><span class="kana eol" aria-hidden="true">// END_OF_LINE · 接続終了</span>
-      <nav class="foot-nav" aria-label="Site"><a href="/">Home</a><a href="/projects/">Projects</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a></nav>
+      <nav class="foot-nav" aria-label="Site"><a href="/">Home</a><a href="/projects/">Projects</a><a href="/arcade/">Arcade</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a></nav>
     </div>
   </div>
 </footer>
 
-<script src="/assets/js/site.js?v=28a142dac6" defer></script>
-<script src="/assets/js/projects-data.js?v=8d0d8af6f5" defer></script>
-<script src="/assets/js/fun.js?v=ddcde077f5" defer></script>
+<script src="/assets/js/site.js?v=6bb877ad89" defer></script>
+<script src="/assets/js/projects-data.js?v=e8f22f8f19" defer></script>
+<script src="/assets/js/fun.js?v=386f566908" defer></script>
 </body>
 </html>

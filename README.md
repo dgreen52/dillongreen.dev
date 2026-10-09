@@ -2,9 +2,10 @@
 
 Static site: hand-written HTML, CSS and a little vanilla JS. No framework, no build step, no
 cookies. The only third-party request is Cloudflare Web Analytics (cookieless), once it's switched
-on for the Pages project. Fonts (Archivo, JetBrains Mono) are self-hosted under the SIL OFL; the
-licenses are in `site/assets/fonts/`. Two small Pages Functions (guestbook, studio waitlist) store
-form posts in Cloudflare D1.
+on for the Pages project (plus the owner's own games, framed on /arcade/ only after a click). Fonts
+(Archivo, JetBrains Mono) are self-hosted under the SIL OFL; the licenses are in `site/assets/fonts/`.
+Small Pages Functions store the guestbook and studio form posts in Cloudflare D1, report live status
+and pass along the owner's public GitHub activity.
 
 ## Layout
 
@@ -13,23 +14,26 @@ portfolio/
 ├── site/                  ← the deployable site (and the only thing uploaded)
 │   ├── index.html         home: hero + ARINC 429 bit-flipper, four featured projects, live status, how I work, experience
 │   ├── projects/          every project, filterable (generated cards, see "Projects" below)
+│   ├── arcade/            the web games, playable in a sandboxed frame on the page (see "Arcade")
 │   ├── par.html           PAR case study (generalized, no proprietary data)
 │   ├── studio/            "Dillon Green · Studio": pitch, pocket429, waitlist form (#waitlist)
 │   ├── guestbook/         Web 1.0 guestbook; entries appear only after approval
-│   ├── now/               "What I'm doing now" (a nownownow.com-style now page; update the date when you edit it)
+│   ├── now/               "What I'm doing now" (a nownownow.com-style now page; update the date when you edit it) + "Latest from the workshop" GitHub feed
 │   ├── privacy.html       plain-language privacy page (linked from the footer and both forms)
 │   ├── 404.html
 │   ├── Dillon_Green_Resume.pdf
 │   ├── _headers           security + cache headers for Cloudflare Pages
 │   ├── robots.txt, sitemap.xml, site.webmanifest
 │   ├── og-image.png (1200×630), favicon.svg/.ico, apple-touch-icon.png, icon-192/512.png
-│   └── assets/{css,js,fonts,img,clips,og}   js: theme, site (decoder + flipper), fun (terminal, ambient grid etc.), forms (guestbook/waitlist), clips (gameplay loops), status (live-status widget)
+│   └── assets/{css,js,fonts,img,clips,og}   js: theme, site (decoder + flipper), fun (terminal, ambient grid etc.), forms (guestbook/waitlist), clips (gameplay loops), status (live-status widget), arcade (game frames), activity (workshop feed)
 │                          clips/: muted gameplay loops (.webm + .mp4) for the game cards · og/: per-page 1200x630 share cards
 ├── functions/             Cloudflare Pages Functions, deployed with the site
-│   ├── api/guestbook.js   GET approved entries (max 100) · POST a new entry (stored 'pending')
+│   ├── api/guestbook.js   GET approved entries (max 100) + their countries · POST a new entry (stored 'pending')
 │   ├── api/waitlist.js    POST only; there is deliberately no way to read the list over HTTP
-│   └── _lib/forms.js      shared validation, honeypot, ip_hash + rate limit (not a route)
-├── db/schema.sql          D1 tables + indexes (guestbook, waitlist); applied by hand
+│   ├── api/activity.js    GET the owner's recent public GitHub activity (logic: _lib/activity-core.js)
+│   └── _lib/forms.js      shared validation, honeypot, ip_hash + rate limit, country code (not a route)
+├── db/schema.sql          D1 tables + indexes (guestbook, waitlist): the whole schema, for a new database
+├── db/migrations/         changes to an existing database, each safe to re-run (wrangler.toml migrations_dir)
 ├── resume/resume.html     working copy of the resume master, phone number removed
 ├── tools/                 asset + verification scripts (not deployed)
 ├── verify/                screenshots from the last verification run (not deployed)
@@ -65,6 +69,20 @@ The D1 database `dillongreen-db` already exists. Create its tables once (safe to
 ```
 npx wrangler d1 execute dillongreen-db --remote --file db/schema.sql
 ```
+
+Then bring an existing database up to date with the migrations in `db/migrations/` (wrangler records
+what it has applied in a `d1_migrations` table; every file is also safe to run again by hand with
+`d1 execute --remote --file`):
+
+```
+npx wrangler d1 migrations apply dillongreen-db --remote
+```
+
+`002_guestbook_country.sql` adds the nullable `guestbook.country` column. SQLite has no
+`ADD COLUMN IF NOT EXISTS`, so it rebuilds the table (rows, ids and timestamps kept, indexes recreated)
+and carries over countries already stored, which is what makes it re-runnable;
+`node tools/test-migrations.js` proves that on throwaway local databases. Until it has run, the
+guestbook keeps working without countries (the Function falls back to the old columns and logs it).
 
 Until that runs, the forms answer with a friendly "try again in a minute" and the guestbook shows
 "couldn't load".
@@ -119,6 +137,12 @@ How the API protects itself (both endpoints, `functions/_lib/forms.js`):
   random string), then redeploy. It is never stored in the repo. **Without it both forms refuse
   posts** ("try again in a minute") rather than store a reversible hash. Hashes older than two
   days are blanked after each new post; changing the secret just restarts the hourly counts.
+- Country: the guestbook POST keeps the `CF-IPCountry` header Cloudflare adds (validated as two capital
+  letters; `XX` (unknown) and `T1` (Tor) are stored as NULL; a CHECK constraint backs it up), never
+  the IP. GET returns `countries`, the distinct codes of **approved** entries (most signatures first),
+  and never ties a country to an entry. The page shows "Signed from N countries" and a row of flags
+  built from the codes (regional-indicator pairs, `textContent` only; where the system has no flag
+  emoji, e.g. Windows, small code chips instead). The waitlist doesn't keep a country.
 - Error replies are generic and friendly; raw errors only go to the Worker log.
 - `GET /api/waitlist` is a 404 (POST is the only handler). Rendering uses `textContent` only
   (`site/assets/js/forms.js`).
@@ -171,7 +195,55 @@ tagged `data-project-name="<slug>"` on any page (home featured cards, studio, no
 - **Live status**: every project with a `url` gets an `.sdot` chip (`data-status-slug`) in its
   picture corner, and `/` and `/projects/` have a `.status-slot` for the network-status panel;
   `assets/js/status.js` (+ `status.css`, `/api/status`) fills both. The slot reserves the panel's
-  height (246px, 354px under 480px) so nothing moves when it loads.
+  height (300px; 408px under 480px, for 11 nodes) so nothing moves when it loads. A 12th node fits
+  the same box on wide screens; below 480px raise `--ns-rows` in `status.css` and the `.status-slot`
+  min-height in `site.css` together.
+- **Arcade** (`"arcade": {"order": n}`): the game gets a cabinet on `/arcade/` (see "Arcade" below).
+
+## Arcade
+
+`/arcade/` lists every project with `"arcade": {"order": n}` (cabinets written by
+`build_projects.py` between `<!-- build:arcade -->` markers): butter, beepbeach, Mixtape Drift, Little
+Airfield and Fernwood. Each cabinet is the card picture (+ gameplay clip and status chip) and its
+controls. **Nothing from a game loads until "Play here" is pressed**; then `assets/js/arcade.js` swaps
+in an `<iframe>` with `sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"`,
+`allow="fullscreen; autoplay; gamepad"`, `referrerpolicy="no-referrer"` and `loading="lazy"`, and
+unloads any other running game first (one at a time). "Fullscreen" puts the frame full screen, "Stop"
+removes it, "Open in new tab" is always there. Phones (under 720px wide, or a short landscape phone)
+never embed: the link becomes "Play in a new tab" and a note says why; with JS off every game is a
+new-tab link. The header shows the Arcade link from 800px (below that it's in the menu sheet).
+
+- CSP: `frame-src https://*.dillon-eu-green.workers.dev` and nothing broader; the site itself keeps
+  `frame-ancestors 'none'` + `X-Frame-Options: DENY`. `check_links.py` fails if either changes or a
+  cabinet would embed something outside that host.
+- Embedding needs the game to allow being framed. All five were checked (their `wrangler.toml`,
+  `_headers` and worker code send no `X-Frame-Options` or `frame-ancestors`, and none frame-busts).
+  For a game that refuses, set `"embed": false` in its `arcade` entry: it gets "Open in new tab" only.
+- Inside the frame there's no `allow-modals` and no clipboard / web-share / motion-sensor permission,
+  so a game's `confirm()` (Little Airfield's "start over"), `prompt()` fallback (Mixtape Drift's share
+  link) and accelerometer reads quietly do nothing there; they work in the game's own tab.
+
+## Workshop feed (/now/)
+
+`GET /api/activity` (`functions/api/activity.js`, logic in `functions/_lib/activity-core.js`) reads
+`https://api.github.com/users/dgreen52/events/public` and answers
+`{ok, stale, fetched_at, items: [{repo, type, message, url, date}]}` (max 8, newest first):
+
+- `push` (one per push; the head commit's first line, max 90 characters, with trailers such as
+  `Co-Authored-By` / `Signed-off-by`, tool footers and email addresses removed; GitHub no longer sends
+  commit messages in push events, so each is looked up once per SHA with the small git-data endpoint),
+  `create` (a new repository only) and `release` (published). Only repos owned by `dgreen52`; links are
+  always `https://github.com/...`; nothing else from GitHub is passed on.
+- Caching: one stored copy in `caches.default` plus isolate memory, refreshed at most every 30 minutes
+  with an ETag. If GitHub errors, times out or rate-limits (60/hour per egress IP when anonymous), the
+  last good copy is served with `stale: true` and GitHub isn't asked again for 5 minutes (or until its
+  rate-limit reset, at most 30). Never fetched and GitHub down: `503 {ok: false}`.
+- **Optional `GITHUB_TOKEN`** raises the limit to 5,000/hour. It only reads public data, so a
+  fine-grained token with no repository access and no permissions is enough:
+  `npx wrangler pages secret put GITHUB_TOKEN --project-name dillongreen`. Without it, it works the same.
+- The page (`assets/js/activity.js`) shows 6 rows in a box that reserves its height, `textContent`
+  only, links re-checked as `https://github.com`; zero items shows a "quiet week" note, and when the
+  feed can't be reached it shows the last copy this browser saw (localStorage), or an offline note.
 
 ## Verify before deploying
 
@@ -180,6 +252,7 @@ Run the site the way Pages will, with the Functions, `_headers` (so the CSP is e
 
 ```
 npx wrangler d1 execute dillongreen-db --local --file db/schema.sql   # once; local only
+npx wrangler d1 migrations apply dillongreen-db --local                 # local only
 npx wrangler pages dev site --port 8788 --binding IP_SALT=local-test-salt   # in one terminal (the forms refuse posts without IP_SALT)
 node tools/verify.js http://127.0.0.1:8788/              # full-page screenshots of every page (incl. 404) at 1440/430/390/360, night+daylight; broken images, 404s, JS/CSP errors; then zero sideways scroll at 320/360/375/390/414/430 in Chromium AND WebKit (iPhone), measured with the overflow-x guard off, listing any element that pokes out
 node tools/test-webkit.js http://127.0.0.1:8788/        # iPhone 13 in WebKit: overflow, no boot overlay, no tilt/hover effects or header blur on touch, menu, More, rails, filters; scroll frames in verify/wk-home-*.png
@@ -188,7 +261,8 @@ node tools/test-mobile.js http://127.0.0.1:8788/         # phones (touch emulati
 python tools/montage.py verify/index-390-dark.png         # lay a tall screenshot out as side-by-side columns to see the whole page at once
 node tools/test-interactions.js http://127.0.0.1:8788/   # bit-flipper, keyboard, theme toggle
 node tools/test-fun.js http://127.0.0.1:8788/            # boot, terminal, Konami intrusion, rain, reduced-motion fallbacks
-node tools/test-forms.js http://127.0.0.1:8788/          # guestbook/waitlist API + UI, rate limit, honeypot, XSS as text, new terminal commands, pocket429 links
+node tools/test-forms.js http://127.0.0.1:8788/          # guestbook/waitlist API + UI, rate limit, honeypot, XSS as text, countries + flags, new terminal commands, pocket429 links
+node tools/test-arcade.js http://127.0.0.1:8788/         # arcade: click-to-load, iframe sandbox/allow/referrer, one game at a time, fullscreen, phones open a tab, no-JS (games stubbed)
 python tools/check_links.py                              # local links/anchors on every page; no phone numbers, dollar amounts or old email
 ```
 
@@ -225,7 +299,7 @@ scroll-snap rails (`.rail`). The ARINC 429 word runs edge to edge as 4 rows of 8
   touch or scroll. Never shown under `prefers-reduced-motion`, to automation, or when the URL
   has a #fragment. Add `?boot` to the URL to see it again.
 - **Terminal**: press `` ` `` or `/`, or click the `>_` button in the header. Try `help`,
-  `whoami`, `decode 6445C0C1`, `projects`, `now`, `open mirror`, `pocket429` (opens the live web app in a
+  `whoami`, `decode 6445C0C1`, `projects`, `now`, `arcade`, `open mirror`, `pocket429` (opens the live web app in a
   new tab), `studio`, `waitlist`, `guestbook`, `play butter`, `play airfield`, `fly`, `theme`. It works on every page; section jumps fall back to the home page.
 - **Easter eggs**: the Konami code (↑↑↓↓←→←→BA) or typing `netrunner` runs a MIRROR-OS-style
   intrusion with katakana rain (`?intrusion` in the URL triggers it too); typing `rain` starts
@@ -259,14 +333,15 @@ project with a live URL and answers
 - Each node gets one GET (redirects not followed) with a 4 s budget, all in parallel:
   **up** = 2xx/3xx under 1.5 s, **slow** = 2xx/3xx at 1.5 s or more, **down** = error, timeout,
   4xx or 5xx. `up` in the JSON counts nodes that answered (up + slow), which is the widget's
-  "N/9 NODES ONLINE".
+  "N/11 NODES ONLINE".
 - Workers-hosted projects are fetched through **service bindings** (`SVC_<SERVICE>` in
   `wrangler.toml`), because a Pages Function fetching another Worker on the same account's
   workers.dev can be refused (error 1042). Without a binding (local dev) it falls back to `fetch()`.
   When you add a Workers project: add its `[[services]]` block (binding = `SVC_` + upper-cased
   service name with `-` -> `_`), run `build_projects.py`, redeploy.
-- pocket429 is checked at `https://pocket429.pages.dev/` instead of its same-zone custom domain
-  (`CHECK_URL` in `status-core.js`).
+- pocket429 and Linework are checked at their Pages origins (`https://pocket429.pages.dev/`,
+  `https://linework-c4u.pages.dev/`) instead of their same-zone custom domains (`CHECK_URL` in
+  `status-core.js`); the widget still links to the public URLs.
 - Caching: one shared result for 60 s (`caches.default`, synthetic key `/__status-cache/v1`, plus
   per-isolate memory; concurrent cold requests share one round of checks). Browsers get
   `Cache-Control: public, max-age=30`. The endpoint reads nothing from the request.
@@ -382,4 +457,6 @@ node tools/test-status-ui.js http://127.0.0.1:8791/    # status widget with a mo
 
 Unit tests (no server, no network): `node tools/test-status.js`, `node tools/test-notify.js`,
 `node tools/test-access.js` (Access JWT with a locally generated RSA key and a mocked certs
-endpoint, plus the admin API rules against a mock D1).
+endpoint, plus the admin API rules against a mock D1), `node tools/test-activity.js` (the GitHub
+reducer and the feed's caching with a mocked fetch, clock and Cache API). `node tools/test-migrations.js`
+runs `db/migrations` against throwaway local D1 databases (`--persist-to`, deleted afterwards).

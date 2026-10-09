@@ -68,6 +68,7 @@ function mockCaches() {
   const calls = [];
   const fetchTable = {
     "pocket429.pages.dev": { status: 200 },
+    "linework-c4u.pages.dev": { status: 200 },
     "surprisepass.pages.dev": { status: 503 },
     // workers.dev hosts must NOT be fetched when a binding exists
     "butter.dillon-eu-green.workers.dev": { status: 200 },
@@ -104,6 +105,9 @@ function mockCaches() {
   check(took < 900, `checks run in parallel and respect the timeout (${took}ms for ${N} nodes, timeout 300ms)`);
   check(by.pocket429.status === "up", "pocket429 checked via pages.dev -> up");
   check(calls.some((c) => c.via === "fetch" && c.host === "pocket429.pages.dev") && !calls.some((c) => c.host === "pocket429.dillongreen.dev"), "pocket429 uses https://pocket429.pages.dev, not the same-zone custom domain");
+  check(by.linework && by.linework.status === "up" && by.linework.url === "https://linework-c4u.pages.dev", "linework checked via its pages.dev origin -> up; public URL kept for the widget link");
+  check(calls.some((c) => c.via === "fetch" && c.host === "linework-c4u.pages.dev") && !calls.some((c) => c.host === "linework.dillongreen.dev" || c.host === "linework.pages.dev"),
+    "linework uses https://linework-c4u.pages.dev (its Pages project), never the same-zone custom domain or linework.pages.dev");
   check(by.airfield.status === "up", "binding 200 -> up");
   check(by.mixtape.status === "up", "binding 302 -> up (redirect not followed)");
   check(calls.filter((c) => c.via === "binding").every((c) => c.redirect === "manual"), "binding requests use redirect: manual");
@@ -114,8 +118,8 @@ function mockCaches() {
   check(by.halfsies.status === "down" && calls.some((c) => c.via === "fetch" && c.host === "halfsies.dillon-eu-green.workers.dev"), "missing binding -> global fetch (local dev path)");
   check(by.surprisepass.status === "down", "pages 503 -> down");
   check(!calls.some((c) => c.via === "fetch" && ["little-airfield", "mixtape-drift", "crumb", "dragonrealm", "beepbeach"].some((s) => c.host.startsWith(s + "."))), "no workers.dev fetch when the binding works");
-  // up: pocket429, airfield, mixtape, crumb (slow), butter (fallback). Nodes without a mock (e.g. fernwood) are down.
-  check(body.total === N && body.up === body.nodes.filter((n) => n.status !== "down").length && body.up === 5, `up counts up+slow (${body.up}/${N})`);
+  // up: pocket429, linework, airfield, mixtape, crumb (slow), butter (fallback). Nodes without a mock (e.g. fernwood) are down.
+  check(body.total === N && body.up === body.nodes.filter((n) => n.status !== "down").length && body.up === 6, `up counts up+slow (${body.up}/${N})`);
   check(!isNaN(Date.parse(body.checked_at)) && body.nodes.every((n) => Object.keys(n).join() === "slug,name,status,ms,url" && Number.isInteger(n.ms)), "response shape {checked_at, up, total, nodes:[{slug,name,status,ms,url}]}");
 
   /* ---- real 4s default timeout on one hanging node ---- */

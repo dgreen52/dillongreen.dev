@@ -89,7 +89,7 @@ const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! "
   await page.keyboard.press("Backquote");
   await page.fill("#term-in", "now");
   await Promise.all([page.waitForURL(/\/now\/$/, { timeout: 5000 }).catch(() => {}), page.keyboard.press("Enter")]);
-  check(/\/now\/$/.test(page.url()) && /Last updated October 3, 2026/.test(await page.textContent(".post-meta")), "terminal 'now' opens /now/ (last updated October 3, 2026)");
+  check(/\/now\/$/.test(page.url()) && /Last updated October 8, 2026/.test(await page.textContent(".post-meta")), "terminal 'now' opens /now/ (last updated October 8, 2026)");
 
   // ambient cursor grid: one fixed layer on every page, follows the mouse, stays lit while scrolling
   for (const pg of ["index.html", "par.html"]) {

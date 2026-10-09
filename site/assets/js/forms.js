@@ -131,6 +131,8 @@
   var empty = document.querySelector("[data-gb-empty]");
   var odo = document.querySelector("[data-odometer]");
   var countText = document.querySelector("[data-count-text]");
+  var geoText = document.querySelector("[data-gb-geo-text]");
+  var flagRow = document.querySelector("[data-gb-flags]");
   var PENDING = "dg-gb-pending";
   var approved = null; // last approved list from the API
 
@@ -149,6 +151,66 @@
       setDigits(Math.round(total * eased));
       if (t < 1) requestAnimationFrame(tick);
     })(start);
+  }
+  // "Signed from N countries" + flags. The API sends only two-letter codes of approved entries (the
+  // server validated them already); they're checked again here and each flag is built from the code as
+  // two regional-indicator characters, set with textContent. Country names (for the tooltip and the
+  // screen-reader label) come from the browser's own Intl.DisplayNames.
+  var regionName = (function () {
+    try {
+      var dn = new Intl.DisplayNames(["en"], { type: "region" });
+      return function (c) { try { return dn.of(c) || c; } catch (e) { return c; } };
+    } catch (e) { return function (c) { return c; }; }
+  })();
+  function flagOf(c) { return String.fromCodePoint(0x1F1E6 + c.charCodeAt(0) - 65, 0x1F1E6 + c.charCodeAt(1) - 65); }
+  // Some systems (Windows, notably) have no flag emoji and draw the two letters instead. Draw one flag on a
+  // tiny canvas: a real flag has colour, the letter fallback is plain. Without flags, each country gets a
+  // small retro code chip ("NZ") instead, which reads as intended rather than broken.
+  var flagsWork = (function () {
+    try {
+      var c = document.createElement("canvas");
+      c.width = c.height = 20;
+      var x = c.getContext("2d", { willReadFrequently: true });
+      if (!x) return true;
+      x.textBaseline = "top";
+      x.font = '18px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif';
+      x.fillText(flagOf("SE"), 0, 0);
+      var d = x.getImageData(0, 0, 20, 20).data;
+      for (var i = 0; i < d.length; i += 4) {
+        if (d[i + 3] > 128 && (Math.abs(d[i] - d[i + 1]) > 40 || Math.abs(d[i + 1] - d[i + 2]) > 40)) return true;
+      }
+      return false;
+    } catch (e) { return true; }
+  })();
+  function showGeo(list) {
+    if (!geoText || !flagRow) return;
+    flagRow.textContent = "";
+    if (list == null) {
+      geoText.textContent = "Flags are offline";
+      flagRow.setAttribute("aria-label", "Visitor flags unavailable");
+      return;
+    }
+    var codes = [];
+    (Array.isArray(list) ? list : []).forEach(function (c) {
+      if (typeof c === "string" && /^[A-Z]{2}$/.test(c) && c !== "XX" && c !== "T1" && codes.indexOf(c) < 0) codes.push(c);
+    });
+    var n = codes.length;
+    geoText.textContent = n === 0 ? "No flags on the map yet" : "Signed from " + n + (n === 1 ? " country" : " countries");
+    if (!n) { // three empty slots keep the row from looking broken
+      for (var k = 0; k < 3; k++) flagRow.appendChild(el("span", "gb-flag-slot"));
+      flagRow.setAttribute("aria-label", "No visitor flags yet");
+      return;
+    }
+    // as many as fit on the one reserved row (about 32px per flag, 38px per code chip), the rest as "+N"
+    var fit = Math.max(3, Math.min(14, Math.floor((flagRow.clientWidth + 4) / (flagsWork ? 32 : 38))));
+    var shown = n > fit ? codes.slice(0, fit - 1) : codes;
+    shown.forEach(function (c) {
+      var f = el("span", flagsWork ? "gb-flag" : "gb-flag is-code", flagsWork ? flagOf(c) : c);
+      f.title = regionName(c);
+      flagRow.appendChild(f);
+    });
+    if (n > shown.length) flagRow.appendChild(el("span", "gb-flag-more", "+" + (n - shown.length)));
+    flagRow.setAttribute("aria-label", n ? "Visitors' countries: " + codes.map(regionName).join(", ") : "No visitor flags yet");
   }
   function fmtDate(d) {
     var dt = new Date(d + "T00:00:00Z");
@@ -218,10 +280,12 @@
       approved = { entries: entries, total: Number(data.total) || entries.length };
       draw();
       showCount(approved.total);
+      showGeo(Array.isArray(data.countries) ? data.countries : []);
     })
     .catch(function () {
       empty.hidden = false;
       empty.textContent = "The guestbook couldn't load just now. Try again in a bit.";
       showCount(null);
+      showGeo(null);
     });
 })();

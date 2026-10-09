@@ -2,8 +2,10 @@
 
 Read-only with respect to the source projects. Re-run after source screenshots
 change:  python tools/build_images.py
+         python tools/build_images.py linework     # just the Linework card
 Spectro has no stored screenshot; render it first with tools/render-spectro.js.
 """
+import sys
 from pathlib import Path
 from PIL import Image
 
@@ -19,6 +21,26 @@ def save(im, rel, width, quality=82):
     dst.parent.mkdir(parents=True, exist_ok=True)
     im.save(dst, "WEBP", quality=quality, method=6)
     print(f"{rel:32s} {im.width}x{im.height}  {dst.stat().st_size // 1024} KB")
+
+def linework():
+    # Linework's own e2e screenshot (1440x900, dark). Keep only the drawing canvas: below the toolbar
+    # (y 134), above the status bar (y 872), left of the layers panel (x 1140). The "Drag a box to cloud
+    # it" hint pill is a transient tooltip, so it's painted over with the canvas colour; the canvas is
+    # then padded left and right in that same flat colour to 16:9, so the plan isn't cropped.
+    src = EXTE / "linework/tests/e2e/out/markup-house-dark-1440.png"
+    if not src.exists():
+        print(f"!! {src.name} missing - run Linework's e2e screenshots"); return
+    im = Image.open(src).convert("RGB").crop((0, 134, 1139, 872))  # 1139 x 738
+    bg = (15, 18, 22)
+    im.paste(bg, (360, 6, 780, 44))  # the hint pill (canvas y 140-178)
+    w = round(im.height * 16 / 9)
+    card = Image.new("RGB", (w, im.height), bg)
+    card.paste(im, ((w - im.width) // 2, 0))
+    save(card, "more/linework.webp", 960)
+
+if sys.argv[1:] == ["linework"]:
+    linework()
+    sys.exit(0)
 
 def crumb_screen(name):
     # The store shots are marketing frames; crop to the phone's inner screen.
@@ -59,3 +81,6 @@ for name in ("rain", "boot", "hack"):
         save(Image.open(p), f"work/mirror-{name}.webp", 480)
     else:
         print(f"!! mirror-{name}.png missing - run: node tools/render-mirror.js")
+
+# Linework: a crop of its own e2e screenshot (see linework() above).
+linework()

@@ -36,6 +36,7 @@ const freshIp = () => `10.42.${Math.floor(++ipN / 250)}.${ipN % 250}`;
 async function post(endpoint, body, opts = {}) {
   const headers = { "Content-Type": opts.type || "application/json", "CF-Connecting-IP": opts.ip || freshIp() };
   if (opts.origin) headers.Origin = opts.origin;
+  if (opts.country !== undefined) headers["CF-IPCountry"] = opts.country;
   const res = await http(BASE + endpoint, { method: opts.method || "POST", headers, body: typeof body === "string" ? body : JSON.stringify(body) });
   let data = null; try { data = await res.json(); } catch (e) {}
   return { status: res.status, data };
@@ -83,6 +84,10 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
     check(F.rateKey("203.0.113.7") === "203.0.113.7" && F.rateKey("::ffff:203.0.113.7") === "::ffff:203.0.113.7" && F.rateKey("") === "unknown" && F.rateKey("2001:db8::1::2") === "2001:db8::1::2", "rateKey: IPv4 / IPv4-mapped kept whole, junk left as-is");
     const h = await F.ipHash(new Request("https://x/", { headers: { "CF-Connecting-IP": "2001:db8:aa:1::5" } }), { IP_SALT: SALT });
     check(h === hmac("2001:db8:aa:1::/64"), "ipHash = HMAC-SHA-256(key IP_SALT, /64 bucket), hex");
+    const cc = [["US", "US"], ["nz", "NZ"], [" gb ", "GB"], ["XX", null], ["T1", null], ["USA", null], ["U", null], ["", null], [null, null], [undefined, null], ["<b", null], ["ÜS", null], ["U1", null], [42, null]];
+    const ccBad = cc.filter(([v, want]) => F.countryCode(v) !== want);
+    check(ccBad.length === 0, "countryCode: two letters (upper-cased) or null; XX (unknown) and T1 (Tor) dropped" + (ccBad.length ? " FAILED for " + JSON.stringify(ccBad) : ""));
+    check(F.requestCountry(new Request("https://x/", { headers: { "CF-IPCountry": "JP" } })) === "JP" && F.requestCountry(new Request("https://x/")) === null, "requestCountry reads CF-IPCountry (absent -> null)");
   }
 
   sql("DELETE FROM guestbook; DELETE FROM waitlist;");
@@ -100,6 +105,25 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
   sql(`UPDATE guestbook SET status = 'approved' WHERE id = ${Number(rows[0].id)}`);
   g = await getEntries();
   check(g.total === 1 && g.entries[0].name === "Ada" && !("ip_hash" in g.entries[0]) && !("id" in g.entries[0]), "approved entry visible, no ip_hash/id exposed");
+
+  /* country: from CF-IPCountry, validated, kept per entry, shown only as an aggregate of approved entries */
+  {
+    const sent = [["Geo NZ", "NZ"], ["Geo nz", "nz"], ["Geo CA", "CA"], ["Geo XX", "XX"], ["Geo T1", "T1"], ["Geo USA", "USA"], ["Geo html", "<b>"], ["Geo none", undefined]];
+    for (const [name, country] of sent) {
+      r = await post("/api/guestbook", { name, message: "Signed with a country header" }, { country });
+      if (r.status !== 201) check(false, `country post ${name} -> ${r.status}`);
+    }
+    const geo = Object.fromEntries(sql("SELECT name, country FROM guestbook WHERE name LIKE 'Geo %'").map((x) => [x.name, x.country]));
+    check(geo["Geo NZ"] === "NZ" && geo["Geo nz"] === "NZ" && geo["Geo CA"] === "CA", "CF-IPCountry stored as two capital letters (NZ, nz -> NZ, CA)");
+    check(["Geo XX", "Geo T1", "Geo USA", "Geo html", "Geo none"].every((n) => geo[n] === null), "XX, T1, USA, <b> and a missing header are stored as NULL");
+    g = await getEntries();
+    check(Array.isArray(g.countries) && g.countries.length === 0, "pending entries' countries are not shown");
+    sql("UPDATE guestbook SET status = 'approved' WHERE name IN ('Geo NZ', 'Geo nz', 'Geo CA', 'Geo XX')");
+    g = await (await http(BASE + "/api/guestbook?fresh=" + Date.now())).json();
+    check(JSON.stringify(g.countries) === '["NZ","CA"]', "GET countries: distinct codes of approved entries, most signatures first: " + JSON.stringify(g.countries));
+    check(g.entries.every((e) => !("country" in e)), "no entry carries its country (only the aggregate list)");
+    sql("DELETE FROM guestbook WHERE name LIKE 'Geo %'");
+  }
 
   r = await post("/api/guestbook", { name: "Bot", message: "buy things", fax: "555" });
   check(r.status === 200 && r.data.ok && sql("SELECT COUNT(*) AS n FROM guestbook WHERE name = 'Bot'")[0].n === 0, "honeypot: friendly reply, nothing stored");
@@ -345,6 +369,30 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
     await ctx.close();
   }
 
+  // guestbook flags: built from the codes with textContent; anything that isn't two capital letters is ignored
+  for (const w of [1440, 390]) {
+    const ctx = await ctxFor({ viewport: { width: w, height: 900 }, colorScheme: "dark", reducedMotion: "reduce" });
+    const page = await ctx.newPage(); watch(page, `guestbook flags ${w}`);
+    const countries = ["NZ", "<img src=x onerror=alert(1)>", "XX", "us", "T1", "CA", "NZ", "JP", 7, null];
+    await page.route("**/api/guestbook", (route) => route.request().method() === "GET"
+      ? route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, total: 1, entries: [{ name: "Flag Tester", url: "", message: "hi", date: "2026-10-08" }], countries }) })
+      : route.continue());
+    await page.goto(BASE + "/guestbook/", { waitUntil: "networkidle" });
+    await page.waitForFunction(() => /Signed from/.test(document.querySelector("[data-gb-geo-text]").textContent));
+    const f = await page.$eval("[data-gb-flags]", (row) => ({
+      kids: [...row.children].map((c) => ({ tag: c.tagName, cls: c.className, text: c.textContent, title: c.title })),
+      label: row.getAttribute("aria-label"), html: row.innerHTML,
+    }));
+    const text = await page.textContent("[data-gb-geo-text]");
+    check(text === "Signed from 3 countries", `${w}: "${text}" (NZ, CA, JP; junk, XX, T1, lower-case and repeats ignored)`);
+    const isFlag = (k) => (k.cls === "gb-flag" && [...k.text].length === 2 && [...k.text].every((ch) => ch.codePointAt(0) >= 0x1F1E6 && ch.codePointAt(0) <= 0x1F1FF)) || (k.cls === "gb-flag is-code" && /^[A-Z]{2}$/.test(k.text));
+    check(f.kids.length === 3 && f.kids.every((k) => k.tag === "SPAN" && isFlag(k)), `${w}: three flags, each a regional-indicator pair (or a code chip where the system has no flag emoji): ` + f.kids.map((k) => k.cls + ":" + k.text).join(" "));
+    check(f.kids.map((k) => k.title).join() === "New Zealand,Canada,Japan" && /New Zealand, Canada, Japan/.test(f.label), `${w}: country names in title + the row's aria-label`);
+    check(!/<img|onerror/.test(f.html) && (await page.$$("[data-gb-flags] img, [data-gb-flags] script")).length === 0, `${w}: no markup from the data`);
+    await page.locator(".counter-box").screenshot({ path: path.join(OUT, `guestbook-flags-${w}-dark.png`) });
+    await ctx.close();
+  }
+
   // studio waitlist UI
   {
     const ctx = await ctxFor({ viewport: { width: 390, height: 860 } });
@@ -394,7 +442,7 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
     const run = async (cmd) => { await page.fill("#term-in", cmd); await page.keyboard.press("Enter"); };
     await run("help");
     const help = await page.textContent(".term-out");
-    check(["play", "butter", "airfield", "open <name>", "fly", "guestbook", "studio", "now"].every((c) => help.includes(c)), "help lists the new commands");
+    check(["play", "butter", "airfield", "open <name>", "fly", "guestbook", "studio", "now", "arcade"].every((c) => help.includes(c)), "help lists the new commands");
     const popup = page.waitForEvent("popup", { timeout: 4000 }).catch(() => null);
     await run("play butter");
     const pop = await popup;
@@ -486,7 +534,7 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
   }
 
   // every page: no console errors / CSP violations, all requests succeed
-  for (const p of ["/", "/projects/", "/par.html", "/now/", "/studio/", "/guestbook/", "/privacy.html"]) {
+  for (const p of ["/", "/projects/", "/arcade/", "/par.html", "/now/", "/studio/", "/guestbook/", "/privacy.html"]) {
     const ctx = await ctxFor({ viewport: { width: 1280, height: 900 } });
     const page = await ctx.newPage(); watch(page, p);
     const failed = [];

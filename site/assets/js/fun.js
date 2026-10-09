@@ -273,14 +273,14 @@
       [["whoami", "who is this"], ["resume", "open the resume (PDF)"], ["contact", "email + GitHub"],
        ["projects · ls", "all projects (ls just lists) · open <name>"], ["pocket429", "open the live ARINC 429 decoder"], ["decode <hex>", "decode an ARINC 429 word, e.g. decode 6445C0C1"],
        ["studio · waitlist", "the studio, and the what-should-I-build form"],
-       ["guestbook", "sign it, Web 1.0 style"], ["now", "what I'm doing these days"], ["play " + PD.filter(function (g) { return g.play && g.url; }).map(function (g) { return g.aliases[0]; }).join(" · "), "games that are live on the web"], ["open <name>", "any project: crumb, halfsies, par, site …"], ["fly", "request flight level 350"],
+       ["guestbook", "sign it, Web 1.0 style"], ["now", "what I'm doing these days"], ["arcade", "play the web games right on the page"], ["play " + PD.filter(function (g) { return g.play && g.url; }).map(function (g) { return g.aliases[0]; }).join(" · "), "games that are live on the web"], ["open <name>", "any project: crumb, halfsies, par, site …"], ["fly", "request flight level 350"],
        ["theme [light|dark]", "switch theme"], ["clear · exit", ""]]
         .forEach(function (r) { print("  " + r[0].padEnd(20) + r[1]); });
       print("  (there may be a couple of undocumented ones)", "dim");
     },
     whoami: function () {
       print("Dillon Green — flight simulator engineer, Seattle.");
-      print("8+ years in aviation: Boeing/Airbus avionics, full flight simulators (CAE, L3Harris).");
+      print("10 years in aviation, 8 hands-on with Boeing/Airbus avionics and full flight simulators (CAE, L3Harris).");
       print("Ships production software by directing AI agents; owns the architecture, review and tests.");
     },
     resume: function () { print("Opening Dillon_Green_Resume.pdf …"); window.open("/Dillon_Green_Resume.pdf", "_blank", "noopener"); },
@@ -324,6 +324,7 @@
     },
     studio: function () { visit("/studio/", "the studio"); },
     guestbook: function () { visit("/guestbook/", "the guestbook"); },
+    arcade: function () { visit("/arcade/", "the arcade"); },
     now: function () { visit("/now/", "the now page"); },
     waitlist: function () {
       if (document.getElementById("waitlist")) { print("→ the waitlist form"); go("#waitlist"); return; }

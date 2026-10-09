@@ -743,6 +743,9 @@ html.glitching img { filter: hue-rotate(90deg) saturate(2); }
 .nav a[aria-current="page"] { color: var(--ink); background: var(--bg-3); }
 .nav .hide-lg { display: none; }
 @media (min-width: 1024px) { .nav .hide-lg { display: inline-block; } }
+/* Arcade: from 800px (between 720 and 800 the header is full; it is in the menu sheet there) */
+.nav .hide-md { display: none; }
+@media (min-width: 800px) { .nav .hide-md { display: inline-block; } }
 
 /* footer site links */
 .foot-nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
@@ -966,6 +969,22 @@ button.btn:disabled { opacity: 0.6; cursor: progress; }
 .badge88.b2 { background: #0a6c7d; color: #fff; }
 .badge88.b3 { background: #f0b44c; color: #1a1200; }
 .badge88.b4 { background: #e9ecf0; color: #15181c; }
+.badge88.b5 { background: #1c120f; color: #ff9b73; border-color: #d97757; }
+.badge88.b6 { background: #f6821f; color: #1f0e00; }
+.badge88.b7 { background: #ff3dc8; color: #1a0014; }
+/* "Signed from N countries" + a flag row (approved entries only; forms.js). Fixed heights: no shift when it fills in. */
+.gb-geo { display: grid; justify-items: center; gap: 4px; width: 100%; }
+html:not(.js) .gb-geo { display: none; }
+.gb-geo-text { height: 20px; margin: 0; font: 600 0.75rem/20px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+.gb-flags { display: flex; justify-content: center; align-items: center; gap: 4px; width: 100%; height: 32px; margin: 0; overflow: hidden; }
+.gb-flag { flex: none; font: 400 22px/32px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; }
+.gb-flag-more { flex: none; font: 600 0.75rem/32px var(--mono); color: var(--ink-3); }
+.gb-flag.is-code {
+  height: 24px; padding: 0 5px; font: 700 0.75rem/22px var(--mono); letter-spacing: 0.06em; color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line-2)); border-radius: 2px; background: var(--bg-3);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.08), inset -1px -1px 0 rgba(0, 0, 0, 0.25);
+}
+.gb-flag-slot { flex: none; width: 28px; height: 20px; border: 1px dashed var(--line-2); border-radius: 2px; }
 .gb-rules { padding: 18px 18px 16px 20px; border: 1px dashed var(--line-2); border-radius: var(--radius); font-size: 0.93rem; color: var(--ink-2); }
 .gb-rules h2 { font: 600 0.72rem/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
 .gb-rules ul { margin: 0; padding-left: 1.3em; }
@@ -1556,9 +1575,10 @@ html:not(.js) .filters, html:not(.js) .filter-count { display: none; }
 
 /* status panel slots (home + /projects/). The widget (status.js + status.css, built separately) fills
    [data-status-panel]; status.css reserves its height, and the slot reserves the same height again so
-   nothing below moves even before status.css arrives: 3 columns x 3 rows from 480px, 2 x 5 below. */
+   nothing below moves even before status.css arrives: 3 columns x 4 rows from 480px, 2 x 6 below
+   (11 nodes; keep in step with --ns-rows in status.css). */
 .status-slot { padding-block: 0; min-height: 300px; }
-@media (max-width: 479.98px) { .status-slot { min-height: 354px; } }
+@media (max-width: 479.98px) { .status-slot { min-height: 408px; } }
 html:not(.js) .status-slot { display: none; }
 #work .status-slot { margin-top: 28px; }
 .live-row { display: grid; gap: 18px; margin: 0 0 26px; }
@@ -1606,6 +1626,79 @@ html:not(.js) .status-slot { display: none; }
   .now-items .status { white-space: normal; line-height: 1.3; }
 }
 
+/* "Latest from the workshop" (/now/, assets/js/activity.js + /api/activity). The feed box reserves
+   6 fixed rows before anything loads, so the skeleton, the list, the "quiet week" note and the offline
+   note all take exactly the same space; with JS off it shrinks to a one-line link to GitHub. */
+.ws {
+  position: relative; padding: 0; margin: 22px 0 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line)); border-radius: var(--radius); background: var(--bg-2);
+}
+.ws::before {
+  content: ""; position: absolute; inset: -1px; z-index: 2; pointer-events: none; --c: var(--accent-2);
+  background:
+    linear-gradient(var(--c), var(--c)) left top / 16px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 2px 16px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 16px 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 2px 16px no-repeat;
+}
+.ws-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 56px; padding: 6px 12px 6px 20px; border-bottom: 1px solid var(--line);
+}
+.ws-title { min-width: 0; }
+.ws-title span { white-space: nowrap; }
+.ws-src {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 8px; flex: none;
+  font: 600 0.78rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none;
+}
+.ws-src svg { width: 14px; height: 14px; }
+@media (hover: hover) { .ws-src:hover { text-decoration: underline; } }
+.ws-feed { --ws-rows: 6; --ws-row: 64px; height: calc(var(--ws-rows) * var(--ws-row)); overflow: hidden; }
+html:not(.js) .ws-feed { height: auto; }
+.ws-list { list-style: none; margin: 0; padding: 0; }
+.ws-list li { height: var(--ws-row); border-bottom: 1px solid var(--line); }
+.ws-list li:last-child { border-bottom: 0; }
+.ws-item {
+  box-sizing: border-box; display: grid; grid-template-rows: 22px 22px; align-content: center; row-gap: 3px;
+  height: 100%; min-width: 0; padding: 0 20px; color: inherit; text-decoration: none;
+}
+a.ws-item { transition: background 0.15s; }
+@media (hover: hover) { a.ws-item:hover { background: var(--bg-3); } a.ws-item:hover .ws-repo { color: var(--accent); } }
+.ws-l1 { display: flex; align-items: center; gap: 10px; min-width: 0; font: 500 0.75rem/22px var(--mono); white-space: nowrap; }
+.ws-kind {
+  flex: none; padding: 0 6px; border: 1px solid var(--line-2); border-radius: 2px;
+  font: 700 0.75rem/18px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+}
+.ws-kind.push { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.ws-kind.create { color: var(--live); border-color: color-mix(in srgb, var(--live) 50%, var(--line)); }
+.ws-kind.release { color: var(--accent-2); border-color: color-mix(in srgb, var(--accent-2) 55%, var(--line)); }
+.ws-repo { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 700; font-size: 0.8125rem; color: var(--ink); }
+.ws-when { margin-left: auto; flex: none; color: var(--ink-3); }
+.ws-l2 { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.95rem; line-height: 22px; color: var(--ink-2); }
+.ws-item.is-skel .ws-kind, .ws-item.is-skel .ws-repo, .ws-item.is-skel .ws-l2 { color: transparent; background: var(--bg-3); border-color: transparent; border-radius: 3px; }
+.ws-item.is-skel .ws-kind { width: 54px; }
+.ws-item.is-skel .ws-repo { width: 120px; height: 12px; }
+.ws-item.is-skel .ws-l2 { width: 70%; height: 12px; margin-top: 5px; }
+.ws-msg {
+  box-sizing: border-box; height: 100%; margin: 0; display: grid; place-content: center; gap: 8px; padding: 18px 22px; text-align: center;
+  font: 500 0.85rem/1.6 var(--mono); color: var(--ink-2);
+}
+html:not(.js) .ws-msg { display: block; text-align: left; padding: 16px 20px; }
+.ws-msg b { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); }
+.ws-feed > .ws-msg { margin: 14px; height: calc(100% - 28px); border: 1px dashed var(--line-2); border-radius: var(--radius); }
+html:not(.js) .ws-feed > .ws-msg { margin: 0; height: auto; border: 0; }
+.ws-msg a { color: var(--accent); }
+.ws-foot {
+  height: 40px; margin: 0; padding: 0 20px; border-top: 1px solid var(--line); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font: 500 0.75rem/40px var(--mono); letter-spacing: 0.02em; color: var(--ink-3);
+}
+@media (max-width: 719.98px) {
+  .ws-head { padding: 4px 6px 4px 16px; }
+  .ws-item { padding: 0 16px; }
+  .ws-foot { padding: 0 16px; }
+  .ws-msg { padding: 16px; font-size: 0.8125rem; }
+}
+
 /* card art direction (thumb.fit in tools/projects.json): portrait phone screens and very wide shots
    sit on a tinted panel (the card surface plus the faint grid) instead of being cropped to a sliver */
 .thumb.is-panel {
@@ -1650,6 +1743,7 @@ html:not(.js) .status-slot { display: none; }
 
 /* card focal points, generated by tools/build_projects.py from thumb.focus */
 /* build:focus */
+.thumb img.focus-linework { object-position: 50% 50%; }
 .thumb img.focus-fernwood { object-position: 50% 40%; }
 .thumb img.focus-airfield { object-position: 50% 45%; }
 .thumb img.focus-mixtape { object-position: 50% 55%; }

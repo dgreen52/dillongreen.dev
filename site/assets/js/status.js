@@ -64,11 +64,19 @@
     }
   }
 
+  // one placeholder per reserved slot (--ns-cols x --ns-rows from status.css), so the skeleton fills
+  // exactly the box the real grid will occupy, whatever the node count is
+  function slots(host) {
+    var cs = getComputedStyle(host);
+    var c = parseInt(cs.getPropertyValue("--ns-cols"), 10), r = parseInt(cs.getPropertyValue("--ns-rows"), 10);
+    return c > 0 && r > 0 && c * r <= 60 ? c * r : 9;
+  }
+
   function skeleton(p) {
     p.body.textContent = "";
     var ul = el("ul", "ns-grid");
     ul.setAttribute("aria-hidden", "true");
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0, n = slots(p.host); i < n; i++) {
       var li = el("li");
       var n = el("div", "ns-node is-skel");
       var l1 = el("span", "ns-l1");

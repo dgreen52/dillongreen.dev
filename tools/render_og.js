@@ -1,5 +1,6 @@
 // Per-page Open Graph share cards (1200x630 PNG) and the meta tags that point at them.
 //   node tools/render_og.js && python tools/stamp_assets.py
+//   node tools/render_og.js arcade now      # only these cards (by "out" name; "og-image" = the generic card)
 // Renders tools/brand/og-page.html once per page below with the site's own fonts into
 // site/assets/og/<name>.png, squeezes each PNG through a 256-colour palette (Pillow) to stay well
 // under 200 KB, and refreshes site/og-image.png (the generic card, tools/brand/og.html) for pages
@@ -19,7 +20,7 @@ const WORD = "01100100010001011100000011000001"; // 0x6445C0C1, label 203, +35,0
 const PAGES = [
   { file: "index.html", out: "home", alt: "Dillon Green, flight simulator engineer · software & automation, with an ARINC 429 data word",
     d: { kicker: "Flight simulator engineer · Software & automation", title: "Dillon Green", dot: ".", size: 128,
-      subStrong: "8+ years in aviation.", sub: "Tools, apps and games built on the side.", art: { bits: WORD, readout: ["LBL 203 · ALT", "+35,000 ft"] } } },
+      subStrong: "10 years in aviation.", sub: "Tools, apps and games built on the side.", art: { bits: WORD, readout: ["LBL 203 · ALT", "+35,000 ft"] } } },
   { file: "projects/index.html", out: "projects", alt: "Projects by Dillon Green: aviation tools, apps, games, hardware and experiments",
     d: { kicker: "Projects · Index", title: "Everything I've shipped", dot: ".", sub: "Aviation tools, apps and games on the web, a smart mirror and browser experiments.",
       art: { chips: [["Aviation", "c"], ["Apps", "c"], ["Games", "p"], ["Hardware", "a"], ["Experiments", ""], ["● Live on the web", "on"]] } } },
@@ -32,9 +33,12 @@ const PAGES = [
   { file: "guestbook/index.html", out: "guestbook", alt: "Dillon Green's guestbook, Web 1.0 style",
     d: { kicker: "Guestbook · est. 2026", title: "Sign the guestbook", dot: "!", sub: "Like it's 1999. Every entry is read and approved by hand.",
       art: { chips: [["★ Best viewed in any browser", "p"], ["No cookies", "on"], ["Hit counter", "a"]] } } },
-  { file: "now/index.html", out: "now", alt: "What Dillon Green is doing now, updated October 3, 2026",
-    d: { kicker: "Now · Updated Oct 3, 2026", title: "What I'm doing now", sub: "Simulator engineering by day. Shipping Crumb and pocket429, building a few games.",
-      art: { chips: [["Crumb · in review", "a"], ["pocket429 · live", "on"]] } } },
+  { file: "now/index.html", out: "now", alt: "What Dillon Green is doing now, updated October 8, 2026",
+    d: { kicker: "Now · Updated Oct 8, 2026", title: "What I'm doing now", sub: "Simulator engineering by day. Shipping Crumb, pocket429 and Linework, building a few games.",
+      art: { chips: [["Crumb · in review", "a"], ["pocket429 · live", "on"], ["Linework · live", "on"]] } } },
+  { file: "arcade/index.html", out: "arcade", alt: "The arcade: Dillon Green's web games, playable on the page",
+    d: { kicker: "Arcade · Insert coin", title: "Play them right here", dot: ".", sub: "butter, beepbeach, Mixtape Drift, Little Airfield and Fernwood, one cabinet at a time.",
+      art: { chips: [["▶ Play here", "c"], ["Click to load", "p"], ["Sandboxed", "a"], ["5 cabinets", "on"]] } } },
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -48,12 +52,18 @@ function setMeta(html, attr, name, value, file) {
   return html.replace(anchor, (m) => m + `<meta ${attr}="${name}" content="${esc(value)}">\n`);
 }
 
+const ONLY = process.argv.slice(2);
+const TODO = ONLY.length ? PAGES.filter((p) => ONLY.includes(p.out)) : PAGES;
+const GENERIC = !ONLY.length || ONLY.includes("og-image");
+const UNKNOWN = ONLY.filter((o) => o !== "og-image" && !PAGES.some((p) => p.out === o));
+if (UNKNOWN.length) { console.error("unknown card(s): " + UNKNOWN.join(", ")); process.exit(1); }
+
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   const browser = await launch();
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
   const written = [];
-  for (const p of PAGES) {
+  for (const p of TODO) {
     await page.goto(fileUrl("og-page.html"));
     await page.evaluate(() => document.fonts.ready);
     const size = await page.evaluate((d) => window.fill(d), p.d);
@@ -64,10 +74,12 @@ function setMeta(html, attr, name, value, file) {
     console.log(`card ${p.out.padEnd(20)} title ${size}px`);
   }
   // the generic card (og-image.png) for pages without their own (privacy, 404)
-  await page.goto(fileUrl("og.html"));
-  await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(200);
-  await page.screenshot({ path: path.join(SITE, "og-image.png") });
-  written.push(path.join(SITE, "og-image.png"));
+  if (GENERIC) {
+    await page.goto(fileUrl("og.html"));
+    await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(200);
+    await page.screenshot({ path: path.join(SITE, "og-image.png") });
+    written.push(path.join(SITE, "og-image.png"));
+  }
   await browser.close();
 
   // palette-quantize: flat colours and big type survive 256 colours fine, and the files shrink a lot
@@ -80,7 +92,7 @@ for f in sys.argv[1:]:
   execFileSync(process.env.PYTHON || "python", ["-c", py, ...written], { stdio: "inherit" });
 
   // meta tags
-  for (const p of PAGES) {
+  for (const p of TODO) {
     const f = path.join(SITE, p.file);
     let html = fs.readFileSync(f, "utf8");
     const before = html;

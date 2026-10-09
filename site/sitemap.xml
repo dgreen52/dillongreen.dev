@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://dillongreen.dev/</loc><lastmod>2026-10-03</lastmod><priority>1.0</priority></url>
-  <url><loc>https://dillongreen.dev/projects/</loc><lastmod>2026-10-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://dillongreen.dev/projects/</loc><lastmod>2026-10-08</lastmod><priority>0.9</priority></url>
+  <url><loc>https://dillongreen.dev/arcade/</loc><lastmod>2026-10-08</lastmod><priority>0.7</priority></url>
   <url><loc>https://dillongreen.dev/par.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority></url>
   <url><loc>https://dillongreen.dev/studio/</loc><lastmod>2026-10-02</lastmod><priority>0.7</priority></url>
-  <url><loc>https://dillongreen.dev/now/</loc><lastmod>2026-10-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://dillongreen.dev/guestbook/</loc><lastmod>2026-10-02</lastmod><priority>0.4</priority></url>
+  <url><loc>https://dillongreen.dev/now/</loc><lastmod>2026-10-08</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dillongreen.dev/guestbook/</loc><lastmod>2026-10-08</lastmod><priority>0.4</priority></url>
   <url><loc>https://dillongreen.dev/privacy.html</loc><lastmod>2026-10-08</lastmod><priority>0.2</priority></url>
   <url><loc>https://dillongreen.dev/Dillon_Green_Resume.pdf</loc><lastmod>2026-10-02</lastmod><priority>0.6</priority></url>
 </urlset>

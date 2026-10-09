@@ -18,10 +18,14 @@ export const CACHE_TTL_S = 60;      // shared result, in caches.default and in i
 export const CLIENT_MAX_AGE_S = 30; // what browsers / the CDN may reuse
 export const CACHE_PATH = "/__status-cache/v1"; // synthetic Cache API key; never a real route
 
-// pocket429's public URL is a custom domain on this same zone (pocket429.dillongreen.dev).
-// A subrequest from this zone's Pages Function back into the zone is avoidable, so check the
-// project's own pages.dev origin instead; it is served by the same deployment.
-export const CHECK_URL = { pocket429: "https://pocket429.pages.dev/" };
+// pocket429's and Linework's public URLs are custom domains on this same zone (*.dillongreen.dev).
+// A subrequest from this zone's Pages Function back into the zone is avoidable, so check each
+// project's own pages.dev origin instead; it is served by the same deployment. (Linework's Pages
+// project is "linework-c4u": the plain linework.pages.dev name belongs to someone else.)
+export const CHECK_URL = {
+  pocket429: "https://pocket429.pages.dev/",
+  linework: "https://linework-c4u.pages.dev/",
+};
 
 /** SVC_<SERVICE>: "little-airfield" -> "SVC_LITTLE_AIRFIELD". */
 export function bindingName(service) {
@@ -97,7 +101,7 @@ export async function checkAll(nodes, env, opts = {}) {
 }
 
 // Per-isolate memory: a warm isolate answers without touching the Cache API, and concurrent
-// requests share one in-flight check instead of fanning out 9 subrequests each.
+// requests share one in-flight check instead of fanning out one subrequest per node each.
 let memo = null;     // { at, text }
 let inflight = null; // Promise<string>
 export function _resetMemory() { memo = null; inflight = null; }

@@ -29,6 +29,20 @@
   ]
  },
  {
+  "slug": "linework",
+  "name": "Linework",
+  "aliases": [
+   "linework",
+   "cad"
+  ],
+  "url": "https://linework-c4u.pages.dev",
+  "line": "Opening Linework. Your drawings never leave this device.",
+  "desc": "CAD viewer + editor for DXF and DGN, in the browser (open linework)",
+  "cats": [
+   "apps"
+  ]
+ },
+ {
   "slug": "fernwood",
   "name": "Fernwood",
   "aliases": [

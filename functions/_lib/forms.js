@@ -140,6 +140,17 @@ export async function ipHash(request, env) {
   return Array.from(new Uint8Array(mac), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+/**
+ * The visitor's country as Cloudflare sees it: the CF-IPCountry header (ISO 3166-1 alpha-2), never the
+ * IP itself. Returns two upper-case letters, or null for anything else, including Cloudflare's "XX"
+ * (no country data) and "T1" (Tor). Only the guestbook keeps it, for the "signed from N countries" row.
+ */
+export function countryCode(value) {
+  const c = typeof value === "string" ? value.trim().toUpperCase() : "";
+  return /^[A-Z]{2}$/.test(c) && c !== "XX" && c !== "T1" ? c : null;
+}
+export const requestCountry = (request) => countryCode(request.headers.get("CF-IPCountry"));
+
 const TABLES = new Set(["guestbook", "waitlist"]);
 function table(t) {
   if (!TABLES.has(t)) throw new Error("unknown table");

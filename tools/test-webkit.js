@@ -9,7 +9,7 @@ const path = require("path");
 const { launchWebKit, devices } = require("./pw");
 const BASE = process.argv[2] || "http://127.0.0.1:8787/";
 const OUT = path.resolve(__dirname, "..", "verify");
-const PAGES = ["", "projects/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
+const PAGES = ["", "projects/", "arcade/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
 const IPHONE = devices["iPhone 13"];
 let fails = 0;
 const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! ") + label); };
