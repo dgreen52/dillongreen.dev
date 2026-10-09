@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects · Dillon Green</title>
+<meta name="description" content="Everything Dillon Green has built: aviation tools, iPhone and web apps, games, a Raspberry Pi smart mirror and browser experiments. Filter by kind.">
+<meta name="author" content="Dillon Green">
+<link rel="canonical" href="https://dillongreen.dev/projects/">
+<meta name="theme-color" content="#06080b">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dillon Green">
+<meta property="og:title" content="Projects · Dillon Green">
+<meta property="og:description" content="Aviation tools, apps, games, hardware and experiments by Dillon Green.">
+<meta property="og:url" content="https://dillongreen.dev/projects/">
+<meta property="og:image" content="https://dillongreen.dev/assets/og/projects.png?v=08aa69d05e">
+<meta name="twitter:image:alt" content="Projects by Dillon Green: aviation tools, apps, games, hardware and experiments">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Projects by Dillon Green: aviation tools, apps, games, hardware and experiments">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects · Dillon Green">
+<meta name="twitter:description" content="Aviation tools, apps, games, hardware and experiments by Dillon Green.">
+<meta name="twitter:image" content="https://dillongreen.dev/assets/og/projects.png?v=08aa69d05e">
+
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=8390797a30">
+<link rel="stylesheet" href="/assets/css/status.css?v=bf28ff3391">
+<script src="/assets/js/theme.js?v=39ed3b7b76"></script>
+</head>
+<body>
+<svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 5.5 7 5.5 7-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 20 20"><path d="M16.5 12.2A6.8 6.8 0 0 1 7.8 3.5a6.8 6.8 0 1 0 8.7 8.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 16 16"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span>Dillon Green</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="/projects/" aria-current="page">Projects</a>
+      <a class="hide-sm" href="/studio/">Studio</a>
+      <a class="hide-sm" href="/guestbook/">Guestbook</a>
+      <a class="hide-lg" href="/#practice">How I work</a>
+      <a class="hide-lg" href="/#experience">Experience</a>
+      <a class="hide-sm" href="/Dillon_Green_Resume.pdf">Resume</a>
+      <button class="theme-btn term-btn" type="button" data-term aria-label="Open terminal" title="Terminal (press ` or /)">&gt;_</button>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch color theme">
+        <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <button class="theme-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" title="Menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <header class="cs-hero post-head">
+    <div class="wrap">
+      <a class="back" href="/"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg>HOME</a>
+      <p class="kicker"><b>PROJECTS</b> Index · 17 entries</p>
+      <h1>Everything I've shipped.</h1>
+      <p class="lead">Production tools for aviation, apps and games on the web, a smart mirror and a few browser experiments. Filter by kind, or scroll the lot.</p>
+    </div>
+  </header>
+
+  <section class="projects" aria-label="All projects">
+    <div class="wrap">
+      <div class="live-row">
+      <!-- build:live -->
+      <nav class="live-web" aria-labelledby="live-web-title">
+        <h2 id="live-web-title"><span class="lamp" aria-hidden="true"></span>Live on the web <span class="lw-count">10 links</span></h2>
+        <ul><li><a href="https://pocket429.dillongreen.dev" rel="noopener" data-project="pocket429"><span class="lw-name" data-project-name="pocket429">pocket429</span><span class="lw-host">pocket429.dillongreen.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://fernwood.dillon-eu-green.workers.dev/" rel="noopener" data-project="fernwood"><span class="lw-name" data-project-name="fernwood">Fernwood</span><span class="lw-host">fernwood…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://little-airfield.dillon-eu-green.workers.dev/" rel="noopener" data-project="airfield"><span class="lw-name" data-project-name="airfield">Little Airfield</span><span class="lw-host">little-airfield…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://mixtape-drift.dillon-eu-green.workers.dev/" rel="noopener" data-project="mixtape"><span class="lw-name" data-project-name="mixtape">Mixtape Drift</span><span class="lw-host">mixtape-drift…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://crumb.dillon-eu-green.workers.dev" rel="noopener" data-project="crumb"><span class="lw-name" data-project-name="crumb">Crumb</span><span class="lw-host">crumb…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://dragonrealm.dillon-eu-green.workers.dev/" rel="noopener" data-project="dragonrealm"><span class="lw-name" data-project-name="dragonrealm">Dragon Realm Online</span><span class="lw-host">dragonrealm…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://surprisepass.pages.dev" rel="noopener" data-project="surprisepass"><span class="lw-name" data-project-name="surprisepass">surprisepass</span><span class="lw-host">surprisepass.pages.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://butter.dillon-eu-green.workers.dev" rel="noopener" data-project="butter"><span class="lw-name" data-project-name="butter">butter</span><span class="lw-host">butter…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://beepbeach.dillon-eu-green.workers.dev" rel="noopener" data-project="beepbeach"><span class="lw-name" data-project-name="beepbeach">beepbeach</span><span class="lw-host">beepbeach…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li><li><a href="https://halfsies.dillon-eu-green.workers.dev" rel="noopener" data-project="halfsies"><span class="lw-name" data-project-name="halfsies">halfsies</span><span class="lw-host">halfsies…workers.dev</span><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></li></ul>
+      </nav>
+      <!-- /build:live -->
+      <section class="status-slot" aria-label="Live status of my apps"><div data-status-panel></div></section>
+      </div>
+      <div class="filters" role="group" aria-label="Filter projects" data-filters>
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" id="aviation" data-filter="aviation" aria-pressed="false">Aviation</button>
+        <button type="button" id="apps" data-filter="apps" aria-pressed="false">Apps</button>
+        <button type="button" id="games" data-filter="games" aria-pressed="false">Games</button>
+        <button type="button" id="hardware" data-filter="hardware" aria-pressed="false">Hardware</button>
+        <button type="button" id="experiments" data-filter="experiments" aria-pressed="false">Experiments</button>
+      </div>
+      <p class="filter-count" aria-live="polite" data-filter-count>17 projects</p>
+      <ul class="pgrid" data-filter-list>
+      <!-- build:cards -->
+        <li class="pcard" id="par" data-cats="aviation">
+          <a class="thumb pcard-media" href="/par.html" tabindex="-1" aria-label="PAR case study"><div class="du-mini" role="img" aria-label="PAR summary: about 72 thousand lines, 231 routes, 340 plus automated checks, rolled out to a 40-person department."><span class="du-mini-head" aria-hidden="true">PAR // SYS.STATUS <i>● IN SERVICE</i></span><span class="du-mini-grid" aria-hidden="true"><span><b>~72k</b><small>lines</small></span><span><b>231</b><small>routes</small></span><span><b class="g">340+</b><small>checks</small></span><span><b>40</b><small>dept size</small></span></span></div><span class="media-go" aria-hidden="true">→ Case study</span></a>
+          <div class="pcard-body">
+            <span class="status internal">Internal</span>
+            <h2 class="pcard-name"><span data-project-name="par">PAR</span></h2>
+            <p class="pcard-pitch">Parts, procurement, work-order and budget platform for an airline flight simulator department.</p>
+            <ul class="chips" aria-label="Technologies"><li>Python</li><li>Flask</li><li>SQLite</li><li>GDAL</li></ul>
+            <div class="pcard-act"><a class="link-arrow internal" href="/par.html">Case study <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="pocket429" data-cats="aviation apps">
+          <a class="thumb is-panel pcard-media" href="https://pocket429.dillongreen.dev" rel="noopener" data-project="pocket429" tabindex="-1" aria-label="Try pocket429"><img class="shot-phone" src="/assets/img/work/pocket429-decode.webp?v=803935b058" width="480" height="1040" decoding="async" alt="pocket429 decode screen: word 6445C0C1 shown as 32 tappable bits, decoded as label 203 altitude."><span class="sdot" data-status-slug="pocket429"></span><span class="media-go" aria-hidden="true">↗ Open</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="pocket429">pocket429</span></h2>
+            <p class="pcard-pitch">ARINC 429 decoder and word builder for avionics technicians, with on-device OCR.</p>
+            <ul class="chips" aria-label="Technologies"><li>JavaScript</li><li>Capacitor</li><li>On-device OCR</li><li>ARINC 429</li></ul>
+            <div class="pcard-act"><a class="btn btn-primary btn-sm" href="https://pocket429.dillongreen.dev" rel="noopener" data-project="pocket429">Try it <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="fernwood" data-cats="games">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/fernwood.webm?v=bf52a65a84" data-clip-mp4="/assets/clips/fernwood.mp4?v=68c981dcd7" href="https://fernwood.dillon-eu-green.workers.dev/" rel="noopener" data-project="fernwood" tabindex="-1" aria-label="Play Fernwood"><img class="cover focus-fernwood" src="/assets/img/more/fernwood.webp?v=c1afbf02af" srcset="/assets/img/more/fernwood-480.webp?v=a5004cb664 480w, /assets/img/more/fernwood.webp?v=c1afbf02af 960w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="960" height="540" decoding="async" alt="Fernwood: a sunny spring morning in the village, a farmer in a straw hat by the notice board, Mira outside her cottage, a tall pine and the general store."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="fernwood"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status soon">WIP · Playable preview</span>
+            <h2 class="pcard-name"><span data-project-name="fernwood">Fernwood</span></h2>
+            <p class="pcard-pitch">A cozy side-scrolling farm-and-explore RPG: dig, farm, fish and make friends in a valley that&#x27;s almost too generous.</p>
+            <ul class="chips" aria-label="Technologies"><li>Pixel art</li><li>Canvas</li><li>Farming</li><li>Mystery</li></ul>
+            <div class="pcard-act"><a class="btn btn-primary btn-sm" href="https://fernwood.dillon-eu-green.workers.dev/" rel="noopener" data-project="fernwood">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a><details class="pcard-more"><summary>Read more</summary><p>Rent the little cottage at the edge of Fernwood and settle in: plant and water a farm, dig down into the caves, fish the river, craft and decorate, and get to know the townsfolk through four seasons of birthdays, rainy nights and a lantern festival everyone can&#x27;t stop talking about. Cozy on top. Something about Fernwood is a little off, and it&#x27;s up to you how far you dig. Pixel art drawn in code, a canvas tile renderer, and pure, tested game rules.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="airfield" data-cats="games aviation">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/airfield.webm?v=f3bdd47b73" data-clip-mp4="/assets/clips/airfield.mp4?v=cf276550bf" href="https://little-airfield.dillon-eu-green.workers.dev/" rel="noopener" data-project="airfield" tabindex="-1" aria-label="Play Little Airfield"><img class="cover focus-airfield" src="/assets/img/more/little-airfield.webp?v=65f7b46772" srcset="/assets/img/more/little-airfield-480.webp?v=5d73008464 480w, /assets/img/more/little-airfield.webp?v=65f7b46772 960w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="960" height="600" decoding="async" alt="Little Airfield: an isometric grass airfield with a paved runway, a parked trainer and a plane taxiing in."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="airfield"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status soon">Prototype</span>
+            <h2 class="pcard-name"><span data-project-name="airfield">Little Airfield</span></h2>
+            <p class="pcard-pitch">Cozy isometric airport builder: clear planes to land, hunt squawks, grow a grass strip into an airport. Best in landscape on phones.</p>
+            <ul class="chips" aria-label="Technologies"><li>Isometric canvas</li><li>Vanilla JS</li><li>Cloudflare</li><li>47 tests</li></ul>
+            <div class="pcard-act"><a class="btn btn-primary btn-sm" href="https://little-airfield.dillon-eu-green.workers.dev/" rel="noopener" data-project="airfield">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="mixtape" data-cats="games">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/mixtape.webm?v=aca8bd5a9b" data-clip-mp4="/assets/clips/mixtape.mp4?v=0bbff5073e" href="https://mixtape-drift.dillon-eu-green.workers.dev/" rel="noopener" data-project="mixtape" tabindex="-1" aria-label="Play Mixtape Drift"><img class="cover focus-mixtape" src="/assets/img/more/mixtape-drift.webp?v=bb46ab874f" srcset="/assets/img/more/mixtape-drift-480.webp?v=1e06e9570d 480w, /assets/img/more/mixtape-drift.webp?v=bb46ab874f 960w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="960" height="540" decoding="async" alt="Mixtape Drift: a pink pixel-art car on a neon city highway at night, under a LOFI FM 88.3 billboard, with the hint &#x27;Boost on the beat. Let go of a drift on the beat.&#x27;"><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="mixtape"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status soon">WIP · Playable</span>
+            <h2 class="pcard-name"><span data-project-name="mixtape">Mixtape Drift</span></h2>
+            <p class="pcard-pitch">A cute pixel street racer where the music is the race: drive to the beat and the song fills in.</p>
+            <ul class="chips" aria-label="Technologies"><li>WebAudio</li><li>Canvas</li><li>Rhythm</li><li>Pixel art</li></ul>
+            <div class="pcard-act"><a class="btn btn-primary btn-sm" href="https://mixtape-drift.dillon-eu-green.workers.dev/" rel="noopener" data-project="mixtape">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a><details class="pcard-more"><summary>Read more</summary><p>Drums and bass always play; clean driving, near misses, on-beat boosts and drifts released on the beat bring in keys, lead and sparkle, and a bump drops a layer. Cruise (endless, collect cassettes), Sprint (race three rivals through one song, GO on the downbeat) and Groove, plus a Garage for shape, paint, underglow and decals. Three original songs played by a small WebAudio synth band composed in code, a music clock driving the beat timing, a low-res scanline road renderer and pixel art drawn in code, with pure rules, track and composer modules under Node tests and Playwright browser checks.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="crumb" data-cats="apps">
+          <a class="thumb is-panel pcard-media" href="https://crumb.dillon-eu-green.workers.dev" rel="noopener" data-project="crumb" tabindex="-1" aria-label="Try Crumb"><img class="shot-phone" src="/assets/img/work/crumb-recipes.webp?v=533bbf2685" width="480" height="1027" loading="lazy" decoding="async" alt="Crumb recipe library with photo cards and filters."><span class="sdot" data-status-slug="crumb"></span><span class="media-go" aria-hidden="true">↗ Open</span></a>
+          <div class="pcard-body">
+            <span class="status review">In review</span>
+            <h2 class="pcard-name"><span data-project-name="crumb">Crumb</span></h2>
+            <p class="pcard-pitch">Recipe cleaner, cookbook and weekly meal planner with a shopping list sorted by aisle.</p>
+            <ul class="chips" aria-label="Technologies"><li>Capacitor</li><li>Swift</li><li>Local-first sync</li><li>RevenueCat</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://crumb.dillon-eu-green.workers.dev" rel="noopener" data-project="crumb">Try it <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="dragonrealm" data-cats="games">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/dragonrealm.webm?v=d0ddc8674f" data-clip-mp4="/assets/clips/dragonrealm.mp4?v=0ffca9452a" href="https://dragonrealm.dillon-eu-green.workers.dev/" rel="noopener" data-project="dragonrealm" tabindex="-1" aria-label="Play Dragon Realm Online"><img class="cover focus-dragonrealm" src="/assets/img/work/jaderealm.webp?v=6487ac80c2" srcset="/assets/img/work/jaderealm-480.webp?v=11b9d33a26 480w, /assets/img/work/jaderealm-960.webp?v=0d6233a0f4 960w, /assets/img/work/jaderealm.webp?v=6487ac80c2 1440w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="1440" height="860" loading="lazy" decoding="async" alt="Dragon Realm Online: an isometric city square full of named characters, with health and mana orbs and a skill bar."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="dragonrealm"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="dragonrealm">Dragon Realm Online</span></h2>
+            <p class="pcard-pitch">Real-time multiplayer isometric browser MMO-style game with chat, trading and duels.</p>
+            <ul class="chips" aria-label="Technologies"><li>Canvas</li><li>Durable Objects</li><li>WebSockets</li><li>D1</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://dragonrealm.dillon-eu-green.workers.dev/" rel="noopener" data-project="dragonrealm">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a><details class="pcard-more"><summary>Read more</summary><p>Live position sync, chat, trading and duels over hibernating WebSockets on Cloudflare Durable Objects, with a player-to-player market stored in D1. About 11k lines.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="mirror" data-cats="hardware">
+          <div class="thumb is-panel"><img class="shot-phone" src="/assets/img/work/mirror-rain.webp?v=a7db87834d" width="480" height="853" loading="lazy" decoding="async" alt="Smart mirror in its cyberpunk theme: clock, rain forecast, calendar, notes and headlines, with katakana rain."></div>
+          <div class="pcard-body">
+            <span class="status review">In build</span>
+            <h2 class="pcard-name"><span data-project-name="mirror">Smart Mirror</span></h2>
+            <p class="pcard-pitch">A Raspberry Pi magic mirror with a cyberpunk streak, run by a zero-dependency Python server.</p>
+            <ul class="chips" aria-label="Technologies"><li>Raspberry Pi</li><li>Python stdlib</li><li>Server-sent events</li><li>PIR sensor</li></ul>
+            <div class="pcard-act"><details class="pcard-more"><summary>Read more</summary><p>A monitor behind two-way acrylic and a browser UI in a self-starting Chromium kiosk. Weather, calendar, news and household notes posted from phones by QR code, with live push. It greets whoever is home by pinging their phones on Wi-Fi, so nothing leaves the LAN, and a PIR sensor wakes the screen. Easter eggs: a MIRROR-OS boot, katakana rain when it is actually raining, and a fake netrunner intrusion.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="surprisepass" data-cats="apps">
+          <a class="thumb is-panel pcard-media" href="https://surprisepass.pages.dev" rel="noopener" data-project="surprisepass" tabindex="-1" aria-label="Try surprisepass"><img class="contain" src="/assets/img/more/surprisepass.webp?v=4febb3c7fa" srcset="/assets/img/more/surprisepass-480.webp?v=5cbbc3535e 480w, /assets/img/more/surprisepass.webp?v=4febb3c7fa 900w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="900" height="366" loading="lazy" decoding="async" alt="A printable surprise-trip boarding pass with a hidden destination."><span class="sdot" data-status-slug="surprisepass"></span><span class="media-go" aria-hidden="true">↗ Open</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="surprisepass">surprisepass</span></h2>
+            <p class="pcard-pitch">Make a printable boarding pass that reveals a surprise trip. Paid tier through Stripe checkout.</p>
+            <ul class="chips" aria-label="Technologies"><li>Web</li><li>Stripe Checkout</li><li>Print layout</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://surprisepass.pages.dev" rel="noopener" data-project="surprisepass">Try it <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="butter" data-cats="games aviation">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/butter.webm?v=ebf904e2c4" data-clip-mp4="/assets/clips/butter.mp4?v=03b959f42c" href="https://butter.dillon-eu-green.workers.dev" rel="noopener" data-project="butter" tabindex="-1" aria-label="Play butter"><img class="cover focus-butter" src="/assets/img/more/butter-band.webp?v=e013f0a2b5" width="640" height="360" loading="lazy" decoding="async" alt="butter in pixel art: a jet on short final over the water at St. Maarten, the beach and runway 10 ahead."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="butter"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="butter">butter</span></h2>
+            <p class="pcard-pitch">A one-thumb pixel-art landing game with a new airport every day: fly the approach, follow the PAPI, flare and grease it.</p>
+            <ul class="chips" aria-label="Technologies"><li>Pixel art</li><li>Canvas</li><li>Flight physics</li><li>Synth audio</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://butter.dillon-eu-green.workers.dev" rel="noopener" data-project="butter">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="beepbeach" data-cats="games">
+          <a class="thumb clip-box pcard-media" data-clip-webm="/assets/clips/beepbeach.webm?v=b6cb9ce124" data-clip-mp4="/assets/clips/beepbeach.mp4?v=c044f4dac3" href="https://beepbeach.dillon-eu-green.workers.dev" rel="noopener" data-project="beepbeach" tabindex="-1" aria-label="Play beepbeach"><img class="cover focus-beepbeach" src="/assets/img/more/beepbeach-band.webp?v=a5064a7cad" width="512" height="320" loading="lazy" decoding="async" alt="beepbeach: a metal detector sweeping the sand between shells, a starfish and a crab."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="beepbeach"></span><span class="media-go" aria-hidden="true">▶ Play</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="beepbeach">beepbeach</span></h2>
+            <p class="pcard-pitch">Sweep a metal detector over the sand, listen for the beep, and dig.</p>
+            <ul class="chips" aria-label="Technologies"><li>Canvas</li><li>Synthesized audio</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://beepbeach.dillon-eu-green.workers.dev" rel="noopener" data-project="beepbeach">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="halfsies" data-cats="apps">
+          <a class="thumb is-panel pcard-media" href="https://halfsies.dillon-eu-green.workers.dev" rel="noopener" data-project="halfsies" tabindex="-1" aria-label="Try halfsies"><img class="shot-phone" src="/assets/img/more/halfsies.webp?v=f4cf2e9ea1" width="360" height="779" loading="lazy" decoding="async" alt="halfsies home screen with a scan-a-receipt button."><span class="sdot" data-status-slug="halfsies"></span><span class="media-go" aria-hidden="true">↗ Open</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live</span>
+            <h2 class="pcard-name"><span data-project-name="halfsies">halfsies</span></h2>
+            <p class="pcard-pitch">Snap a receipt, tap who had what, and send everyone their exact share with tax and tip.</p>
+            <ul class="chips" aria-label="Technologies"><li>Receipt OCR</li><li>Web app</li></ul>
+            <div class="pcard-act"><a class="link-arrow" href="https://halfsies.dillon-eu-green.workers.dev" rel="noopener" data-project="halfsies">Try it <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+        <li class="pcard" id="retros" data-cats="experiments">
+          <div class="thumb"><img class="cover focus-retros" src="/assets/img/lab/retros.webp?v=2716d8a0b9" width="800" height="500" loading="lazy" decoding="async" alt="RetrOS: a teal retro desktop with draggable windows, a paint program and a taskbar."></div>
+          <div class="pcard-body">
+            <span class="status exp">Experiment</span>
+            <h2 class="pcard-name"><span data-project-name="retros">RetrOS</span></h2>
+            <p class="pcard-pitch">A retro desktop as a new-tab page, with draggable windows, a Start menu, a taskbar and small games.</p>
+            <ul class="chips" aria-label="Technologies"><li>New-tab page</li><li>Browser extension</li></ul>
+            <div class="pcard-act"><details class="pcard-more"><summary>Read more</summary><p>Built to try out new-tab pages: windows you can drag, a Start menu, a taskbar, a paint program and a few small built-in games.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="spectro" data-cats="experiments">
+          <div class="thumb"><img class="cover focus-spectro" src="/assets/img/lab/spectro.webp?v=5d75c809e6" width="800" height="500" loading="lazy" decoding="async" alt="Spectro: segmented blue spectrum-analyzer bars with peak markers."></div>
+          <div class="pcard-body">
+            <span class="status exp">Experiment</span>
+            <h2 class="pcard-name"><span data-project-name="spectro">Spectro</span></h2>
+            <p class="pcard-pitch">A music visualizer for a tab&#x27;s audio: spectrum bars, an oscilloscope and more.</p>
+            <ul class="chips" aria-label="Technologies"><li>Web Audio</li><li>Canvas</li></ul>
+            <div class="pcard-act"><details class="pcard-more"><summary>Read more</summary><p>Listens to the audio playing in a tab and draws spectrum bars with peak markers, an oscilloscope and a few other modes, all on Web Audio.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="cyberhome" data-cats="experiments">
+          <div class="thumb"><img class="cover focus-cyberhome" src="/assets/img/lab/cyberhome.webp?v=fd130b8d0c" width="800" height="500" loading="lazy" decoding="async" alt="Cyberhome: a Web 1.0 style homepage with a hit counter and guestbook."></div>
+          <div class="pcard-body">
+            <span class="status exp">Experiment</span>
+            <h2 class="pcard-name"><span data-project-name="cyberhome">Cyberhome</span></h2>
+            <p class="pcard-pitch">A Web 1.0 homepage for every new tab: hit counter, guestbook, cool links and themes.</p>
+            <ul class="chips" aria-label="Technologies"><li>New-tab page</li><li>Web 1.0</li></ul>
+            <div class="pcard-act"><details class="pcard-more"><summary>Read more</summary><p>Every new tab opens a little Web 1.0 homepage of your own: a hit counter, a guestbook, a cool-links list and swappable themes.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="ribbon" data-cats="experiments">
+          <div class="thumb is-panel"><img class="shot-phone" src="/assets/img/lab/ribbon.webp?v=c7bcf57ff1" width="380" height="620" loading="lazy" decoding="async" alt="Ribbon settings panel with reading themes, typeface and spacing controls."></div>
+          <div class="pcard-body">
+            <span class="status exp">Experiment</span>
+            <h2 class="pcard-name"><span data-project-name="ribbon">Ribbon</span></h2>
+            <p class="pcard-pitch">A reading companion for AO3 with reader themes, mute filters, highlights and EPUB export.</p>
+            <ul class="chips" aria-label="Technologies"><li>Browser extension</li><li>EPUB export</li></ul>
+            <div class="pcard-act"><details class="pcard-more"><summary>Read more</summary><p>An in-page reading tool for AO3: reader themes, typeface and spacing controls, mute filters, highlights and EPUB export.</p></details></div>
+          </div>
+        </li>
+        <li class="pcard" id="this-site" data-cats="apps">
+          <a class="thumb pcard-media" href="/" data-recurse tabindex="-1" aria-label="Visit dillongreen.dev"><img class="cover focus-this-site" src="/assets/img/more/dillongreen-dev.webp?v=cae8429b22" srcset="/assets/img/more/dillongreen-dev-480.webp?v=062fb94af0 480w, /assets/img/more/dillongreen-dev.webp?v=cae8429b22 960w" sizes="(max-width: 479px) calc(100vw - 34px), (max-width: 1023px) calc(50vw - 40px), 380px" width="960" height="540" loading="lazy" decoding="async" alt="The dillongreen.dev home page: name, intro, resume and contact buttons, and the ARINC 429 bit-flipper."><span class="media-go" aria-hidden="true">→ Visit</span></a>
+          <div class="pcard-body">
+            <span class="status live">Live · You are here</span>
+            <h2 class="pcard-name"><span data-project-name="this-site">dillongreen.dev</span> <span class="pcard-aside">(this site)</span></h2>
+            <p class="pcard-pitch">Framework-free portfolio: static HTML, CSS and JS on Cloudflare Pages, with Pages Functions and D1 for the guestbook and studio form, a strict CSP, cookieless analytics, an in-browser ARINC 429 decoder and a hidden terminal with MIRROR-OS easter eggs. Built by directing AI coding agents, held to automated checks: cross-engine mobile overflow and layout-shift tests in Chromium and WebKit, form and XSS tests, link checks.</p>
+            <ul class="chips" aria-label="Technologies"><li>Cloudflare Pages</li><li>D1</li><li>Vanilla JS</li><li>Playwright</li></ul>
+            <div class="pcard-act"><a class="btn btn-primary btn-sm" href="/" data-recurse>Visit <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a><a class="link-arrow" href="https://github.com/dgreen52/dillongreen.dev#readme" rel="noopener">Source &amp; README <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div>
+          </div>
+        </li>
+      <!-- /build:cards -->
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 id="contact-title">Let's talk.</h2>
+        <p>Working on something in aviation, aerospace or industrial software where knowing the domain matters as much as shipping fast? I'd like to hear about it.</p>
+      </div>
+      <div class="foot-links">
+        <a class="btn btn-primary" href="mailto:dillon@dillongreen.dev"><svg aria-hidden="true"><use href="#i-mail"/></svg>dillon@dillongreen.dev</a>
+        <a class="btn" href="https://github.com/dgreen52" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg>github.com/dgreen52</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Dillon Green · Seattle, WA</span><span class="kana eol" aria-hidden="true">// END_OF_LINE · 接続終了</span>
+      <nav class="foot-nav" aria-label="Site"><a href="/">Home</a><a href="/projects/">Projects</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js?v=28a142dac6" defer></script>
+<script src="/assets/js/projects-data.js?v=8d0d8af6f5" defer></script>
+<script src="/assets/js/clips.js?v=34d6dda0e5" defer></script>
+<script src="/assets/js/status.js?v=d741913b84" defer></script>
+<script src="/assets/js/fun.js?v=ddcde077f5" defer></script>
+</body>
+</html>

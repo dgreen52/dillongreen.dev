@@ -1,0 +1,70 @@
+[
+ {
+  "slug": "pocket429",
+  "name": "pocket429",
+  "url": "https://pocket429.dillongreen.dev",
+  "kind": "pages"
+ },
+ {
+  "slug": "fernwood",
+  "name": "Fernwood",
+  "url": "https://fernwood.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "fernwood"
+ },
+ {
+  "slug": "airfield",
+  "name": "Little Airfield",
+  "url": "https://little-airfield.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "little-airfield"
+ },
+ {
+  "slug": "mixtape",
+  "name": "Mixtape Drift",
+  "url": "https://mixtape-drift.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "mixtape-drift"
+ },
+ {
+  "slug": "crumb",
+  "name": "Crumb",
+  "url": "https://crumb.dillon-eu-green.workers.dev",
+  "kind": "workers",
+  "service": "crumb"
+ },
+ {
+  "slug": "dragonrealm",
+  "name": "Dragon Realm Online",
+  "url": "https://dragonrealm.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "dragonrealm"
+ },
+ {
+  "slug": "surprisepass",
+  "name": "surprisepass",
+  "url": "https://surprisepass.pages.dev",
+  "kind": "pages"
+ },
+ {
+  "slug": "butter",
+  "name": "butter",
+  "url": "https://butter.dillon-eu-green.workers.dev",
+  "kind": "workers",
+  "service": "butter"
+ },
+ {
+  "slug": "beepbeach",
+  "name": "beepbeach",
+  "url": "https://beepbeach.dillon-eu-green.workers.dev",
+  "kind": "workers",
+  "service": "beepbeach"
+ },
+ {
+  "slug": "halfsies",
+  "name": "halfsies",
+  "url": "https://halfsies.dillon-eu-green.workers.dev",
+  "kind": "workers",
+  "service": "halfsies"
+ }
+]

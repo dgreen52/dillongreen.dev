@@ -1,0 +1,18 @@
+# dg-notify: owner email alerts for the dillongreen Pages project (guestbook + studio waitlist).
+# Deploy from this folder:  npx wrangler deploy
+# Secrets (set once, never committed):
+#   npx wrangler secret put NOTIFY_TO    # the owner's VERIFIED Email Routing destination address
+#   npx wrangler secret put NOTIFY_KEY   # long random string; the same value goes on the Pages project
+name = "dg-notify"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+# Not on the public internet: no workers.dev URL, no preview URLs, no routes.
+# The only caller is the Pages project's NOTIFY service binding.
+workers_dev = false
+preview_urls = false
+
+# Email Routing "send to a verified address" binding. No destination_address here on purpose:
+# the recipient comes from the NOTIFY_TO secret and must be a verified destination on the account.
+[[send_email]]
+name = "MAIL"

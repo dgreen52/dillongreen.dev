@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects. The writing section was unpublished (drafts/ next to site/); old shared links land on the home page.
+/writing /  301
+/writing/ /  301
+/writing/* /  301

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin · Dillon Green</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="same-origin">
+<meta name="theme-color" content="#06080b">
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="preload" href="/assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=8390797a30">
+<link rel="stylesheet" href="/admin/admin.css">
+<script src="/assets/js/theme.js?v=39ed3b7b76"></script>
+</head>
+<body class="adm">
+<header class="adm-top">
+  <div class="adm-wrap adm-bar">
+    <a class="brand" href="/" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span class="adm-brand-txt">Admin</span></a>
+    <span class="adm-who" data-who hidden></span>
+    <button class="adm-btn adm-btn-ghost" type="button" data-refresh aria-label="Refresh the current list">Refresh</button>
+  </div>
+</header>
+
+<main id="main" class="adm-wrap">
+  <p class="adm-kicker"><span class="adm-lamp" aria-hidden="true"></span>// MODERATION CONSOLE</p>
+
+  <div class="adm-tabs" role="tablist" aria-label="Lists">
+    <button class="adm-tab" type="button" role="tab" id="tab-pending" aria-controls="panel" aria-selected="true" data-tab="pending">Pending <span class="adm-n" data-count="pending">·</span></button>
+    <button class="adm-tab" type="button" role="tab" id="tab-approved" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="approved">Approved <span class="adm-n" data-count="approved">·</span></button>
+    <button class="adm-tab" type="button" role="tab" id="tab-waitlist" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="waitlist">Waitlist <span class="adm-n" data-count="waitlist">·</span></button>
+  </div>
+
+  <section id="panel" class="adm-panel" role="tabpanel" aria-labelledby="tab-pending" aria-busy="true" tabindex="-1">
+    <p class="adm-empty">Loading…</p>
+  </section>
+  <noscript><p class="adm-empty">The admin console needs JavaScript.</p></noscript>
+</main>
+
+<div class="adm-toast" role="status" aria-live="polite" data-toast hidden></div>
+
+<script src="/assets/js/admin.js?v=cdd80d72e6" defer></script>
+</body>
+</html>

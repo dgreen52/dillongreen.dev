@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "Archivo"; src: url("../../site/assets/fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+* { margin: 0; box-sizing: border-box; }
+html, body { width: 512px; height: 512px; background: transparent; }
+.ic {
+  width: 512px; height: 512px; border-radius: 112px; background: #0b0d10;
+  display: grid; place-items: center; position: relative; overflow: hidden;
+}
+.full .ic { border-radius: 0; }
+.t { font: 800 236px/1 "Archivo"; font-stretch: 118%; letter-spacing: -0.05em; color: #e9ecf0; margin-top: -30px; }
+.bar { position: absolute; left: 96px; right: 96px; bottom: 100px; height: 30px; display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+.bar i { border-radius: 4px; background: #2a323d; }
+.bar i.on { background: #62d3e6; }
+</style></head>
+<body>
+<div class="ic"><div class="t">DG</div>
+  <div class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+<script>if (location.hash === "#full") document.body.className = "full";</script>
+</body></html>

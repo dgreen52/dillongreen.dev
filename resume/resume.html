@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dillon Green - Resume</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.6in; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 9.6pt; line-height: 1.32; color: #1d232b; margin: 0; }
+  header { text-align: center; margin-bottom: 8pt; }
+  h1 { font-size: 22pt; letter-spacing: 4pt; margin: 0; font-weight: 700; }
+  .title { font-size: 10pt; letter-spacing: 2.2pt; text-transform: uppercase; color: #3a5f86; margin: 2pt 0 4pt; }
+  .contact { font-size: 9pt; color: #444; }
+  .contact a { color: #444; text-decoration: none; }
+  h2 { font-size: 9.5pt; letter-spacing: 2pt; text-transform: uppercase; color: #3a5f86; border-bottom: 1px solid #c9d3de; padding-bottom: 2pt; margin: 10pt 0 5pt; }
+  p { margin: 0 0 4pt; }
+  .item { margin-bottom: 6pt; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+  .name { font-weight: 700; font-size: 10.2pt; }
+  .sub { color: #555; font-style: italic; }
+  .meta { color: #555; white-space: nowrap; font-size: 9pt; }
+  .stack { color: #3a5f86; font-size: 8.6pt; margin: 1pt 0 2pt; }
+  ul { margin: 1pt 0 0; padding-left: 13pt; }
+  li { margin-bottom: 1.6pt; }
+  .role { font-weight: 600; margin-top: 3pt; }
+  .also { font-size: 9pt; color: #333; }
+  .skills li { margin-bottom: 2pt; }
+  b { font-weight: 650; }
+</style>
+</head>
+<body>
+<header>
+  <h1>DILLON GREEN</h1>
+  <div class="title">Flight Simulator Engineer · Software &amp; Automation</div>
+  <div class="contact"><a href="mailto:dillon@dillongreen.dev">dillon@dillongreen.dev</a> · Seattle, WA · <a href="https://dillongreen.dev">dillongreen.dev</a> · <a href="https://github.com/dgreen52">github.com/dgreen52</a></div>
+</header>
+
+<h2>Summary</h2>
+<p>Flight simulator engineer and self-taught software developer with 8+ years in aviation systems: Boeing and Airbus avionics, full flight simulators and FAA-qualified training devices. Designed, built and deployed PAR, the ~72k-line parts, procurement and work-order platform used across the 40-person simulator department, and leads the intern-built MPIC test bench. Pairs hands-on simulator expertise with AI-assisted software development to modernize how operations teams work.</p>
+
+<h2>Software Projects</h2>
+<div class="item">
+  <div class="row"><span><span class="name">PAR (Parts &amp; Requisitions Platform)</span> <span class="sub">— Simulator Operations (sole developer)</span></span></div>
+  <div class="stack">Python · Flask · SQLite · Bootstrap · GDAL · PyInstaller</div>
+  <ul>
+    <li>Designed and built the department's inventory, procurement, work-order and budget system: ~72k lines, 231 routes, 50+ tables, three user roles and a full audit ledger; rolled out to a 40-person department, in daily use.</li>
+    <li>Migrated off legacy MS Access and GigaTrak with 15 importers, including a reviewable two-way reconcile engine (field-level diffs, learned vocabulary mapping, idempotent history import that keeps the original timestamps).</li>
+    <li>Built a schematics pipeline that converts 6,000+ CAE MicroStation DGN drawings to searchable SVG via GDAL and links part numbers on drawings to live stock.</li>
+    <li>Added fleet-level reorder logic across 26 simulator devices at two sites: spares aggregation, critical and low-stock tiers, ABC/FSN classification; plus a REST API, QR labels printed to Zebra printers, and mobile photo capture.</li>
+    <li>Backed it with 340+ automated checks (72 regression suites, 142 headless-browser end-to-end checks, a 30-thread concurrency test), a ratcheting quality gate, automated offsite backups and a one-file Windows service deploy.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">pocket429</span> <span class="sub">— ARINC 429 decoder for avionics technicians (live at <a href="https://pocket429.dillongreen.dev">pocket429.dillongreen.dev</a>; iOS app in preparation)</span></span></div>
+  <div class="stack">JavaScript · Capacitor · Cloudflare Workers · Stripe</div>
+  <ul><li>Decodes and builds ARINC 429 data words (BNR, BCD, ISO-5, parity, bit-order detection) against a label database compiled from cited OEM manuals.</li></ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Smart Mirror</span> <span class="sub">— Raspberry Pi magic mirror (hardware build in progress)</span></span></div>
+  <div class="stack">Python · Raspberry Pi · systemd · Chromium kiosk · PIR sensor</div>
+  <ul><li>Zero-dependency Python server and browser UI behind a two-way mirror: self-starting kiosk, cached proxying that never blanks on network loss, Wi-Fi presence detection, motion-sensor screen wake and phone-to-mirror notes over QR.</li></ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Dragon Realm Online</span> <span class="sub">— Real-time multiplayer browser game (<a href="https://dragonrealm.dillon-eu-green.workers.dev/">play</a>)</span></span></div>
+  <div class="stack">JavaScript · Canvas · Cloudflare Durable Objects · WebSockets · D1</div>
+  <ul><li>Live position sync, chat, trading and duels over hibernating WebSockets, with a player market stored in D1 (~11k lines).</li></ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Crumb</span> <span class="sub">— Recipe and meal-planning app (iOS, in App Store review)</span></span></div>
+  <div class="stack">JavaScript · Capacitor · Swift · RevenueCat · Cloudflare · Codemagic CI</div>
+  <ul><li>Wrote a native Swift plugin for on-device Vision OCR, iCloud sync and a share extension; local-first sync design; subscriptions; 267 automated checks.</li></ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Little Airfield</span> <span class="sub">— Cozy airport-builder game for iPhone (<a href="https://little-airfield.dillon-eu-green.workers.dev/">playable prototype</a>)</span></span></div>
+  <div class="stack">JavaScript · Canvas (isometric, art drawn in code) · Playwright</div>
+  <ul><li>Clear planes to land into the wind, fix pilot-reported squawks and grow a grass strip into a towered airport; pure rules engine with automated tests and iPhone-landscape end-to-end checks.</li></ul>
+</div>
+<p class="also"><b>Also built:</b> Mixtape Drift (rhythm street racer with a WebAudio synth band), <a href="https://surprisepass.pages.dev">surprisepass</a> (live, Stripe payments), halfsies (receipt-OCR bill splitter), and butter and beepbeach (canvas games). Portfolio: <a href="https://dillongreen.dev">dillongreen.dev</a>.</p>
+<div class="item">
+  <h2>Experience</h2>
+  <div class="row"><span class="name">Alaska Airlines</span><span class="meta">Seattle, WA</span></div>
+  <div class="row role"><span>Flight Simulator Engineer</span><span class="meta">June 2025 – Present</span></div>
+  <ul>
+    <li>Engineer for Boeing 737, 787 and Airbus A330 full flight simulators on CAE XR, R4, R5 and L3Harris platforms, holding each device to FAA qualification standards.</li>
+    <li>Lead the summer intern team building a standalone MPIC test bench: 16 MPICs in a dedicated I/O chassis, driven by a repurposed Windows Server 2019 sim node on its own 48-port network. The bench loads simulator software, tests I/O and checks aircraft panels without taking a training device offline.</li>
+    <li>Write code-level fixes across simulator platforms for faults that hardware or configuration changes can't resolve.</li>
+    <li>Design and implement MPIC interface modifications that improve system reliability.</li>
+    <li>Built and deployed PAR, the department's parts, procurement and work-order platform (see Software Projects).</li>
+    <li>Work with regulatory and pilot-training teams to sustain FAA-mandated qualification.</li>
+  </ul>
+  <div class="row role"><span>Flight Simulator Technician III</span><span class="meta">2022 – June 2025</span></div>
+  <ul>
+    <li>Maintained and troubleshot CAE and L3Harris full flight simulators, clearing time-critical faults before scheduled training sessions.</li>
+    <li>Integrated new hardware through MPIC interface management; subject-matter expert for ISS/IOS issues.</li>
+    <li>Resolved recurring discrepancies from schematics, wiring diagrams and pilot handbooks; kept FAA qualification records.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Panasonic Avionics</span> <span class="sub">— Maintenance Services Technician</span></span><span class="meta">2018 – 2022</span></div>
+  <ul>
+    <li>Performed systems verification and in-flight entertainment software validation inside Boeing 737 MAX and 787 production facilities ahead of customer delivery.</li>
+    <li>Worked on aircraft at Seattle-Tacoma International Airport (SEA), diagnosing complex faults across Boeing 737, 757, 767, 787 and Airbus A320 and A330 fleets and running software installs and end-to-end system checkouts in live airline operations.</li>
+    <li>Supported engineers on electrical troubleshooting using wiring diagrams and system schematics.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">SkyWest Airlines</span> <span class="sub">— Parts Clerk I (2018); Cross-Utilized Agent (2016–2018)</span></span><span class="meta">2016 – 2018</span></div>
+  <ul><li>Managed parts inventory and sourcing for CRJ and ERJ line maintenance; earlier, ramp, gate and customer-service operations.</li></ul>
+</div>
+
+<h2>Skills</h2>
+<ul class="skills">
+  <li><b>AI &amp; tooling:</b> AI-assisted development and code review (Claude Code, Anthropic API)</li>
+  <li><b>Languages:</b> Python, JavaScript, Swift, SQL, PowerShell; working knowledge of C++, C#, Fortran</li>
+  <li><b>Platforms:</b> Flask, SQLite/PostgreSQL, Cloudflare Workers, Capacitor (iOS &amp; Android), RevenueCat, GDAL</li>
+  <li><b>Engineering practice:</b> automated regression and headless-browser testing, CI (Codemagic), data migration and reconciliation, backup/restore, Windows service deployment</li>
+  <li><b>Aviation:</b> Boeing 737/787 and Airbus A320/A330 systems, CAE XR/R4/R5 and L3Harris simulators, MPIC and ISS/IOS, ARINC 429, electrical schematics, FAA simulator qualification</li>
+  <li><b>Certification:</b> CAE XR Maintenance Certificate</li>
+</ul>
+</body>
+</html>

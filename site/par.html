@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PAR case study · Dillon Green</title>
+<meta name="description" content="Case study: PAR, a parts, requisitions, work-order and budget platform built by one developer for an airline flight simulator department. Python, Flask, SQLite, 340+ automated checks, rolled out to a 40-person department.">
+<meta name="author" content="Dillon Green">
+<link rel="canonical" href="https://dillongreen.dev/par.html">
+<meta name="theme-color" content="#06080b">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dillon Green">
+<meta property="og:title" content="PAR: a parts & requisitions platform for an airline simulator department">
+<meta property="og:description" content="Sole developer. ~72k lines, 231 routes, 340+ automated checks, rolled out to a 40-person simulator maintenance department.">
+<meta property="og:url" content="https://dillongreen.dev/par.html">
+<meta property="og:image" content="https://dillongreen.dev/assets/og/par.png?v=b4ddd0cf8a">
+<meta name="twitter:image:alt" content="PAR case study: a parts and requisitions platform for an airline simulator department">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PAR case study: a parts and requisitions platform for an airline simulator department">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PAR case study · Dillon Green">
+<meta name="twitter:description" content="Sole developer. ~72k lines, 231 routes, 340+ automated checks, rolled out to a 40-person simulator maintenance department.">
+<meta name="twitter:image" content="https://dillongreen.dev/assets/og/par.png?v=b4ddd0cf8a">
+
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=8390797a30">
+<script src="assets/js/theme.js?v=39ed3b7b76"></script>
+</head>
+<body>
+<svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-l" viewBox="0 0 16 16"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 5.5 7 5.5 7-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 20 20"><path d="M16.5 12.2A6.8 6.8 0 0 1 7.8 3.5a6.8 6.8 0 1 0 8.7 8.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span>Dillon Green</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="/projects/">Projects</a>
+      <a class="hide-sm" href="/studio/">Studio</a>
+      <a class="hide-sm" href="/guestbook/">Guestbook</a>
+      <a class="hide-lg" href="./#practice">How I work</a>
+      <a class="hide-lg" href="./#experience">Experience</a>
+      <a class="hide-sm" href="Dillon_Green_Resume.pdf">Resume</a>
+      <button class="theme-btn term-btn" type="button" data-term aria-label="Open terminal" title="Terminal (press ` or /)">&gt;_</button>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch color theme">
+        <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <button class="theme-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" title="Menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article>
+    <header class="cs-hero">
+      <div class="wrap">
+        <a class="back" href="./#work"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg>ALL WORK</a>
+        <p class="kicker"><b>CASE STUDY</b> Internal tool · sole developer</p>
+        <h1>PAR: parts, orders and repairs for a flight simulator fleet</h1>
+        <p class="lead">PAR is the system rolled out to an airline's 40-person flight simulator maintenance department to track parts, order them, repair the simulators they belong to and account for the money. I designed it, built it and run it, working with AI coding agents under my review.</p>
+        <dl class="facts">
+          <div><dt>Codebase</dt><dd>~72k<small>lines, one developer</small></dd></div>
+          <div><dt>Surface</dt><dd>231<small>routes · 3 roles</small></dd></div>
+          <div><dt>Schema</dt><dd>50+<small>SQLite tables + audit ledger</small></dd></div>
+          <div><dt>Tests</dt><dd>340+<small>automated checks</small></dd></div>
+          <div><dt>Rolled out to</dt><dd>40<small>person department</small></dd></div>
+          <div><dt>Fleet</dt><dd>26<small>simulator devices, two sites</small></dd></div>
+          <div><dt>Migration</dt><dd>15<small>importers from legacy systems</small></dd></div>
+          <div><dt>Schematics</dt><dd>6,000+<small>drawings converted to SVG</small></dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="cs-section" aria-labelledby="h-problem">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>01</b></p><h2 id="h-problem">Problem</h2></header>
+        <div class="prose">
+          <p>A full flight simulator is an aircraft cockpit plus racks of computers, I/O and motion hardware, and it has to pass regulatory qualification to stay in service. Keeping two dozen of them in that state means always knowing <strong>which part is where, what condition it's in, what's on order and which budget is paying for it.</strong></p>
+          <p>The department's records were split between a legacy MS Access database and GigaTrak, and the two had drifted apart. Part conditions, the work to fix them, purchasing and budgets weren't connected in one place. The schematics that show where a part sits in a simulator were MicroStation CAD drawings, which needed CAD software to open and weren't linked to stock.</p>
+          <p>The department needed one system of record that technicians would actually use on the floor, and a migration that didn't lose history.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-built">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>02</b></p><h2 id="h-built">What I built</h2></header>
+        <div>
+          <ul class="feature-list">
+            <li><h3>Inventory that matches the hangar</h3><p>Consumable, rotable and repairable parts, serial tracking, and a building → location → bin hierarchy.</p></li>
+            <li><h3>Requisition to shelf</h3><p>Requisitions become purchase orders, and receiving an order puts the parts straight into inventory.</p></li>
+            <li><h3>Work orders that open themselves</h3><p>When a part's condition changes, PAR opens the work order to repair it, so nothing broken gets lost on a shelf.</p></li>
+            <li><h3>Budgets and project accounting</h3><p>Spending is tracked against budgets and projects in the same system as the parts and orders.</p></li>
+            <li><h3>Fleet-level reorder logic</h3><p>Spares are aggregated across 26 simulator devices at two sites, with critical and low-stock tiers and ABC/FSN classification.</p></li>
+            <li><h3>Schematics linked to stock</h3><p>6,000+ CAE MicroStation DGN drawings converted to SVG through GDAL, with part numbers on the drawing linked to live stock.</p></li>
+            <li><h3>A migration that keeps history</h3><p>15 importers off MS Access and GigaTrak, including a reviewable two-way, field-level reconcile engine that learns vocabulary mappings by majority vote, and an idempotent history import that keeps original timestamps.</p></li>
+            <li><h3>Integrations on the floor</h3><p>A REST API for the discrepancy system, QR labels in Zebra ZPL through a network print agent, and photo capture from phones.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-arch">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>03</b></p><h2 id="h-arch">Architecture</h2></header>
+        <div>
+          <div class="prose">
+            <p>PAR is deliberately boring to operate. It's <strong>one Python process</strong>: Flask behind Waitress, server-rendered Jinja templates with Bootstrap, and SQLite in WAL mode. PyInstaller packages it as a single-file Windows service, so a deploy is one file and a service restart.</p>
+            <p>For a department of this size, a single-file database with WAL gives concurrent reads and very simple backups. A 30-thread concurrency test keeps that assumption honest. Three roles control what each person can change, and an immutable audit ledger records every change.</p>
+          </div>
+          <figure class="diagram">
+            <!-- wide layout -->
+            <svg class="d-large" viewBox="0 0 1000 540" role="img" aria-labelledby="arch-t arch-d">
+              <title id="arch-t">PAR architecture</title>
+              <desc id="arch-d">Browsers, phones and the discrepancy system's REST client call a Flask application served by Waitress, which stores data in SQLite. The app runs as a one-file Windows service. Importers bring in data from MS Access, GigaTrak and CAE documentation. A schematics pipeline converts DGN drawings to SVG with GDAL. The app sends labels to a network print agent, and the database is backed up daily and offsite.</desc>
+              <defs>
+                <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow" d="M0 0 10 5 0 10z"/></marker>
+                <marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow a" d="M0 0 10 5 0 10z"/></marker>
+              </defs>
+              <text class="d-g" x="20" y="64">CLIENTS · FLOOR</text>
+              <text class="d-g" x="750" y="64">DATA IN · OUT</text>
+              <text class="d-s" x="750" y="470">solid: requests, data in</text>
+              <text class="d-s" x="750" y="490">dashed: output leaving</text>
+
+              <rect class="d-group" x="328" y="48" width="346" height="476" rx="16"/>
+              <text class="d-g" x="350" y="80">WINDOWS SERVICE · ONE FILE</text>
+
+              <!-- clients -->
+              <rect class="d-box" x="20" y="90" width="230" height="80" rx="10"/>
+              <text class="d-t" x="38" y="124">Desktop browsers</text>
+              <text class="d-s" x="38" y="148">Jinja + Bootstrap pages</text>
+              <rect class="d-box" x="20" y="200" width="230" height="80" rx="10"/>
+              <text class="d-t" x="38" y="234">Phones on the floor</text>
+              <text class="d-s" x="38" y="258">photo capture · QR</text>
+              <rect class="d-box" x="20" y="310" width="230" height="80" rx="10"/>
+              <text class="d-t" x="38" y="344">Discrepancy system</text>
+              <text class="d-s" x="38" y="368">REST API consumer</text>
+
+              <!-- core -->
+              <rect class="d-core" x="350" y="100" width="300" height="130" rx="12"/>
+              <text class="d-t" x="372" y="136">Waitress · Flask</text>
+              <text class="d-s" x="372" y="162">231 routes · 3 roles</text>
+              <text class="d-s" x="372" y="184">server-rendered Jinja</text>
+              <text class="d-s" x="372" y="206">REST API · print jobs</text>
+
+              <rect class="d-store" x="350" y="300" width="300" height="120" rx="12"/>
+              <path class="d-line" d="M350 326 H650"/>
+              <text class="d-t" x="372" y="318">SQLite (WAL)</text>
+              <text class="d-s" x="372" y="352">50+ tables</text>
+              <text class="d-s" x="372" y="374">immutable audit ledger</text>
+              <text class="d-s" x="372" y="396">scrubbed copies for agents</text>
+
+              <path class="d-line a" d="M500 230 V296" marker-end="url(#aha)"/>
+              <path class="d-line a" d="M520 296 V234" marker-end="url(#aha)"/>
+
+              <path class="d-line" d="M250 130 H346" marker-end="url(#ah)"/>
+              <path class="d-line" d="M250 240 H296 V165 H346" marker-end="url(#ah)"/>
+              <path class="d-line" d="M250 350 H306 V200 H346" marker-end="url(#ah)"/>
+
+              <!-- print agent sits with the floor clients -->
+              <rect class="d-box" x="20" y="420" width="230" height="80" rx="10"/>
+              <text class="d-t" x="38" y="454">Print agent</text>
+              <text class="d-s" x="38" y="478">ZPL QR labels → Zebra</text>
+              <path class="d-line" d="M350 222 H316 V460 H254" marker-end="url(#ah)" stroke-dasharray="4 4"/>
+
+              <!-- right column -->
+              <rect class="d-box" x="750" y="90" width="230" height="80" rx="10"/>
+              <text class="d-t" x="768" y="124">15 importers</text>
+              <text class="d-s" x="768" y="148">Access · GigaTrak · CAE docs</text>
+              <rect class="d-box" x="750" y="200" width="230" height="80" rx="10"/>
+              <text class="d-t" x="768" y="234">Schematics pipeline</text>
+              <text class="d-s" x="768" y="258">DGN → GDAL → SVG</text>
+              <rect class="d-box" x="750" y="340" width="230" height="80" rx="10"/>
+              <text class="d-t" x="768" y="374">Backups</text>
+              <text class="d-s" x="768" y="398">daily + offsite</text>
+
+              <path class="d-line" d="M750 130 H654" marker-end="url(#ah)"/>
+              <path class="d-line" d="M750 240 H704 V190 H654" marker-end="url(#ah)"/>
+              <path class="d-line" d="M650 380 H746" marker-end="url(#ah)" stroke-dasharray="4 4"/>
+            </svg>
+
+            <!-- narrow layout -->
+            <svg class="d-small" viewBox="0 0 340 730" role="img" aria-labelledby="arch-t2">
+              <title id="arch-t2">PAR architecture: clients call a Flask app on Waitress backed by SQLite, fed by importers and a schematics pipeline, with a print agent and backups.</title>
+              <defs>
+                <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow" d="M0 0 10 5 0 10z"/></marker>
+                <marker id="aha2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow a" d="M0 0 10 5 0 10z"/></marker>
+              </defs>
+              <text class="d-g" x="0" y="14">CLIENTS</text>
+              <rect class="d-box" x="0" y="24" width="106" height="62" rx="8"/>
+              <text class="d-t" x="10" y="50">Browsers</text>
+              <text class="d-s" x="10" y="70">Jinja pages</text>
+              <rect class="d-box" x="117" y="24" width="106" height="62" rx="8"/>
+              <text class="d-t" x="127" y="50">Phones</text>
+              <text class="d-s" x="127" y="70">photos · QR</text>
+              <rect class="d-box" x="234" y="24" width="106" height="62" rx="8"/>
+              <text class="d-t" x="244" y="50" textLength="86" lengthAdjust="spacingAndGlyphs">Discrepancy</text>
+              <text class="d-s" x="244" y="70">REST API</text>
+              <path class="d-line" d="M53 86 V120" marker-end="url(#ah2)"/>
+              <path class="d-line" d="M170 86 V120" marker-end="url(#ah2)"/>
+              <path class="d-line" d="M287 86 V120" marker-end="url(#ah2)"/>
+
+              <rect class="d-group" x="0" y="106" width="340" height="304" rx="12" transform="translate(0 0)"/>
+              <rect class="d-core" x="16" y="126" width="308" height="112" rx="10"/>
+              <text class="d-t" x="30" y="156">Waitress · Flask</text>
+              <text class="d-s" x="30" y="180">231 routes · 3 roles</text>
+              <text class="d-s" x="30" y="200">server-rendered Jinja</text>
+              <text class="d-s" x="30" y="220">REST API · print jobs</text>
+              <path class="d-line a" d="M160 238 V276" marker-end="url(#aha2)"/>
+              <path class="d-line a" d="M180 276 V242" marker-end="url(#aha2)"/>
+              <rect class="d-store" x="16" y="280" width="308" height="104" rx="10"/>
+              <path class="d-line" d="M16 306 H324"/>
+              <text class="d-t" x="30" y="298">SQLite (WAL)</text>
+              <text class="d-s" x="30" y="330">50+ tables</text>
+              <text class="d-s" x="30" y="350">immutable audit ledger</text>
+              <text class="d-s" x="30" y="370">scrubbed copies for agents</text>
+              <text class="d-g" x="16" y="402">WINDOWS SERVICE · ONE FILE</text>
+
+              <text class="d-g" x="22" y="448">DATA IN</text>
+              <rect class="d-box" x="22" y="458" width="142" height="70" rx="8"/>
+              <text class="d-t" x="32" y="486">15 importers</text>
+              <text class="d-s" x="32" y="508">Access·GigaTrak</text>
+              <rect class="d-box" x="176" y="458" width="142" height="70" rx="8"/>
+              <text class="d-t" x="186" y="486">Schematics</text>
+              <text class="d-s" x="186" y="508">DGN→GDAL→SVG</text>
+              <path class="d-line" d="M93 458 V414" marker-end="url(#ah2)"/>
+              <path class="d-line" d="M247 458 V414" marker-end="url(#ah2)"/>
+
+              <text class="d-g" x="22" y="578">DATA OUT</text>
+              <rect class="d-box" x="0" y="590" width="164" height="70" rx="8"/>
+              <text class="d-t" x="10" y="618">Print agent</text>
+              <text class="d-s" x="10" y="640">ZPL → Zebra</text>
+              <rect class="d-box" x="176" y="590" width="164" height="70" rx="8"/>
+              <text class="d-t" x="186" y="618">Backups</text>
+              <text class="d-s" x="186" y="640">daily + offsite</text>
+              <path class="d-line" d="M10 412 V586" marker-end="url(#ah2)" stroke-dasharray="3 4"/>
+              <path class="d-line" d="M330 412 V586" marker-end="url(#ah2)" stroke-dasharray="3 4"/>
+              <text class="d-s" x="0" y="696">solid: requests and data coming in</text>
+              <text class="d-s" x="0" y="716">dashed: output leaving the service</text>
+            </svg>
+            <figcaption>Simplified. Names of internal systems, sites and suppliers are left out on purpose.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-eng">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>04</b></p><h2 id="h-eng">Engineering practices</h2></header>
+        <div>
+          <div class="prose">
+            <p>PAR was built with AI coding agents working in parallel under my direction. That only works with a test suite that catches regressions before people on the floor do, so <strong>340+ automated checks gate every change.</strong></p>
+          </div>
+          <div class="checks">
+            <div class="check"><div class="n">72</div><div class="t">Regression suites</div><p>Run in parallel, each against its own copy of the database.</p></div>
+            <div class="check"><div class="n">142</div><div class="t">Browser end-to-end checks</div><p>Headless Chrome, driven by a small, dependency-free Chrome DevTools Protocol client.</p></div>
+            <div class="check"><div class="n">30</div><div class="t">Threads, one test</div><p>A concurrency test that hammers the app and SQLite at once.</p></div>
+          </div>
+          <div class="prose">
+                        <p><strong>The quality gate ratchets:</strong> the bar can go up, never down. <strong>Backups run daily and offsite.</strong> <strong>Agents never read real records:</strong> when they need to look at data they get a scrubbed copy, and test suites run against throwaway copies that only report pass/fail and counts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-results">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>05</b></p><h2 id="h-results">Results</h2></header>
+        <div class="prose">
+          <p><strong>Rolled out to the whole 40-person department and in daily use.</strong> Inventory, purchasing, work orders, budgets and schematics now live in one system instead of several that disagreed.</p>
+          <p>The legacy MS Access and GigaTrak data came across through imports a person could review, field by field, without losing the original history or timestamps.</p>
+          <p>Technicians can open a simulator drawing in the browser, click a part number and see what's on the shelf. Reorder decisions are made across all 26 devices at both sites instead of one device at a time.</p>
+          <p class="disclaimer">Internal tool — details generalized; no proprietary data shown.</p>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="foot" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 id="contact-title">Let's talk.</h2>
+        <p>Working on something in aviation, aerospace or industrial software where knowing the domain matters as much as shipping fast? I'd like to hear about it.</p>
+      </div>
+      <div class="foot-links">
+        <a class="btn btn-primary" href="mailto:dillon@dillongreen.dev"><svg aria-hidden="true"><use href="#i-mail"/></svg>dillon@dillongreen.dev</a>
+        <a class="btn" href="https://github.com/dgreen52" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg>github.com/dgreen52</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Dillon Green · Seattle, WA</span><span class="kana eol" aria-hidden="true">// END_OF_LINE · 接続終了</span>
+      <nav class="foot-nav" aria-label="Site"><a href="./">Home</a><a href="/projects/">Projects</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a><a href="Dillon_Green_Resume.pdf">Resume (PDF)</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=28a142dac6" defer></script>
+<script src="assets/js/projects-data.js?v=8d0d8af6f5" defer></script>
+<script src="assets/js/fun.js?v=ddcde077f5" defer></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guestbook · Dillon Green</title>
+<meta name="description" content="Sign Dillon Green's guestbook. Like it's 1999, but every entry is read and approved by hand.">
+<meta name="author" content="Dillon Green">
+<link rel="canonical" href="https://dillongreen.dev/guestbook/">
+<meta name="theme-color" content="#06080b">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dillon Green">
+<meta property="og:title" content="Guestbook · Dillon Green">
+<meta property="og:description" content="Like it's 1999. Leave a name and a note; entries are approved by hand.">
+<meta property="og:url" content="https://dillongreen.dev/guestbook/">
+<meta property="og:image" content="https://dillongreen.dev/assets/og/guestbook.png?v=95b91ec3a0">
+<meta name="twitter:image:alt" content="Dillon Green's guestbook, Web 1.0 style">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dillon Green's guestbook, Web 1.0 style">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guestbook · Dillon Green">
+<meta name="twitter:description" content="Like it's 1999. Leave a name and a note; entries are approved by hand.">
+<meta name="twitter:image" content="https://dillongreen.dev/assets/og/guestbook.png?v=95b91ec3a0">
+
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=8390797a30">
+<script src="/assets/js/theme.js?v=39ed3b7b76"></script>
+</head>
+<body>
+<svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 5.5 7 5.5 7-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 20 20"><path d="M16.5 12.2A6.8 6.8 0 0 1 7.8 3.5a6.8 6.8 0 1 0 8.7 8.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 16 16"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span>Dillon Green</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="/projects/">Projects</a>
+      <a class="hide-sm" href="/studio/">Studio</a>
+      <a class="hide-sm" href="/guestbook/" aria-current="page">Guestbook</a>
+      <a class="hide-lg" href="/#practice">How I work</a>
+      <a class="hide-lg" href="/#experience">Experience</a>
+      <a class="hide-sm" href="/Dillon_Green_Resume.pdf">Resume</a>
+      <button class="theme-btn term-btn" type="button" data-term aria-label="Open terminal" title="Terminal (press ` or /)">&gt;_</button>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch color theme">
+        <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <button class="theme-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" title="Menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <header class="cs-hero">
+    <div class="wrap">
+      <p class="annunciator"><span class="lamp" aria-hidden="true"></span><span>Guestbook · est. 2026 · approved by hand</span></p>
+      <h1>Sign the guestbook.</h1>
+      <p class="lead">Remember guestbooks? I missed them. Leave your name and a note. I read every entry and approve them by hand, so yours will show up once I've seen it.</p>
+    </div>
+  </header>
+
+  <section class="gb-section" aria-label="Sign the guestbook">
+    <div class="wrap">
+      <div class="gb-grid">
+        <div class="gb-window">
+          <div class="gb-titlebar"><span>guestbook.cgi · sign here</span><span class="ctl" aria-hidden="true"><i>_</i><i>□</i><i>×</i></span></div>
+          <p class="marquee" aria-hidden="true"><span>★ Welcome to my guestbook ★ Thanks for stopping by ★ Please sign ★ Be nice ★ No spam, no robots ★</span></p>
+          <form class="form" data-form="guestbook" data-endpoint="/api/guestbook" novalidate>
+            <div class="field">
+              <label for="gb-name">Name</label>
+              <input id="gb-name" name="name" type="text" maxlength="40" required autocomplete="nickname" spellcheck="false" placeholder="Your name or handle">
+            </div>
+            <div class="field">
+              <label for="gb-url">Your site <span class="opt">(optional, shown as plain text)</span></label>
+              <input id="gb-url" name="url" type="text" inputmode="url" maxlength="80" autocomplete="url" spellcheck="false" autocapitalize="off" placeholder="example.com" aria-describedby="gb-url-hint">
+              <span class="field-hint" id="gb-url-hint">Not a link, on purpose. Sorry, spammers.</span>
+            </div>
+            <div class="field">
+              <label for="gb-msg">Message</label>
+              <textarea id="gb-msg" name="message" maxlength="280" required rows="4" placeholder="Say hi, share a sim story, tell me what you're building…" aria-describedby="gb-msg-count"></textarea>
+              <span class="field-hint"><span class="count" id="gb-msg-count" data-count-for="gb-msg" aria-live="off">0 / 280</span></span>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label for="gb-fax">Leave this empty</label>
+              <input id="gb-fax" name="fax" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="form-foot">
+              <button class="btn btn-primary" type="submit">Sign the guestbook</button>
+              <p class="fine">Stored: what you type, plus a salted hash of your IP to stop spam. <a href="/privacy.html">Privacy</a></p>
+            </div>
+            <p class="form-status" role="status" aria-live="polite" data-status></p>
+            <noscript><p class="noscript-note">Signing needs JavaScript. You can also email a note to dillon@dillongreen.dev.</p></noscript>
+          </form>
+        </div>
+
+        <aside class="gb-side" aria-label="About this guestbook">
+          <div class="counter-box">
+            <p class="cap" id="gb-count-cap">Signatures so far</p>
+            <div class="odometer" data-odometer role="img" aria-labelledby="gb-count-cap" aria-describedby="gb-count-text"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span></div>
+            <p class="sub" id="gb-count-text" data-count-text>Counting…</p>
+            <div class="badges" aria-hidden="true">
+              <span class="badge88 b1">No<br>framework</span>
+              <span class="badge88 b2">No cookies<br>inside</span>
+              <span class="badge88 b3">Best viewed<br>any browser</span>
+              <span class="badge88 b4">ARINC 429<br>powered</span>
+            </div>
+          </div>
+          <div class="gb-rules">
+            <h2>House rules</h2>
+            <ul>
+              <li>Be kind. Entries are approved by hand.</li>
+              <li>Up to 280 characters, one link at most.</li>
+              <li>Your site shows as text, never as a link.</li>
+              <li>Want an entry removed? Email <a href="mailto:dillon@dillongreen.dev">dillon@dillongreen.dev</a>.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <div class="gb-entries" aria-labelledby="gb-entries-title">
+        <div class="section-head">
+          <p class="kicker"><b>ENTRIES</b> Newest first</p>
+          <h2 id="gb-entries-title">Who's been by</h2>
+        </div>
+        <ol class="gb-list" data-gb-list aria-live="polite"></ol>
+        <p class="gb-empty" data-gb-empty>Loading the guestbook…</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 id="contact-title">Let's talk.</h2>
+        <p>Working on something in aviation, aerospace or industrial software where knowing the domain matters as much as shipping fast? I'd like to hear about it.</p>
+      </div>
+      <div class="foot-links">
+        <a class="btn btn-primary" href="mailto:dillon@dillongreen.dev"><svg aria-hidden="true"><use href="#i-mail"/></svg>dillon@dillongreen.dev</a>
+        <a class="btn" href="https://github.com/dgreen52" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg>github.com/dgreen52</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Dillon Green · Seattle, WA</span><span class="kana eol" aria-hidden="true">// END_OF_LINE · 接続終了</span>
+      <nav class="foot-nav" aria-label="Site"><a href="/">Home</a><a href="/projects/">Projects</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js?v=28a142dac6" defer></script>
+<script src="/assets/js/projects-data.js?v=8d0d8af6f5" defer></script>
+<script src="/assets/js/fun.js?v=ddcde077f5" defer></script>
+<script src="/assets/js/forms.js?v=c590c82f40" defer></script>
+</body>
+</html>

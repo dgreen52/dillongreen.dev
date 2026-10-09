@@ -1,0 +1,632 @@
+{
+  "_readme": "Single source for every project: /projects/ cards + 'Live on the web' list, the home/studio/post links tagged data-project, and the terminal (assets/js/projects-data.js). Edit here, then run: python tools/build_projects.py && python tools/stamp_assets.py. 'url' is the live URL; an action href of '@url' means 'use url'. Set 'unavailable' to a short note to pull a project's link everywhere without deleting it. 'clip' names a gameplay loop in site/assets/clips/<clip>.webm/.mp4 (tools/capture_clips.js); live projects get a status chip automatically. thumb.fit: 'cover' (crop to the card box at thumb.focus, a CSS object-position), 'contain' (whole image on the tinted panel) or 'phone' (a portrait phone screen standing on the panel, running off the bottom edge).",
+  "projects": [
+    {
+      "slug": "par",
+      "name": "PAR",
+      "aliases": [
+        "par"
+      ],
+      "cats": [
+        "aviation"
+      ],
+      "status": "internal",
+      "status_label": "Internal",
+      "pitch": "Parts, procurement, work-order and budget platform for an airline flight simulator department.",
+      "tags": [
+        "Python",
+        "Flask",
+        "SQLite",
+        "GDAL"
+      ],
+      "thumb": {
+        "kind": "par-readout"
+      },
+      "url": null,
+      "actions": [
+        {
+          "text": "Case study",
+          "href": "/par.html",
+          "style": "int"
+        }
+      ],
+      "home_anchor": "#p-par",
+      "desc": "PAR: parts & requisitions platform (case study: par.html)"
+    },
+    {
+      "slug": "pocket429",
+      "name": "pocket429",
+      "aliases": [
+        "pocket429",
+        "429"
+      ],
+      "cats": [
+        "aviation",
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "ARINC 429 decoder and word builder for avionics technicians, with on-device OCR.",
+      "tags": [
+        "JavaScript",
+        "Capacitor",
+        "On-device OCR",
+        "ARINC 429"
+      ],
+      "thumb": {
+        "src": "work/pocket429-decode.webp",
+        "w": 480,
+        "h": 1040,
+        "eager": true,
+        "alt": "pocket429 decode screen: word 6445C0C1 shown as 32 tappable bits, decoded as label 203 altitude.",
+        "fit": "phone"
+      },
+      "url": "https://pocket429.dillongreen.dev",
+      "live_label": "pocket429.dillongreen.dev",
+      "actions": [
+        {
+          "text": "Try it",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "home_anchor": "#p-429",
+      "launch_line": "Opening pocket429, the full ARINC 429 decoder …",
+      "desc": "ARINC 429 decoder (live: pocket429.dillongreen.dev)"
+    },
+    {
+      "slug": "fernwood",
+      "name": "Fernwood",
+      "aliases": [
+        "fernwood",
+        "fern"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "proto",
+      "status_label": "WIP · Playable preview",
+      "pitch": "A cozy side-scrolling farm-and-explore RPG: dig, farm, fish and make friends in a valley that's almost too generous.",
+      "more": "Rent the little cottage at the edge of Fernwood and settle in: plant and water a farm, dig down into the caves, fish the river, craft and decorate, and get to know the townsfolk through four seasons of birthdays, rainy nights and a lantern festival everyone can't stop talking about. Cozy on top. Something about Fernwood is a little off, and it's up to you how far you dig. Pixel art drawn in code, a canvas tile renderer, and pure, tested game rules.",
+      "tags": [
+        "Pixel art",
+        "Canvas",
+        "Farming",
+        "Mystery"
+      ],
+      "thumb": {
+        "src": "more/fernwood.webp",
+        "w": 960,
+        "h": 540,
+        "eager": true,
+        "alt": "Fernwood: a sunny spring morning in the village, a farmer in a straw hat by the notice board, Mira outside her cottage, a tall pine and the general store.",
+        "fit": "cover",
+        "focus": "50% 40%"
+      },
+      "url": "https://fernwood.dillon-eu-green.workers.dev/",
+      "live_label": "fernwood…workers.dev",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "home_anchor": "#p-fernwood",
+      "launch_line": "The cottage at the edge of the valley is yours now. Mind the creaky floorboard.",
+      "desc": "Fernwood: cozy farm-and-explore RPG with something a little off (play fernwood)",
+      "clip": "fernwood"
+    },
+    {
+      "slug": "airfield",
+      "name": "Little Airfield",
+      "aliases": [
+        "airfield",
+        "little-airfield",
+        "littleairfield"
+      ],
+      "cats": [
+        "games",
+        "aviation"
+      ],
+      "status": "proto",
+      "status_label": "Prototype",
+      "pitch": "Cozy isometric airport builder: clear planes to land, hunt squawks, grow a grass strip into an airport. Best in landscape on phones.",
+      "tags": [
+        "Isometric canvas",
+        "Vanilla JS",
+        "Cloudflare",
+        "47 tests"
+      ],
+      "thumb": {
+        "src": "more/little-airfield.webp",
+        "w": 960,
+        "h": 600,
+        "eager": true,
+        "alt": "Little Airfield: an isometric grass airfield with a paved runway, a parked trainer and a plane taxiing in.",
+        "fit": "cover",
+        "focus": "50% 45%"
+      },
+      "url": "https://little-airfield.dillon-eu-green.workers.dev/",
+      "live_label": "little-airfield…workers.dev",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "home_anchor": "#p-airfield",
+      "launch_line": "Airfield traffic, windsock favors runway two-seven. Cleared to land. (Best in landscape on a phone.)",
+      "desc": "Little Airfield: cozy isometric airport builder (play airfield)",
+      "clip": "airfield"
+    },
+    {
+      "slug": "mixtape",
+      "name": "Mixtape Drift",
+      "aliases": [
+        "mixtape",
+        "mixtape-drift",
+        "drift"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "proto",
+      "status_label": "WIP · Playable",
+      "pitch": "A cute pixel street racer where the music is the race: drive to the beat and the song fills in.",
+      "more": "Drums and bass always play; clean driving, near misses, on-beat boosts and drifts released on the beat bring in keys, lead and sparkle, and a bump drops a layer. Cruise (endless, collect cassettes), Sprint (race three rivals through one song, GO on the downbeat) and Groove, plus a Garage for shape, paint, underglow and decals. Three original songs played by a small WebAudio synth band composed in code, a music clock driving the beat timing, a low-res scanline road renderer and pixel art drawn in code, with pure rules, track and composer modules under Node tests and Playwright browser checks.",
+      "tags": [
+        "WebAudio",
+        "Canvas",
+        "Rhythm",
+        "Pixel art"
+      ],
+      "thumb": {
+        "src": "more/mixtape-drift.webp",
+        "w": 960,
+        "h": 540,
+        "eager": true,
+        "alt": "Mixtape Drift: a pink pixel-art car on a neon city highway at night, under a LOFI FM 88.3 billboard, with the hint 'Boost on the beat. Let go of a drift on the beat.'",
+        "fit": "cover",
+        "focus": "50% 55%"
+      },
+      "url": "https://mixtape-drift.dillon-eu-green.workers.dev/",
+      "live_label": "mixtape-drift…workers.dev",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "home_anchor": "#p-mixtape",
+      "launch_line": "Tape in. Count-in on the downbeat: one, two, three, four. Drift on the beat.",
+      "desc": "Mixtape Drift: pixel street racer, music is the race (play mixtape)",
+      "clip": "mixtape"
+    },
+    {
+      "slug": "crumb",
+      "name": "Crumb",
+      "aliases": [
+        "crumb"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "review",
+      "status_label": "In review",
+      "pitch": "Recipe cleaner, cookbook and weekly meal planner with a shopping list sorted by aisle.",
+      "tags": [
+        "Capacitor",
+        "Swift",
+        "Local-first sync",
+        "RevenueCat"
+      ],
+      "thumb": {
+        "src": "work/crumb-recipes.webp",
+        "w": 480,
+        "h": 1027,
+        "alt": "Crumb recipe library with photo cards and filters.",
+        "fit": "phone"
+      },
+      "url": "https://crumb.dillon-eu-green.workers.dev",
+      "live_label": "crumb…workers.dev",
+      "actions": [
+        {
+          "text": "Try it",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "desc": "Recipe cleaner + meal planner (open crumb)"
+    },
+    {
+      "slug": "dragonrealm",
+      "name": "Dragon Realm Online",
+      "aliases": [
+        "dragonrealm",
+        "dragon-realm",
+        "jaderealm",
+        "jade"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "Real-time multiplayer isometric browser MMO-style game with chat, trading and duels.",
+      "more": "Live position sync, chat, trading and duels over hibernating WebSockets on Cloudflare Durable Objects, with a player-to-player market stored in D1. About 11k lines.",
+      "tags": [
+        "Canvas",
+        "Durable Objects",
+        "WebSockets",
+        "D1"
+      ],
+      "thumb": {
+        "src": "work/jaderealm.webp",
+        "w": 1440,
+        "h": 860,
+        "alt": "Dragon Realm Online: an isometric city square full of named characters, with health and mana orbs and a skill bar.",
+        "fit": "cover",
+        "focus": "50% 40%"
+      },
+      "url": "https://dragonrealm.dillon-eu-green.workers.dev/",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "desc": "Dragon Realm Online: real-time multiplayer browser game (play dragonrealm)",
+      "live_label": "dragonrealm…workers.dev",
+      "launch_line": "Realm gate open. Mind the duelists in the square.",
+      "clip": "dragonrealm"
+    },
+    {
+      "slug": "mirror",
+      "name": "Smart Mirror",
+      "aliases": [
+        "mirror",
+        "smart-mirror"
+      ],
+      "cats": [
+        "hardware"
+      ],
+      "status": "build",
+      "status_label": "In build",
+      "pitch": "A Raspberry Pi magic mirror with a cyberpunk streak, run by a zero-dependency Python server.",
+      "more": "A monitor behind two-way acrylic and a browser UI in a self-starting Chromium kiosk. Weather, calendar, news and household notes posted from phones by QR code, with live push. It greets whoever is home by pinging their phones on Wi-Fi, so nothing leaves the LAN, and a PIR sensor wakes the screen. Easter eggs: a MIRROR-OS boot, katakana rain when it is actually raining, and a fake netrunner intrusion.",
+      "tags": [
+        "Raspberry Pi",
+        "Python stdlib",
+        "Server-sent events",
+        "PIR sensor"
+      ],
+      "thumb": {
+        "src": "work/mirror-rain.webp",
+        "w": 480,
+        "h": 853,
+        "alt": "Smart mirror in its cyberpunk theme: clock, rain forecast, calendar, notes and headlines, with katakana rain.",
+        "fit": "phone"
+      },
+      "url": null,
+      "actions": [],
+      "desc": "Raspberry Pi smart mirror, cyberpunk edition"
+    },
+    {
+      "slug": "surprisepass",
+      "name": "surprisepass",
+      "aliases": [
+        "surprisepass"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "Make a printable boarding pass that reveals a surprise trip. Paid tier through Stripe checkout.",
+      "tags": [
+        "Web",
+        "Stripe Checkout",
+        "Print layout"
+      ],
+      "thumb": {
+        "src": "more/surprisepass.webp",
+        "w": 900,
+        "h": 366,
+        "alt": "A printable surprise-trip boarding pass with a hidden destination.",
+        "fit": "contain"
+      },
+      "url": "https://surprisepass.pages.dev",
+      "live_label": "surprisepass.pages.dev",
+      "actions": [
+        {
+          "text": "Try it",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "desc": "Surprise-trip boarding pass (open surprisepass)"
+    },
+    {
+      "slug": "butter",
+      "name": "butter",
+      "aliases": [
+        "butter"
+      ],
+      "cats": [
+        "games",
+        "aviation"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "A one-thumb pixel-art landing game with a new airport every day: fly the approach, follow the PAPI, flare and grease it.",
+      "tags": [
+        "Pixel art",
+        "Canvas",
+        "Flight physics",
+        "Synth audio"
+      ],
+      "thumb": {
+        "src": "more/butter-band.webp",
+        "w": 640,
+        "h": 360,
+        "alt": "butter in pixel art: a jet on short final over the water at St. Maarten, the beach and runway 10 ahead.",
+        "fit": "cover",
+        "focus": "50% 50%"
+      },
+      "url": "https://butter.dillon-eu-green.workers.dev",
+      "live_label": "butter…workers.dev",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "launch_line": "Butter 1, runway one-six-center, cleared for takeoff.",
+      "desc": "One-thumb pixel-art landing game (play butter)",
+      "clip": "butter"
+    },
+    {
+      "slug": "beepbeach",
+      "name": "beepbeach",
+      "aliases": [
+        "beepbeach"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "Sweep a metal detector over the sand, listen for the beep, and dig.",
+      "tags": [
+        "Canvas",
+        "Synthesized audio"
+      ],
+      "thumb": {
+        "src": "more/beepbeach-band.webp",
+        "w": 512,
+        "h": 320,
+        "alt": "beepbeach: a metal detector sweeping the sand between shells, a starfish and a crab.",
+        "fit": "cover",
+        "focus": "50% 50%"
+      },
+      "url": "https://beepbeach.dillon-eu-green.workers.dev",
+      "live_label": "beepbeach…workers.dev",
+      "play": true,
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "launch_line": "Metal detector calibrated. Low tide in ten. Happy digging.",
+      "desc": "Metal-detector beach game (play beepbeach)",
+      "clip": "beepbeach"
+    },
+    {
+      "slug": "halfsies",
+      "name": "halfsies",
+      "aliases": [
+        "halfsies"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "Snap a receipt, tap who had what, and send everyone their exact share with tax and tip.",
+      "tags": [
+        "Receipt OCR",
+        "Web app"
+      ],
+      "thumb": {
+        "src": "more/halfsies.webp",
+        "w": 360,
+        "h": 779,
+        "alt": "halfsies home screen with a scan-a-receipt button.",
+        "fit": "phone"
+      },
+      "url": "https://halfsies.dillon-eu-green.workers.dev",
+      "live_label": "halfsies…workers.dev",
+      "actions": [
+        {
+          "text": "Try it",
+          "href": "@url",
+          "style": "link"
+        }
+      ],
+      "desc": "Receipt bill splitter (open halfsies)"
+    },
+    {
+      "slug": "retros",
+      "name": "RetrOS",
+      "aliases": [
+        "retros"
+      ],
+      "cats": [
+        "experiments"
+      ],
+      "status": "exp",
+      "status_label": "Experiment",
+      "pitch": "A retro desktop as a new-tab page, with draggable windows, a Start menu, a taskbar and small games.",
+      "more": "Built to try out new-tab pages: windows you can drag, a Start menu, a taskbar, a paint program and a few small built-in games.",
+      "tags": [
+        "New-tab page",
+        "Browser extension"
+      ],
+      "thumb": {
+        "src": "lab/retros.webp",
+        "w": 800,
+        "h": 500,
+        "alt": "RetrOS: a teal retro desktop with draggable windows, a paint program and a taskbar.",
+        "fit": "cover",
+        "focus": "0% 0%"
+      },
+      "url": null,
+      "actions": [],
+      "desc": "Retro desktop new-tab page"
+    },
+    {
+      "slug": "spectro",
+      "name": "Spectro",
+      "aliases": [
+        "spectro"
+      ],
+      "cats": [
+        "experiments"
+      ],
+      "status": "exp",
+      "status_label": "Experiment",
+      "pitch": "A music visualizer for a tab's audio: spectrum bars, an oscilloscope and more.",
+      "more": "Listens to the audio playing in a tab and draws spectrum bars with peak markers, an oscilloscope and a few other modes, all on Web Audio.",
+      "tags": [
+        "Web Audio",
+        "Canvas"
+      ],
+      "thumb": {
+        "src": "lab/spectro.webp",
+        "w": 800,
+        "h": 500,
+        "alt": "Spectro: segmented blue spectrum-analyzer bars with peak markers.",
+        "fit": "cover",
+        "focus": "0% 50%"
+      },
+      "url": null,
+      "actions": [],
+      "desc": "Tab-audio music visualizer"
+    },
+    {
+      "slug": "cyberhome",
+      "name": "Cyberhome",
+      "aliases": [
+        "cyberhome"
+      ],
+      "cats": [
+        "experiments"
+      ],
+      "status": "exp",
+      "status_label": "Experiment",
+      "pitch": "A Web 1.0 homepage for every new tab: hit counter, guestbook, cool links and themes.",
+      "more": "Every new tab opens a little Web 1.0 homepage of your own: a hit counter, a guestbook, a cool-links list and swappable themes.",
+      "tags": [
+        "New-tab page",
+        "Web 1.0"
+      ],
+      "thumb": {
+        "src": "lab/cyberhome.webp",
+        "w": 800,
+        "h": 500,
+        "alt": "Cyberhome: a Web 1.0 style homepage with a hit counter and guestbook.",
+        "fit": "cover",
+        "focus": "0% 0%"
+      },
+      "url": null,
+      "actions": [],
+      "desc": "Web 1.0 new-tab homepage"
+    },
+    {
+      "slug": "ribbon",
+      "name": "Ribbon",
+      "aliases": [
+        "ribbon"
+      ],
+      "cats": [
+        "experiments"
+      ],
+      "status": "exp",
+      "status_label": "Experiment",
+      "pitch": "A reading companion for AO3 with reader themes, mute filters, highlights and EPUB export.",
+      "more": "An in-page reading tool for AO3: reader themes, typeface and spacing controls, mute filters, highlights and EPUB export.",
+      "tags": [
+        "Browser extension",
+        "EPUB export"
+      ],
+      "thumb": {
+        "src": "lab/ribbon.webp",
+        "w": 380,
+        "h": 620,
+        "alt": "Ribbon settings panel with reading themes, typeface and spacing controls.",
+        "fit": "phone"
+      },
+      "url": null,
+      "actions": [],
+      "desc": "Reading companion for AO3"
+    },
+    {
+      "slug": "this-site",
+      "name": "dillongreen.dev",
+      "aside": "(this site)",
+      "aliases": [
+        "site",
+        "this",
+        "dillongreen.dev"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live · You are here",
+      "pitch": "Framework-free portfolio: static HTML, CSS and JS on Cloudflare Pages, with Pages Functions and D1 for the guestbook and studio form, a strict CSP, cookieless analytics, an in-browser ARINC 429 decoder and a hidden terminal with MIRROR-OS easter eggs. Built by directing AI coding agents, held to automated checks: cross-engine mobile overflow and layout-shift tests in Chromium and WebKit, form and XSS tests, link checks.",
+      "tags": [
+        "Cloudflare Pages",
+        "D1",
+        "Vanilla JS",
+        "Playwright"
+      ],
+      "thumb": {
+        "src": "more/dillongreen-dev.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "The dillongreen.dev home page: name, intro, resume and contact buttons, and the ARINC 429 bit-flipper.",
+        "fit": "cover",
+        "focus": "50% 0%"
+      },
+      "url": null,
+      "recurse": true,
+      "actions": [
+        {
+          "text": "Visit",
+          "href": "/",
+          "style": "btn-int",
+          "recurse": true
+        },
+        {
+          "text": "Source & README",
+          "href": "https://github.com/dgreen52/dillongreen.dev#readme",
+          "style": "link"
+        }
+      ],
+      "desc": "dillongreen.dev itself (open site)"
+    }
+  ]
+}

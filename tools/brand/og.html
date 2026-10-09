@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "Archivo"; src: url("../../site/assets/fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../site/assets/fonts/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1200px; height: 630px; overflow: hidden; }
+body {
+  background: #0b0d10; color: #e9ecf0; font-family: "Archivo"; position: relative;
+  background-image: linear-gradient(rgba(233,236,240,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(233,236,240,.045) 1px, transparent 1px);
+  background-size: 32px 32px; background-position: -1px -1px;
+}
+.pad { position: absolute; inset: 64px 72px; display: flex; flex-direction: column; }
+.top { display: flex; justify-content: space-between; font: 600 18px "JetBrains Mono"; letter-spacing: .12em; color: #8a95a3; }
+.top .lamp { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #5fd38d; margin-right: 12px; box-shadow: 0 0 0 5px rgba(95,211,141,.18); vertical-align: 1px; }
+h1 { margin-top: 52px; font-size: 132px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.035em; line-height: .9; }
+h1 span { color: #62d3e6; }
+.sub { margin-top: 26px; font-size: 30px; line-height: 1.3; font-weight: 500; color: #b0b8c3; letter-spacing: -0.01em; }
+.sub b { color: #e9ecf0; font-weight: 650; }
+.word { margin-top: auto; display: flex; align-items: flex-end; gap: 22px; }
+.bits { display: grid; grid-template-columns: repeat(32, 1fr); gap: 4px; flex: 1; will-change: transform; }
+.bits i { font: 600 22px/1 "JetBrains Mono"; font-style: normal; text-align: center; padding: 9px 0 8px; border-radius: 5px; background: #181d24; border-top: 3px solid var(--f); color: #e9ecf0; }
+.bits i.z { color: #6b7684; font-weight: 400; }
+.ro { font: 600 15px/1.35 "JetBrains Mono"; color: #8a95a3; letter-spacing: .08em; text-align: right; white-space: nowrap; }
+.ro b { display: block; font-size: 34px; color: #62d3e6; letter-spacing: 0; }
+</style></head>
+<body>
+<div class="pad">
+  <div class="top"><span><span class="lamp"></span>FLIGHT SIMULATOR ENGINEER · SOFTWARE &amp; AUTOMATION</span><span>DILLONGREEN.DEV</span></div>
+  <h1>Dillon Green<span>.</span></h1>
+  <p class="sub"><b>8+ years in aviation.</b><br>Tools, apps and games built on the side.</p>
+  <div class="word">
+    <div class="bits" id="bits"></div>
+    <div class="ro">LBL 203 · ALT<b>+35,000 ft</b></div>
+  </div>
+</div>
+<script>
+  var w = "01100100010001011100000011000001", el = document.getElementById("bits");
+  for (var i = 0; i < 32; i++) {
+    var b = 32 - i, f = b === 32 ? "#8a95a3" : b >= 30 ? "#f0b44c" : b >= 11 ? "#62d3e6" : b >= 9 ? "#9b87f5" : "#5fd38d";
+    var c = document.createElement("i"); c.textContent = w[i]; c.style.setProperty("--f", f);
+    if (w[i] === "0") c.className = "z"; el.appendChild(c);
+  }
+</script>
+</body></html>

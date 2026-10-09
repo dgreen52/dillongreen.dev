@@ -1,0 +1,17 @@
+# local wrangler state (dev D1, cache, account info)
+.wrangler/
+node_modules/
+# verification screenshots (contain local test data)
+verify/
+*.log
+.DS_Store
+Thumbs.db
+
+# unpublished drafts stay local
+drafts/
+
+# local secrets: never commit (wrangler reads .dev.vars for `pages dev`)
+.dev.vars*
+.env*
+*.pem
+*.key
