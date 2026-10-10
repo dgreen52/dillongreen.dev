@@ -18,12 +18,17 @@ import re
 import sys
 from pathlib import Path
 
+TEXT_SUFFIXES = {".css", ".js", ".mjs", ".json", ".svg", ".html", ".txt", ".webmanifest", ".xml"}
+
 SITE = Path(__file__).resolve().parent.parent / "site"
 CHECK = "--check" in sys.argv
 
 
 def digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:10]
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_SUFFIXES:  # same hash whatever line endings git checked out (CRLF on Windows)
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()[:10]
 
 
 def resolve(base_dir: Path, ref: str) -> Path:

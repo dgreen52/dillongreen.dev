@@ -105,7 +105,7 @@ function mockCaches() {
   check(took < 900, `checks run in parallel and respect the timeout (${took}ms for ${N} nodes, timeout 300ms)`);
   check(by.pocket429.status === "up", "pocket429 checked via pages.dev -> up");
   check(calls.some((c) => c.via === "fetch" && c.host === "pocket429.pages.dev") && !calls.some((c) => c.host === "pocket429.dillongreen.dev"), "pocket429 uses https://pocket429.pages.dev, not the same-zone custom domain");
-  check(by.linework && by.linework.status === "up" && by.linework.url === "https://linework-c4u.pages.dev", "linework checked via its pages.dev origin -> up; public URL kept for the widget link");
+  check(by.linework && by.linework.status === "up" && by.linework.url === "https://linework.dillongreen.dev", "linework checked via its pages.dev origin -> up; public URL kept for the widget link");
   check(calls.some((c) => c.via === "fetch" && c.host === "linework-c4u.pages.dev") && !calls.some((c) => c.host === "linework.dillongreen.dev" || c.host === "linework.pages.dev"),
     "linework uses https://linework-c4u.pages.dev (its Pages project), never the same-zone custom domain or linework.pages.dev");
   check(by.airfield.status === "up", "binding 200 -> up");

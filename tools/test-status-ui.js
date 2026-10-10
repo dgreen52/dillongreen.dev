@@ -27,7 +27,7 @@ const DEMO = `<!doctype html><html lang="en"><head><meta charset="utf-8">
 
 const NODES = [
   ["pocket429", "pocket429", "up", 182, "https://pocket429.dillongreen.dev"],
-  ["linework", "Linework", "up", 64, "https://linework-c4u.pages.dev"],
+  ["linework", "Linework", "up", 64, "https://linework.dillongreen.dev"],
   ["fernwood", "Fernwood", "up", 131, "https://fernwood.dillon-eu-green.workers.dev/"],
   ["airfield", "Little Airfield", "up", 96, "https://little-airfield.dillon-eu-green.workers.dev/"],
   ["mixtape", "Mixtape Drift", "up", 141, "https://mixtape-drift.dillon-eu-green.workers.dev/"],
