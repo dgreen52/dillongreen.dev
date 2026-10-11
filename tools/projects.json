@@ -44,8 +44,8 @@
         "aviation",
         "apps"
       ],
-      "status": "live",
-      "status_label": "Live",
+      "status": "build",
+      "status_label": "iOS app coming soon",
       "pitch": "ARINC 429 decoder and word builder for avionics technicians, with on-device OCR.",
       "tags": [
         "JavaScript",
@@ -65,14 +65,14 @@
       "live_label": "pocket429.dillongreen.dev",
       "actions": [
         {
-          "text": "Try it",
+          "text": "See it",
           "href": "@url",
           "style": "btn"
         }
       ],
       "home_anchor": "#p-429",
-      "launch_line": "Opening pocket429, the full ARINC 429 decoder …",
-      "desc": "ARINC 429 decoder (live: pocket429.dillongreen.dev)"
+      "launch_line": "Opening pocket429 …",
+      "desc": "ARINC 429 decoder, iOS app coming soon (pocket429.dillongreen.dev)"
     },
     {
       "slug": "linework",
