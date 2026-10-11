@@ -37,7 +37,7 @@
   ],
   "url": "https://linework.dillongreen.dev",
   "line": "Opening Linework. Your drawings never leave this device.",
-  "desc": "CAD viewer + editor for DXF, DWG and DGN, in the browser (open linework)",
+  "desc": "CAD viewer + editor for DXF, DWG, DGN and PDF, in the browser (open linework)",
   "cats": [
    "apps"
   ]
