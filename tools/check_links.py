@@ -54,8 +54,14 @@ for f in list(SITE.rglob("*.html")) + list(SITE.rglob("*.css")) + list(SITE.rglo
 sm = (SITE / "sitemap.xml").read_text(encoding="utf-8")
 for name in pages:
     if name in ("404.html",) or name.startswith("admin/"): continue
-    url = "https://dillongreen.dev/" + (name[:-len("index.html")] if name.endswith("index.html") else name)
+    # Pages serves /x.html at /x (a 308 from /x.html), so pages are listed, and name themselves, at the clean URL;
+    # a canonical/og:url that redirects makes link previews (LinkedIn) drop the image on a re-scrape
+    url = "https://dillongreen.dev/" + (name[:-len("index.html")] if name.endswith("index.html") else name[:-len(".html")] if name.endswith(".html") else name)
     if f"<loc>{url}</loc>" not in sm: problems.append(f"sitemap.xml: missing {url}")
+    t = (SITE / name).read_text(encoding="utf-8", errors="ignore")
+    for tag in ('rel="canonical" href="', 'property="og:url" content="'):
+        m = re.search(re.escape(tag) + r'([^"]+)"', t)
+        if not m or m.group(1) != url: problems.append(f"{name}: {tag.split('=')[0]} should be {url}, is {m.group(1) if m else 'missing'}")
 
 # CSS url() references
 for css in SITE.rglob("*.css"):
