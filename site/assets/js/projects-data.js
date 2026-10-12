@@ -99,7 +99,8 @@
    "roblox",
    "airport-tycoon"
   ],
-  "desc": "Little Airfield on Roblox: airport tycoon you can fly (waiting on Roblox to go public)",
+  "url": "https://www.roblox.com/games/95660426608576/Airport-Tycoon-Little-Airfield",
+  "desc": "Little Airfield on Roblox: airport tycoon you can fly (play it on Roblox)",
   "cats": [
    "games",
    "aviation"

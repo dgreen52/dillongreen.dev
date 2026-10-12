@@ -278,8 +278,8 @@
         "games",
         "aviation"
       ],
-      "status": "review",
-      "status_label": "Waiting on Roblox",
+      "status": "live",
+      "status_label": "Live on Roblox",
       "pitch": "Little Airfield in 3D on Roblox: grow a grass strip into a Mega Hub, then fly your own planes into it, from a Cub to a twinjet airliner.",
       "more": "Planes land, taxi in and park for you to tie down, fuel and fix. Fly your own fleet: barrel rolls, cargo drops, water-bombing fires, a seaplane, a helicopter and an airliner you have to actually land, with PAPI lights and jet callouts. Luau with Rojo; the game rules are pure and unit-tested, and automated Studio playtests fly 15 missions on autopilot every run.",
       "tags": [
@@ -296,9 +296,16 @@
         "fit": "cover",
         "focus": "50% 50%"
       },
-      "url": null,
-      "actions": [],
-      "desc": "Little Airfield on Roblox: airport tycoon you can fly (waiting on Roblox to go public)",
+      "url": "https://www.roblox.com/games/95660426608576/Airport-Tycoon-Little-Airfield",
+      "live_label": "roblox.com",
+      "actions": [
+        {
+          "text": "Play on Roblox",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "desc": "Little Airfield on Roblox: airport tycoon you can fly (play it on Roblox)",
       "clip": "airfield-roblox"
     },
     {
