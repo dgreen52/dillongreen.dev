@@ -1,5 +1,5 @@
 {
-  "_readme": "Single source for every project: /projects/ cards + 'Live on the web' list, the home/studio/post links tagged data-project, and the terminal (assets/js/projects-data.js). Edit here, then run: python tools/build_projects.py && python tools/stamp_assets.py. 'url' is the live URL; an action href of '@url' means 'use url'. Set 'unavailable' to a short note to pull a project's link everywhere without deleting it. 'clip' names a gameplay loop in site/assets/clips/<clip>.webm/.mp4 (tools/capture_clips.js); live projects get a status chip automatically. thumb.fit: 'cover' (crop to the card box at thumb.focus, a CSS object-position), 'contain' (whole image on the tinted panel) or 'phone' (a portrait phone screen standing on the panel, running off the bottom edge). 'arcade': {'order': n} puts a game on /arcade/ (n = position), where it can be played in a sandboxed frame on the page; add 'embed': false for a game whose site refuses to be framed (it then only gets 'Open in new tab'). Embeds must live on *.dillon-eu-green.workers.dev, the only frame-src the CSP in site/_headers allows.",
+  "_readme": "Single source for every project: /projects/ cards + 'Live on the web' list, the home/studio/post links tagged data-project, and the terminal (assets/js/projects-data.js). Edit here, then run: python tools/build_projects.py && python tools/stamp_assets.py. 'url' is the live URL; an action href of '@url' means 'use url'. Set 'service' to a Worker's name to keep its uptime check on that Worker's binding after it moves to a custom domain. Set 'unavailable' to a short note to pull a project's link everywhere without deleting it. 'clip' names a gameplay loop in site/assets/clips/<clip>.webm/.mp4 (tools/capture_clips.js); live projects get a status chip automatically. thumb.fit: 'cover' (crop to the card box at thumb.focus, a CSS object-position), 'contain' (whole image on the tinted panel) or 'phone' (a portrait phone screen standing on the panel, running off the bottom edge). 'arcade': {'order': n} puts a game on /arcade/ (n = position), where it can be played in a sandboxed frame on the page; add 'embed': false for a game whose site refuses to be framed (it then only gets 'Open in new tab'). Embeds must live on *.dillon-eu-green.workers.dev, the only frame-src the CSP in site/_headers allows.",
   "projects": [
     {
       "slug": "par",
@@ -34,6 +34,58 @@
       "desc": "PAR: parts & requisitions platform (case study: par.html)"
     },
     {
+      "slug": "linework",
+      "name": "Linework",
+      "aliases": [
+        "linework",
+        "cad"
+      ],
+      "cats": [
+        "apps"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "A lightweight CAD editor in your browser: open DXF, DWG, MicroStation DGN and PDF drawings, trace a wire through a whole set of schematics, measure, mark up and edit, then save back to DXF or DGN. Nothing ever leaves your device.",
+      "tags": [
+        "Canvas",
+        "Web Worker",
+        "WebAssembly",
+        "Offline PWA",
+        "Open source"
+      ],
+      "thumb": {
+        "src": "more/linework-trace.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "Linework tracing a wire on a schematic: the PWR 28V net glows magenta from connector J1 to a terminal block, a relay, a lamp and an off-sheet link to sheet 2.",
+        "fit": "cover",
+        "focus": "35% 50%"
+      },
+      "url": "https://linework.dillongreen.dev",
+      "live_label": "linework.dillongreen.dev",
+      "actions": [
+        {
+          "text": "Open Linework",
+          "href": "@url",
+          "style": "btn"
+        },
+        {
+          "text": "Case study",
+          "href": "/linework.html",
+          "style": "int"
+        },
+        {
+          "text": "Source",
+          "href": "https://github.com/dgreen52/linework",
+          "style": "link"
+        }
+      ],
+      "home_anchor": "#p-linework",
+      "launch_line": "Opening Linework. Your drawings never leave this device.",
+      "clip": "linework",
+      "desc": "Linework: CAD viewer + editor for DXF, DWG, DGN and PDF, in the browser (open linework; case study: linework.html)"
+    },
+    {
       "slug": "pocket429",
       "name": "pocket429",
       "aliases": [
@@ -44,8 +96,8 @@
         "aviation",
         "apps"
       ],
-      "status": "build",
-      "status_label": "iOS app coming soon",
+      "status": "review",
+      "status_label": "In App Store review",
       "pitch": "ARINC 429 decoder and word builder for avionics technicians, with on-device OCR.",
       "tags": [
         "JavaScript",
@@ -72,52 +124,52 @@
       ],
       "home_anchor": "#p-429",
       "launch_line": "Opening pocket429 …",
-      "desc": "ARINC 429 decoder, iOS app coming soon (pocket429.dillongreen.dev)"
+      "desc": "ARINC 429 decoder, iOS app in App Store review (pocket429.dillongreen.dev)"
     },
     {
-      "slug": "linework",
-      "name": "Linework",
+      "slug": "crumb",
+      "name": "Cookfold",
+      "aside": "(formerly Crumb)",
       "aliases": [
-        "linework",
-        "cad"
+        "cookfold",
+        "crumb"
       ],
       "cats": [
         "apps"
       ],
       "status": "live",
-      "status_label": "Live",
-      "pitch": "A lightweight CAD editor in your browser: open DXF, DWG, MicroStation DGN and PDF drawings, trace a wire through a whole set of schematics, measure, mark up and edit, then save back to DXF or DGN. Nothing ever leaves your device.",
+      "status_label": "On the App Store",
+      "pitch": "Recipe cleaner, cookbook and weekly meal planner with a shopping list sorted by aisle. On the App Store for iPhone, with a web version.",
       "tags": [
-        "Canvas",
-        "Web Worker",
-        "WebAssembly",
-        "Offline PWA",
-        "Open source"
+        "Capacitor",
+        "Swift",
+        "Local-first sync",
+        "RevenueCat"
       ],
       "thumb": {
-        "src": "more/linework.webp",
-        "w": 960,
-        "h": 540,
-        "alt": "Linework in dark mode: a house floor plan with dimensions, room labels and red markup: revision clouds, arrows and a callout.",
-        "fit": "cover",
-        "focus": "50% 50%"
+        "src": "work/crumb-recipes.webp",
+        "w": 480,
+        "h": 1027,
+        "alt": "Cookfold recipe library with photo cards and filters.",
+        "fit": "phone"
       },
-      "url": "https://linework.dillongreen.dev",
-      "live_label": "linework.dillongreen.dev",
+      "url": "https://cookfold.dillongreen.dev",
+      "live_label": "cookfold.dillongreen.dev",
       "actions": [
         {
-          "text": "Open Linework",
-          "href": "@url",
+          "text": "App Store",
+          "href": "https://apps.apple.com/app/id6817948372",
           "style": "btn"
         },
         {
-          "text": "Source",
-          "href": "https://github.com/dgreen52/linework",
+          "text": "Web version",
+          "href": "@url",
           "style": "link"
         }
       ],
-      "launch_line": "Opening Linework. Your drawings never leave this device.",
-      "desc": "CAD viewer + editor for DXF, DWG, DGN and PDF, in the browser (open linework)"
+      "desc": "Cookfold (formerly Crumb): recipe cleaner + meal planner, on the App Store (open cookfold)",
+      "home_anchor": "#p-cookfold",
+      "service": "crumb"
     },
     {
       "slug": "fernwood",
@@ -296,42 +348,6 @@
       "launch_line": "Tape in. Count-in on the downbeat: one, two, three, four. Drift on the beat.",
       "desc": "Mixtape Drift: pixel street racer, music is the race (play mixtape)",
       "clip": "mixtape"
-    },
-    {
-      "slug": "crumb",
-      "name": "Crumb",
-      "aliases": [
-        "crumb"
-      ],
-      "cats": [
-        "apps"
-      ],
-      "status": "review",
-      "status_label": "In review",
-      "pitch": "Recipe cleaner, cookbook and weekly meal planner with a shopping list sorted by aisle.",
-      "tags": [
-        "Capacitor",
-        "Swift",
-        "Local-first sync",
-        "RevenueCat"
-      ],
-      "thumb": {
-        "src": "work/crumb-recipes.webp",
-        "w": 480,
-        "h": 1027,
-        "alt": "Crumb recipe library with photo cards and filters.",
-        "fit": "phone"
-      },
-      "url": "https://crumb.dillon-eu-green.workers.dev",
-      "live_label": "crumb…workers.dev",
-      "actions": [
-        {
-          "text": "Try it",
-          "href": "@url",
-          "style": "link"
-        }
-      ],
-      "desc": "Recipe cleaner + meal planner (open crumb)"
     },
     {
       "slug": "dragonrealm",

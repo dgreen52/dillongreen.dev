@@ -13,6 +13,21 @@
   ]
  },
  {
+  "slug": "linework",
+  "name": "Linework",
+  "aliases": [
+   "linework",
+   "cad"
+  ],
+  "url": "https://linework.dillongreen.dev",
+  "line": "Opening Linework. Your drawings never leave this device.",
+  "anchor": "#p-linework",
+  "desc": "Linework: CAD viewer + editor for DXF, DWG, DGN and PDF, in the browser (open linework; case study: linework.html)",
+  "cats": [
+   "apps"
+  ]
+ },
+ {
   "slug": "pocket429",
   "name": "pocket429",
   "aliases": [
@@ -22,22 +37,22 @@
   "url": "https://pocket429.dillongreen.dev",
   "line": "Opening pocket429 …",
   "anchor": "#p-429",
-  "desc": "ARINC 429 decoder, iOS app coming soon (pocket429.dillongreen.dev)",
+  "desc": "ARINC 429 decoder, iOS app in App Store review (pocket429.dillongreen.dev)",
   "cats": [
    "aviation",
    "apps"
   ]
  },
  {
-  "slug": "linework",
-  "name": "Linework",
+  "slug": "crumb",
+  "name": "Cookfold",
   "aliases": [
-   "linework",
-   "cad"
+   "cookfold",
+   "crumb"
   ],
-  "url": "https://linework.dillongreen.dev",
-  "line": "Opening Linework. Your drawings never leave this device.",
-  "desc": "CAD viewer + editor for DXF, DWG, DGN and PDF, in the browser (open linework)",
+  "url": "https://cookfold.dillongreen.dev",
+  "anchor": "#p-cookfold",
+  "desc": "Cookfold (formerly Crumb): recipe cleaner + meal planner, on the App Store (open cookfold)",
   "cats": [
    "apps"
   ]
@@ -105,18 +120,6 @@
   "desc": "Mixtape Drift: pixel street racer, music is the race (play mixtape)",
   "cats": [
    "games"
-  ]
- },
- {
-  "slug": "crumb",
-  "name": "Crumb",
-  "aliases": [
-   "crumb"
-  ],
-  "url": "https://crumb.dillon-eu-green.workers.dev",
-  "desc": "Recipe cleaner + meal planner (open crumb)",
-  "cats": [
-   "apps"
   ]
  },
  {

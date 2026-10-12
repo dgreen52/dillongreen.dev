@@ -9,7 +9,7 @@ const path = require("path");
 const { launchWebKit, devices } = require("./pw");
 const BASE = process.argv[2] || "http://127.0.0.1:8787/";
 const OUT = path.resolve(__dirname, "..", "verify");
-const PAGES = ["", "projects/", "arcade/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
+const PAGES = ["", "projects/", "arcade/", "par.html", "linework.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
 const IPHONE = devices["iPhone 13"];
 let fails = 0;
 const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! ") + label); };
@@ -126,7 +126,8 @@ const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! "
     await page.goto(BASE + "projects/", { waitUntil: "load" });
     await page.tap('[data-filter="aviation"]');
     const ids = await page.$$eval(".pcard", (cs) => cs.filter((c) => !c.hidden).map((c) => c.id));
-    check(ids.join() === "par,pocket429,airfield,butter", "WebKit: Aviation filter -> " + ids.join(", "));
+    const want = require("./projects.json").projects.filter((p) => p.cats.includes("aviation")).map((p) => p.slug);
+    check(ids.join() === want.join(), "WebKit: Aviation filter -> " + ids.join(", "));
     await page.screenshot({ path: path.join(OUT, "wk-projects-aviation-390-dark.png"), caret: "initial" });
     await ctx.close();
   }

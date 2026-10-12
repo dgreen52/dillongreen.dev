@@ -120,7 +120,9 @@ def primary(p):
 
 def media_label(p, a):
     t, n = a["text"], p["name"]
-    return {"Try it": f"Try {n}", "Case study": f"{n} case study"}.get(t, f"{t} {n}")
+    if n.lower() in t.lower():
+        return t  # "Open Linework", not "Open Linework Linework"
+    return {"Try it": f"Try {n}", "See it": f"See {n}", "Case study": f"{n} case study", "App Store": f"{n} on the App Store"}.get(t, f"{t} {n}")
 
 
 def media_open(p):
@@ -348,7 +350,9 @@ if js != old:
 def node(p):
     host = p["url"].split("://", 1)[-1].split("/", 1)[0].lower()
     n = {"slug": p["slug"], "name": p["name"], "url": p["url"], "kind": "workers" if host.endswith(".workers.dev") else "pages"}
-    if n["kind"] == "workers":
+    if p.get("service"):  # a Worker on a custom domain: still checked through its binding
+        n["kind"], n["service"] = "workers", p["service"]
+    elif n["kind"] == "workers":
         n["service"] = host.split(".", 1)[0]
     return n
 

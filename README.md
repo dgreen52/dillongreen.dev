@@ -16,6 +16,7 @@ portfolio/
 │   ├── projects/          every project, filterable (generated cards, see "Projects" below)
 │   ├── arcade/            the web games, playable in a sandboxed frame on the page (see "Arcade")
 │   ├── par.html           PAR case study (generalized, no proprietary data)
+│   ├── linework.html      Linework case study (invented sample drawings only)
 │   ├── studio/            "Dillon Green · Studio": pitch, pocket429, waitlist form (#waitlist)
 │   ├── guestbook/         Web 1.0 guestbook; entries appear only after approval
 │   ├── now/               "What I'm doing now" (a nownownow.com-style now page; update the date when you edit it) + "Latest from the workshop" GitHub feed
@@ -157,7 +158,7 @@ How the API protects itself (both endpoints, `functions/_lib/forms.js`):
 | Smart Mirror renders | `node tools/render-mirror.js` (serves ../Mirror/static read-only; every /api call is answered with an invented demo config and fake data, so the real config.json / notes.json are never read), then `python tools/build_images.py` |
 | OG image and icons | `node tools/render-brand.js && python tools/make_ico.py` |
 | Per-page share cards | `node tools/render_og.js && python tools/stamp_assets.py`: renders `tools/brand/og-page.html` once per page (list in the script) into `site/assets/og/*.png` (palette PNGs, < 200 KB), refreshes `site/og-image.png` (the generic card for privacy/404), and rewrites each page's `og:image*` / `twitter:image*` tags |
-| Gameplay clips | `node tools/capture_clips.js [mixtape airfield butter beepbeach dragonrealm]`, then `python tools/img_variants.py && python tools/build_projects.py && python tools/stamp_assets.py`. Serves each game read-only from `../<game>/dist` on localhost (outside requests refused), drives it with the same inputs/test hooks as its own browser checks, records ~7.6 s with the CDP screencast, and ffmpeg makes a 7 s crossfaded loop (H.264 `.mp4` + VP9 `.webm`, limited-range BT.709, each ≤ 700 KB). ffmpeg comes from `$FFMPEG`, PATH or Python's `imageio-ffmpeg`. `KEEP=1` keeps raw frames in `verify/clips-raw/`; `--reencode` re-encodes from them without a browser |
+| Gameplay clips | `node tools/capture_clips.js [mixtape airfield butter beepbeach dragonrealm linework]` (linework needs `node tools/make_dist.mjs` run in `../linework` first; its sheets are invented in the page), then `python tools/img_variants.py && python tools/build_projects.py && python tools/stamp_assets.py`. Serves each game read-only from `../<game>/dist` on localhost (outside requests refused), drives it with the same inputs/test hooks as its own browser checks, records ~7.6 s with the CDP screencast, and ffmpeg makes a 7 s crossfaded loop (H.264 `.mp4` + VP9 `.webm`, limited-range BT.709, each ≤ 700 KB). ffmpeg comes from `$FFMPEG`, PATH or Python's `imageio-ffmpeg`. `KEEP=1` keeps raw frames in `verify/clips-raw/`; `--reencode` re-encodes from them without a browser |
 | Card image variants | `python tools/img_variants.py`: `-480`/`-960` copies of wide screenshots for `srcset`, and the butter/beepbeach band posters (first frame of their clips) |
 
 Resume PDF (PowerShell):

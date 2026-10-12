@@ -471,7 +471,7 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
     await run("open site");
     check((await page.textContent(".term-out")).includes("you are already here"), "open site: you are already here");
     await run("ls");
-    check((await page.textContent(".term-out")).includes("live: pocket429.dillongreen.dev") && (await page.textContent(".term-out")).includes("play airfield"), "ls lists projects (live pocket429, Little Airfield)");
+    check((await page.textContent(".term-out")).includes("(pocket429.dillongreen.dev)") && (await page.textContent(".term-out")).includes("play airfield"), "ls lists projects (live pocket429, Little Airfield)");
     {
       const pa = page.waitForEvent("popup", { timeout: 4000 }).catch(() => null);
       await run("play airfield");
@@ -534,7 +534,7 @@ const age = () => sql("UPDATE guestbook SET created_at = datetime(created_at, '-
   }
 
   // every page: no console errors / CSP violations, all requests succeed
-  for (const p of ["/", "/projects/", "/arcade/", "/par.html", "/now/", "/studio/", "/guestbook/", "/privacy.html"]) {
+  for (const p of ["/", "/projects/", "/arcade/", "/par.html", "/linework.html", "/now/", "/studio/", "/guestbook/", "/privacy.html"]) {
     const ctx = await ctxFor({ viewport: { width: 1280, height: 900 } });
     const page = await ctx.newPage(); watch(page, p);
     const failed = [];

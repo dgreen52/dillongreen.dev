@@ -6,7 +6,7 @@ const path = require("path");
 const { launch } = require("./pw");
 const BASE = process.argv[2] || "http://127.0.0.1:8787/";
 const OUT = path.resolve(__dirname, "..", "verify");
-const PAGES = ["", "projects/", "arcade/", "par.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
+const PAGES = ["", "projects/", "arcade/", "par.html", "linework.html", "studio/", "guestbook/", "now/", "privacy.html", "404.html"];
 const WIDTHS = (process.env.WIDTHS || "320,360,390,430").split(",").map(Number);
 let fails = 0;
 const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! ") + label); };
@@ -245,7 +245,9 @@ function audit() {
     const { ctx, page } = await newPage(390, "dark");
     await page.goto(BASE + "now/", { waitUntil: "load" });
     const got = (await page.innerText(".post-meta")).trim();
-    check(got === "Last updated October 8, 2026 · Seattle, WA" && (await page.getAttribute(".post-meta time", "datetime")) === "2026-10-08", `now/ date line: "${got}"`);
+    const iso = await page.getAttribute(".post-meta time", "datetime"); // the visible date must match it
+    const want = iso && new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+    check(want && got === `Last updated ${want} · Seattle, WA`, `now/ date line: "${got}" (datetime ${iso})`);
     await ctx.close();
   }
 

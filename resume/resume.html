@@ -51,7 +51,21 @@
   </ul>
 </div>
 <div class="item">
-  <div class="row"><span><span class="name">pocket429</span> <span class="sub">— ARINC 429 decoder for avionics technicians (live at <a href="https://pocket429.dillongreen.dev">pocket429.dillongreen.dev</a>; iOS app in preparation)</span></span></div>
+  <div class="row"><span><span class="name">Linework</span> <span class="sub">— Open-source CAD viewer and editor in the browser (<a href="https://linework.dillongreen.dev">linework.dillongreen.dev</a>)</span></span></div>
+  <div class="stack">JavaScript · Canvas · Web Workers · WebAssembly · pdf.js · Offline PWA · Playwright</div>
+  <ul>
+    <li>Opens DXF, DWG, MicroStation DGN and PDF drawings entirely on the user's device; measure, mark up, edit and save back to DXF or DGN.</li>
+    <li>Traces a wire's whole net on a schematic in under 50 ms on a 53k-entity drawing; indexes a folder of sheets in the background, links off-sheet references and searches text across every sheet.</li>
+    <li>Edits DGN files losslessly by patching the original bytes in place; reads DWG with LibreDWG compiled to WebAssembly in a bit-for-bit reproducible build and loaded only on demand, keeping app startup under a 150 KB budget; 330+ automated unit and end-to-end tests.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">Cookfold</span> <span class="sub">— Recipe and meal-planning app for iPhone (live on the App Store; formerly Crumb)</span></span></div>
+  <div class="stack">JavaScript · Capacitor · Swift · RevenueCat · Cloudflare · Codemagic CI</div>
+  <ul><li>Wrote a native Swift plugin for on-device Vision OCR, iCloud sync and a share extension; local-first sync design; subscriptions; shipped through App Store review with Codemagic CI builds to TestFlight; 460+ automated checks.</li></ul>
+</div>
+<div class="item">
+  <div class="row"><span><span class="name">pocket429</span> <span class="sub">— ARINC 429 decoder for avionics technicians (iOS app in App Store review; <a href="https://pocket429.dillongreen.dev">pocket429.dillongreen.dev</a>)</span></span></div>
   <div class="stack">JavaScript · Capacitor · Cloudflare Workers · Stripe</div>
   <ul><li>Decodes and builds ARINC 429 data words (BNR, BCD, ISO-5, parity, bit-order detection) against a label database compiled from cited OEM manuals.</li></ul>
 </div>
@@ -64,11 +78,6 @@
   <div class="row"><span><span class="name">Dragon Realm Online</span> <span class="sub">— Real-time multiplayer browser game (<a href="https://dragonrealm.dillon-eu-green.workers.dev/">play</a>)</span></span></div>
   <div class="stack">JavaScript · Canvas · Cloudflare Durable Objects · WebSockets · D1</div>
   <ul><li>Live position sync, chat, trading and duels over hibernating WebSockets, with a player market stored in D1 (~11k lines).</li></ul>
-</div>
-<div class="item">
-  <div class="row"><span><span class="name">Crumb</span> <span class="sub">— Recipe and meal-planning app (iOS, in App Store review)</span></span></div>
-  <div class="stack">JavaScript · Capacitor · Swift · RevenueCat · Cloudflare · Codemagic CI</div>
-  <ul><li>Wrote a native Swift plugin for on-device Vision OCR, iCloud sync and a share extension; local-first sync design; subscriptions; 267 automated checks.</li></ul>
 </div>
 <div class="item">
   <div class="row"><span><span class="name">Little Airfield</span> <span class="sub">— Cozy airport-builder game for iPhone (<a href="https://little-airfield.dillon-eu-green.workers.dev/">playable prototype</a>)</span></span></div>

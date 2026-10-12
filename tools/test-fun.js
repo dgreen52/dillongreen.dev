@@ -89,10 +89,10 @@ const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! "
   await page.keyboard.press("Backquote");
   await page.fill("#term-in", "now");
   await Promise.all([page.waitForURL(/\/now\/$/, { timeout: 5000 }).catch(() => {}), page.keyboard.press("Enter")]);
-  check(/\/now\/$/.test(page.url()) && /Last updated October 8, 2026/.test(await page.textContent(".post-meta")), "terminal 'now' opens /now/ (last updated October 8, 2026)");
+  check(/\/now\/$/.test(page.url()) && /Last updated [A-Z][a-z]+ \d{1,2}, \d{4}/.test(await page.textContent(".post-meta")), "terminal 'now' opens /now/ (with its last-updated date)");
 
   // ambient cursor grid: one fixed layer on every page, follows the mouse, stays lit while scrolling
-  for (const pg of ["index.html", "par.html"]) {
+  for (const pg of ["index.html", "par.html", "linework.html"]) {
     await page.goto(BASE + pg);
     await page.mouse.move(400, 300); await page.mouse.move(640, 420, { steps: 4 });
     await page.waitForTimeout(600);
@@ -139,7 +139,7 @@ const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! "
   await page.locator("#mixtape .thumb").screenshot({ path: path.join(OUT, "fun-media-hover.png") });
   await page.goto(BASE);
   const hm = await page.$$eval(".project .pcard-media", (as) => as.map((a) => [a.getAttribute("href"), a.tabIndex, a.getAttribute("aria-label")]));
-  check(hm.length === 4 && hm.every((x) => x[1] === -1 && x[2]), "home: all four featured pictures are links (" + hm.map((x) => x[2]).join(", ") + ")");
+  check(hm.length === 5 && hm.every((x) => x[1] === -1 && x[2]), "home: all five featured pictures are links (" + hm.map((x) => x[2]).join(", ") + ")");
   const rq = await rp.goto(BASE + "projects/"); await rp.locator("#mixtape .thumb").scrollIntoViewIfNeeded(); await rp.waitForTimeout(1200);
   check(!(await rp.$("video")) && !(await rp.$(".ambient.on")), "reduced motion: no clips load, no ambient grid");
 

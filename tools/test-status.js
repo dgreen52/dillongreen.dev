@@ -45,8 +45,10 @@ function mockCaches() {
     `projects-live.json has one node per live project in tools/projects.json (${nodes.length}/${N}; run tools/build_projects.py if not)`);
   check(nodes.every((n) => n.slug && n.name && /^https:\/\//.test(n.url) && (n.kind === "pages" || n.kind === "workers")), "every node has slug/name/https url/kind");
   const workers = nodes.filter((n) => n.kind === "workers").map((n) => n.service).sort();
-  const wantWorkers = live.map((p) => new URL(p.url).hostname).filter((h) => h.endsWith(".workers.dev")).map((h) => h.split(".")[0]).sort();
+  // a project's "service" keeps a Worker that moved to a custom domain on its binding
+  const wantWorkers = live.map((p) => p.service || new URL(p.url).hostname).filter((h) => !h.includes(".") || h.endsWith(".workers.dev")).map((h) => h.split(".")[0]).sort();
   check(JSON.stringify(workers) === JSON.stringify(wantWorkers) && workers.includes("fernwood"), `${workers.length} workers-hosted services (${workers.join(", ")})`);
+  check(nodes.find((n) => n.slug === "crumb")?.service === "crumb", "Cookfold (cookfold.dillongreen.dev) is still checked through the crumb Worker's binding");
   const toml = fs.readFileSync(path.join(ROOT, "wrangler.toml"), "utf8").split("\r\n").join("\n"); // checkouts may be CRLF
   const missing = workers.filter((s) => !toml.includes(`binding = "${core.bindingName(s)}"\nservice = "${s}"`));
   check(missing.length === 0, "wrangler.toml has an SVC_ binding for each Workers node" + (missing.length ? " (missing: " + missing.join(", ") + ")" : ""));

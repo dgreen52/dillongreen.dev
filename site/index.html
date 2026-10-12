@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dillon Green · Flight simulator engineer, software &amp; automation</title>
-<meta name="description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, an ARINC 429 decoder, mobile apps and browser games.">
+<meta name="description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, a browser CAD editor, an ARINC 429 decoder, iPhone apps and browser games.">
 <meta name="author" content="Dillon Green">
 <link rel="canonical" href="https://dillongreen.dev/">
 <meta name="theme-color" content="#06080b">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dillon Green">
 <meta property="og:title" content="Dillon Green · Flight simulator engineer who builds software">
-<meta property="og:description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, an ARINC 429 decoder, mobile apps and browser games.">
+<meta property="og:description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, a browser CAD editor, an ARINC 429 decoder, iPhone apps and browser games.">
 <meta property="og:url" content="https://dillongreen.dev/">
 <meta property="og:image" content="https://dillongreen.dev/assets/og/home.png?v=a422669df2">
 <meta name="twitter:image:alt" content="Dillon Green, flight simulator engineer · software &amp; automation, with an ARINC 429 data word">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Dillon Green, flight simulator engineer · software &amp; automation, with an ARINC 429 data word">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dillon Green · Flight simulator engineer who builds software">
-<meta name="twitter:description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, an ARINC 429 decoder, mobile apps and browser games.">
+<meta name="twitter:description" content="Flight simulator engineer in Seattle with 10 years in aviation. Aviation tools, apps and games — an airline simulator parts platform, a browser CAD editor, an ARINC 429 decoder, iPhone apps and browser games.">
 <meta name="twitter:image" content="https://dillongreen.dev/assets/og/home.png?v=a422669df2">
 
 <link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
@@ -31,7 +31,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=612aa3b529">
+<link rel="stylesheet" href="assets/css/site.css?v=e87a2befb6">
 <link rel="stylesheet" href="assets/css/status.css?v=67e34d0521">
 <script src="assets/js/theme.js?v=39ed3b7b76"></script>
 <script type="application/ld+json">
@@ -198,8 +198,31 @@
           </div>
         </article>
 
+        <!-- Linework -->
+        <article class="project flip" aria-labelledby="p-linework">
+          <div class="media">
+            <div class="shot-wide"><a class="clip-frame clip-box pcard-media" data-clip-webm="/assets/clips/linework.webm?v=32d528df23" data-clip-mp4="/assets/clips/linework.mp4?v=c9344888bf" href="https://linework.dillongreen.dev" rel="noopener" data-project="linework" tabindex="-1" aria-label="Open Linework"><img src="assets/img/more/linework-trace.webp?v=c63f324bb7" srcset="assets/img/more/linework-trace-480.webp?v=3355b3609f 480w, assets/img/more/linework-trace.webp?v=c63f324bb7 960w" sizes="(max-width: 639px) calc(100vw - 62px), (max-width: 899px) calc(100vw - 124px), 560px" width="960" height="540" loading="lazy" decoding="async" alt="Linework tracing a wire on a schematic: the PWR 28V net glows magenta from connector J1 to a terminal block, a relay, a lamp and an off-sheet link to sheet 2, with the net's length and five ends listed in a side panel."><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="linework"></span><span class="media-go" aria-hidden="true">↗ Open</span></a></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="platforms">Browser · Works offline · Open source</span>
+              <span class="status live">Live</span>
+            </div>
+            <h3 id="p-linework"><span class="glitch" data-project-name="linework">Linework</span><span class="sub">A CAD viewer and editor in the browser: nothing to install, and your drawings never leave your device</span></h3>
+            <p class="m-extra" id="x-lw">Opens DXF, DWG, MicroStation DGN and PDF drawings. Click a wire and everything connected to it lights up; in a sheet set, off-sheet references jump straight to the next sheet. Measure, mark up, find and replace, edit with MicroStation-style key-ins, compare two revisions, print to scale, and save back to DXF or DGN. DGN edits are patched into the original file in place, so everything you didn't touch stays byte-for-byte the same. DWG support is LibreDWG compiled to WebAssembly, loaded only when you open a DWG, so the app itself loads in under 150 KB compressed.</p>
+            <ul class="chips m-extra" id="x-lw-t" aria-label="Technologies">
+              <li>Canvas</li><li>Web Worker</li><li>WebAssembly</li><li>Offline PWA</li><li>GPL-3.0</li><li>330+ tests</li>
+            </ul>
+            <div class="links">
+              <a class="btn btn-primary" href="https://linework.dillongreen.dev" rel="noopener" data-project="linework">Open Linework <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
+              <a class="link-arrow internal" href="linework.html">Read the case study <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+              <button class="more-btn" type="button" aria-expanded="false" aria-controls="x-lw x-lw-t" data-less="Less"><span class="more-label">More</span><span class="sr-only"> about Linework</span><svg class="more-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </article>
+
         <!-- pocket429 -->
-        <article class="project flip" aria-labelledby="p-429">
+        <article class="project" aria-labelledby="p-429">
           <div class="media">
             <a class="phones pcard-media" href="https://pocket429.dillongreen.dev" rel="noopener" data-project="pocket429" tabindex="-1" aria-label="Try pocket429">
               <div class="phone side"><img src="assets/img/work/pocket429-scan.webp?v=e0be31726a" width="480" height="1040" loading="lazy" decoding="async" alt="pocket429 scan screen reading words from a photo of a bus analyzer and checking each one."></div>
@@ -211,7 +234,7 @@
           <div class="project-body">
             <div class="project-meta">
               <span class="platforms">iOS · Android · Web</span>
-              <span class="status soon">iOS app coming soon</span>
+              <span class="status review">iOS app in App Store review</span>
             </div>
             <h3 id="p-429"><span class="glitch" data-project-name="pocket429">pocket429</span><span class="sub">ARINC 429 decoder and word builder for avionics technicians</span></h3>
             <p class="m-extra" id="x-429">Decodes and builds data words (BNR, BCD, ISO-5 text, parity, bit-order detection) against a label database compiled from cited OEM manuals. It can also read words off a photo of an analyzer screen, on the device.</p>
@@ -222,6 +245,34 @@
               <a class="btn btn-primary" href="https://pocket429.dillongreen.dev" rel="noopener" data-project="pocket429">See pocket429 <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
               <a class="link-arrow internal" href="#word">Try the bit-flipper above <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
               <button class="more-btn" type="button" aria-expanded="false" aria-controls="x-429 x-429-t" data-less="Less"><span class="more-label">More</span><span class="sr-only"> about pocket429</span><svg class="more-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cookfold (formerly Crumb; the project slug stays "crumb") -->
+        <article class="project flip" aria-labelledby="p-cookfold">
+          <div class="media">
+            <a class="phones pcard-media" href="https://apps.apple.com/app/id6817948372" rel="noopener" tabindex="-1" aria-label="Cookfold on the App Store">
+              <div class="phone side"><img src="assets/img/work/crumb-recipe.webp?v=e5b8b6457a" width="480" height="1027" loading="lazy" decoding="async" alt="Cookfold recipe page: Butter Chicken with Garlic Naan with time, servings, calories and a Start cooking button above the ingredients."></div>
+              <div class="phone main"><img src="assets/img/work/crumb-recipes.webp?v=533bbf2685" width="480" height="1027" loading="lazy" decoding="async" alt="Cookfold recipe library with photo cards and filters."></div>
+              <div class="phone side"><img src="assets/img/work/crumb-plan.webp?v=2f187dc94a" width="480" height="1027" loading="lazy" decoding="async" alt="Cookfold weekly plan with a recipe on each day."></div>
+            <span class="media-go" aria-hidden="true">↗ App Store</span></a>
+            <span class="sdot" data-status-slug="crumb"></span>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="platforms">iPhone · Web</span>
+              <span class="status live">On the App Store</span>
+            </div>
+            <h3 id="p-cookfold"><span class="glitch" data-project-name="crumb">Cookfold</span><span class="sub">Recipe saver, cookbook and weekly meal planner: just the recipe, minus the life story</span></h3>
+            <p class="m-extra" id="x-cf">Share a recipe from Safari or any app, paste a link, or snap a cookbook page (the text is read on the phone), and Cookfold keeps just the ingredients and steps. Cook mode shows one big step at a time with timers, servings scale with every amount, and the week's plan turns into a shopping list sorted by aisle. Works offline, syncs through iCloud, no accounts. Released in October 2026 as Crumb; version 1.0.1 renames it Cookfold.</p>
+            <ul class="chips m-extra" id="x-cf-t" aria-label="Technologies">
+              <li>Capacitor</li><li>Swift</li><li>iCloud sync</li><li>RevenueCat</li><li>460+ tests</li>
+            </ul>
+            <div class="links">
+              <a class="btn btn-primary" href="https://apps.apple.com/app/id6817948372" rel="noopener">App Store <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
+              <a class="link-arrow" href="https://cookfold.dillongreen.dev" rel="noopener" data-project="crumb">Web version <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
+              <button class="more-btn" type="button" aria-expanded="false" aria-controls="x-cf x-cf-t" data-less="Less"><span class="more-label">More</span><span class="sr-only"> about Cookfold</span><svg class="more-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
         </article>
@@ -245,29 +296,6 @@
               <a class="btn btn-primary" href="https://fernwood.dillon-eu-green.workers.dev/" rel="noopener" data-project="fernwood">Play the preview <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
               <span class="tag-note">Work in progress</span>
               <button class="more-btn" type="button" aria-expanded="false" aria-controls="x-fern x-fern-t" data-less="Less"><span class="more-label">More</span><span class="sr-only"> about Fernwood</span><svg class="more-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Mixtape Drift -->
-        <article class="project flip" aria-labelledby="p-mixtape">
-          <div class="media">
-            <div class="shot-wide"><a class="clip-frame clip-box pcard-media" data-clip-webm="/assets/clips/mixtape.webm?v=aca8bd5a9b" data-clip-mp4="/assets/clips/mixtape.mp4?v=0bbff5073e" href="https://mixtape-drift.dillon-eu-green.workers.dev/" rel="noopener" data-project="mixtape" tabindex="-1" aria-label="Play Mixtape Drift"><img src="assets/img/more/mixtape-drift.webp?v=bb46ab874f" srcset="assets/img/more/mixtape-drift-480.webp?v=1e06e9570d 480w, assets/img/more/mixtape-drift.webp?v=bb46ab874f 960w" sizes="(max-width: 639px) calc(100vw - 62px), (max-width: 899px) calc(100vw - 124px), 560px" width="960" height="540" loading="lazy" decoding="async" alt="Mixtape Drift: a pink pixel-art car on a neon city highway at night, under a LOFI FM 88.3 billboard, with the hint 'Boost on the beat. Let go of a drift on the beat.'"><span class="clip-hud" aria-hidden="true">▶ Live capture</span><span class="sdot" data-status-slug="mixtape"></span><span class="media-go" aria-hidden="true">▶ Play</span></a></div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="platforms">Browser · Phones · WebAudio</span>
-              <span class="status soon">WIP · Playable</span>
-            </div>
-            <h3 id="p-mixtape"><span class="glitch" data-project-name="mixtape">Mixtape Drift</span><span class="sub">A cute pixel street racer where the music is the race: drive to the beat and the song fills in</span></h3>
-            <p class="m-extra" id="x-mix">Drums and bass always play. Clean driving, near misses, on-beat boosts and drifts released on the beat bring in keys, lead and sparkle; a bump drops a layer. Cruise for cassettes, Sprint three rivals through one song (GO on the downbeat), or Groove, then tune the car in the Garage: shape, paint, underglow, decal.</p>
-            <ul class="chips m-extra" id="x-mix-t" aria-label="Technologies">
-              <li>WebAudio synth band</li><li>Music clock</li><li>Scanline road renderer</li><li>Pixel art in code</li><li>Node + Playwright tests</li>
-            </ul>
-            <div class="links">
-              <a class="btn btn-primary" href="https://mixtape-drift.dillon-eu-green.workers.dev/" rel="noopener" data-project="mixtape">Play <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
-              <span class="tag-note">Sound on</span>
-              <button class="more-btn" type="button" aria-expanded="false" aria-controls="x-mix x-mix-t" data-less="Less"><span class="more-label">More</span><span class="sr-only"> about Mixtape Drift</span><svg class="more-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
         </article>
@@ -302,7 +330,7 @@
         <div>
           <span class="num">C · QUALITY GATES</span>
           <h3>Tests are the contract</h3>
-          <p>Every project has automated suites and a gate that only ratchets up: 340+ checks on PAR, including headless-browser end-to-end tests on a CDP driver I wrote, and 267 on Crumb. Agents never read real records: when they need to look at data they get a scrubbed copy, and test suites run against throwaway copies that only report pass/fail and counts.</p>
+          <p>Every project has automated suites and a gate that only ratchets up: 340+ checks on PAR (including headless-browser end-to-end tests on a CDP driver I wrote), 460+ on Cookfold, 330+ on Linework. Agents never read real records: when they need to look at data they get a scrubbed copy, and test suites run against throwaway copies that only report pass/fail and counts.</p>
         </div>
         <div>
           <span class="num">D · THE FACTORY</span>
@@ -389,9 +417,9 @@
 </footer>
 
 <script src="assets/js/site.js?v=6bb877ad89" defer></script>
-<script src="assets/js/projects-data.js?v=8594003d92" defer></script>
+<script src="assets/js/projects-data.js?v=f31493d660" defer></script>
 <script src="assets/js/clips.js?v=34d6dda0e5" defer></script>
 <script src="assets/js/status.js?v=8c070a03aa" defer></script>
-<script src="assets/js/fun.js?v=da49a2b63f" defer></script>
+<script src="assets/js/fun.js?v=6b5928b62e" defer></script>
 </body>
 </html>

@@ -36,7 +36,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /* ------------------------------------------------------------------ games
    root: folder served at /. view: CSS viewport. crop: [x, y, w, h] in device pixels of the captured
    frame (optional). size: output [w, h]. warm: async (page) => runs before recording.
-   drive: async (page, t0) => runs while recording (scripted input). */
+   drive: async (page, t0) => runs while recording (scripted input). context: browser-context overrides (optional). */
 const GAMES = {
   mixtape: {
     root: "mixtape/dist", view: [960, 540], dpr: 1, size: [640, 360],
@@ -202,6 +202,116 @@ const GAMES = {
     async drive() {},
   },
 
+  // Linework (the CAD viewer, not a game): wire tracing across a sheet set. Served from ../linework/dist, which is
+  // git-ignored there; build it first with `node tools/make_dist.mjs` in ../linework. The drawings are invented in
+  // the page by sheets() below with Linework's own DXF writer (samples/gen/dxf-writer.js) - no real drawing is read.
+  // Headless screencasts have no mouse pointer, so init draws one where the real mouse events land.
+  linework: {
+    root: "linework/dist", view: [960, 540], dpr: 1, size: [640, 360], query: "?nosw", context: { isMobile: false, hasTouch: false },
+    init: () => addEventListener("DOMContentLoaded", () => {
+      const c = document.body.appendChild(document.createElement("div"));
+      c.style.cssText = "position:fixed;left:0;top:0;z-index:2147483647;pointer-events:none;transform:translate(-99px,0)";
+      c.innerHTML = '<svg width="22" height="24"><path d="M3 2v17l4.3-4 3 6.4 3-1.4-3-6.2h6z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+      addEventListener("pointermove", (e) => { c.style.transform = `translate(${e.clientX - 3}px,${e.clientY - 2}px)`; }, true);
+      addEventListener("pointerdown", (e) => { // a ring on each click
+        const r = document.body.appendChild(document.createElement("div"));
+        r.style.cssText = `position:fixed;left:${e.clientX - 13}px;top:${e.clientY - 13}px;width:26px;height:26px;border:2px solid rgba(255,255,255,.85);border-radius:50%;z-index:2147483646;pointer-events:none;transition:transform .5s,opacity .5s`;
+        requestAnimationFrame(() => requestAnimationFrame(() => { r.style.transform = "scale(1.7)"; r.style.opacity = "0"; }));
+        setTimeout(() => r.remove(), 700);
+      }, true);
+    }),
+    sheets: async () => { // runs in the page: three invented control-panel sheets (connector, terminal strips, relays, off-page links)
+      const { DxfWriter } = await import("/samples/gen/dxf-writer.js");
+      const Z = { layer: "0" }, ref = (b, at) => b.attdef("REF", "Ref", "-", at, { h: 6 }, Z), att = (tag, value, at, h) => ({ tag, value, at, h });
+      const two = (b, pins, draw) => { b.line([0, 12], [0, 18], Z); b.line([0, 0], [0, -6], Z); b.text(pins[0], [1.6, 14], { h: 3.4 }, Z); b.text(pins[1], [1.6, -4.9], { h: 3.4 }, Z); ref(b, [9, 3.5]); draw(); };
+      const sheet = (k, title, draw) => {
+        const w = new DxfWriter({ version: "AC1015", insunits: 4 }), pl = (b, pts) => b.lwpolyline(pts, true, Z), D = { layer: "DEVICES" };
+        w.layer("BORDER", 8).layer("WIRES", 3).layer("LABELS", 2).layer("DEVICES", 7);
+        w.block("CONN", [0, 0], (b) => { pl(b, [[0, 0], [16, 0], [16, 44], [0, 44]]); [37, 27, 17, 7].forEach((y, i) => { b.line([16, y], [20, y], Z); b.text(String(i + 1), [9.5, y - 1.7], { h: 3.4 }, Z); }); ref(b, [0, 47]); });
+        w.block("TERM", [0, 0], (b) => { pl(b, [[0, 0], [52, 0], [52, 10], [0, 10]]); [8, 20, 32, 44].forEach((x, i) => { b.circle([x, 10], 1.2, Z); b.text(String(i + 1), [x - 1, 2.5], { h: 3.8 }, Z); }); ref(b, [-15, 2]); });
+        w.block("COIL", [0, 0], (b) => two(b, ["A1", "A2"], () => pl(b, [[-6, 0], [6, 0], [6, 12], [-6, 12]])));
+        w.block("LAMP", [0, 0], (b) => two(b, ["X1", "X2"], () => { b.circle([0, 6], 6, Z); b.line([-4.2, 1.8], [4.2, 10.2], Z); b.line([-4.2, 10.2], [4.2, 1.8], Z); }));
+        w.block("MOTOR", [0, 0], (b) => two(b, ["1", "2"], () => { b.circle([0, 6], 6, Z); b.text("M", [-2.2, 3.7], { h: 4.8 }, Z); }));
+        w.block("GND", [0, 0], (b) => { b.line([0, 0], [0, -3], Z); b.line([-5, -3], [5, -3], Z); b.line([-3.2, -4.6], [3.2, -4.6], Z); b.line([-1.4, -6.2], [1.4, -6.2], Z); });
+        w.block("OFFPAGE", [0, 0], (b) => { pl(b, [[0, -5], [27, -5], [33, 0], [27, 5], [0, 5]]); b.attdef("TO", "Sheet", "SHEET", [3, -1.9], { h: 3.8 }, Z); });
+        w.block("TBLOCK", [0, 0], (b) => { pl(b, [[0, 0], [76, 0], [76, 22], [0, 22]]); b.line([0, 9], [76, 9], Z); b.attdef("TITLE", "Title", "-", [3, 12.5], { h: 5 }, Z); b.attdef("SHEET", "Sheet", "-", [3, 3.2], { h: 3.2 }, Z); b.attdef("DWGNO", "Drawing", "-", [48, 3.2], { h: 3.2 }, Z); });
+        w.lwpolyline([[0, 0], [268, 0], [268, 140], [0, 140]], true, { layer: "BORDER" });
+        w.insert("TBLOCK", [190, 2], { attribs: [att("TITLE", title, [193, 14.5], 5), att("SHEET", `SHEET ${k} OF 3`, [193, 5.2], 3.2), att("DWGNO", `CTRL-0${k}`, [238, 5.2], 3.2)] }, D);
+        draw({
+          wire: (...pts) => w.lwpolyline(pts, false, { layer: "WIRES" }),
+          dot: (x, y) => w.hatch([[[x - 1.4, y, 1], [x + 1.4, y, 1]]], { solid: true }, { layer: "WIRES" }),
+          lab: (s, x, y, h = 4.5) => w.text(s, [x, y], { h }, { layer: "LABELS" }),
+          dev: (name, x, y, r) => w.insert(name, [x, y], { attribs: r ? [att("REF", r, name === "CONN" ? [x, y + 47] : name === "TERM" ? [x - 15, y + 2] : [x + 9, y + 3.5], 6)] : [] }, D),
+          off: (x, y, to) => w.insert("OFFPAGE", [x, y], { attribs: [att("TO", to, [x + 3, y - 1.9], 3.8)] }, D),
+        });
+        return { name: `CTRL-0${k}.dxf`, text: w.toString() };
+      };
+      return [
+        sheet(1, "POWER DISTRIBUTION", ({ wire, dot, lab, dev, off }) => {
+          dev("CONN", 12, 63, "J1");
+          wire([32, 100], [228, 100]); off(228, 100, "SHEET 2"); lab("PWR 28V", 38, 101.2); lab("W101", 205, 101.2); // the net the clip traces
+          for (const [x, y] of [[82, 66], [146, 70], [196, 70]]) { dot(x, 100); wire([x, 100], [x, y]); }
+          dev("TERM", 74, 56, "TB2"); dev("COIL", 146, 52, "K1"); dev("LAMP", 196, 52, "DS1");
+          wire([32, 90], [118, 90], [118, 66]); lab("SIG A", 91, 91.2); lab("W103", 40, 91.2);
+          wire([32, 80], [56, 80], [56, 74]); dev("GND", 56, 74); lab("CHASSIS", 35, 81.2, 3.4);
+          wire([32, 70], [38, 70], [38, 36], [228, 36]); off(228, 36, "SHEET 2"); lab("RTN", 44, 37.2); lab("W102", 205, 37.2);
+          for (const x of [146, 196]) { dot(x, 36); wire([x, 46], [x, 36]); }
+        }),
+        sheet(2, "MOTOR CONTROL", ({ wire, dot, lab, dev, off }) => {
+          off(10, 100, "SHEET 1"); wire([43, 100], [196, 100], [196, 50]); lab("PWR 28V", 49, 101.2); lab("W101", 156, 101.2);
+          for (const x of [96, 146]) { dot(x, 100); wire([x, 100], [x, 70]); }
+          dev("MOTOR", 96, 52, "M1"); dev("COIL", 146, 52, "K2"); dev("TERM", 188, 40, "TB3"); lab("FAN 1", 105, 49.6, 3.4);
+          off(10, 36, "SHEET 1"); wire([43, 36], [146, 36], [146, 46]); dot(96, 36); wire([96, 46], [96, 36]); lab("RTN", 49, 37.2); lab("W102", 106, 37.2);
+          wire([220, 50], [220, 80], [228, 80]); off(228, 80, "SHEET 3"); lab("W110", 207.5, 81.2);
+        }),
+        sheet(3, "INDICATORS", ({ wire, lab, dev, off }) => {
+          off(10, 80, "SHEET 2"); wire([43, 80], [120, 80], [120, 70]); lab("W110", 49, 81.2);
+          dev("LAMP", 120, 52, "DS3"); wire([120, 46], [120, 36], [160, 36], [160, 30]); dev("GND", 160, 30); lab("FAN ON", 129, 49.6, 3.4);
+        }),
+      ];
+    },
+    async warm(page) {
+      await page.waitForFunction(() => !!window.__linework && !!window.__linework.files);
+      const files = await page.evaluate(this.sheets);
+      await page.evaluate(async (files) => { // as Linework's e2e does: a folder in this origin's private storage stands in for the one Open folder asks for
+        const dir = await (await navigator.storage.getDirectory()).getDirectoryHandle("control-panel", { create: true });
+        for (const f of files) { const w = await (await dir.getFileHandle(f.name, { create: true })).createWritable(); await w.write(f.text); await w.close(); }
+        window.showDirectoryPicker = async () => dir;
+      }, files);
+      const sheet = (n) => page.waitForFunction((n) => { const a = window.__linework; return a.doc && a.doc.name === n && !a.loading && a.edit.ready; }, n, { timeout: 30000 });
+      await page.click('.topbar [data-action="open-folder"]');
+      await sheet("CTRL-01.dxf");
+      await page.waitForFunction(() => { const s = window.__linework.sheets.status(); return s.indexed === 3 && !s.indexing; }, null, { timeout: 60000 });
+      // the sheet list closed; each sheet framed left of where the trace panel opens (the set keeps every sheet's view)
+      const frame = () => page.evaluate(() => window.__linework.zoomToWorld(-3.6, -5.45, 423.6, 145.45));
+      await page.click("#sheets-hide");
+      await page.keyboard.press("PageDown"); await sheet("CTRL-02.dxf"); await frame();
+      await page.keyboard.press("PageUp"); await sheet("CTRL-01.dxf"); await frame();
+      await page.keyboard.press("j"); // View > Trace
+      await page.waitForFunction(() => window.__linework.trace && window.__linework.trace.graph);
+      // screen points: rest, the PWR 28V wire, its "SHEET 2" off-page link, the same wire on sheet 2 (same frame)
+      this.px = await page.evaluate((pts) => pts.map(([x, y]) => { const [sx, sy] = window.__linework.worldToScreen(x, y), r = document.querySelector("#cv-overlay").getBoundingClientRect(); return [r.left + sx, r.top + sy]; }), [[68, 118], [68, 100], [244, 100], [76, 100]]);
+      await page.evaluate(() => { document.querySelector("#toasts").innerHTML = ""; document.activeElement.blur(); });
+      await page.mouse.move(...this.px[0]); await sleep(800);
+    },
+    async drive(page) {
+      const P = this.px;
+      let at = P[0];
+      const glide = async (to, ms) => { // eased, in real time
+        const from = at, t0 = Date.now();
+        for (let f = 0; f < 1;) { f = Math.min(1, (Date.now() - t0) / ms); const e = (1 - Math.cos(Math.PI * f)) / 2; await page.mouse.move(from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e); await sleep(16); }
+        at = to;
+      };
+      await sleep(900);
+      await glide(P[1], 600); await sleep(80); await page.mouse.click(...at); // a wire: its whole net lights up, the rest dims
+      await sleep(850);
+      await page.keyboard.press("h"); await glide(P[2], 900); await sleep(250); // Pan; the net's "SHEET 2" reference is a link
+      await page.mouse.click(...at); await sleep(250); // -> sheet 2
+      await page.keyboard.press("j"); await glide(P[3], 700); await sleep(80); await page.mouse.click(...at); // the same net, on sheet 2
+      await sleep(900); await glide(P[0], 700);
+    },
+  },
+
   // Little Airfield on Roblox can't run in a browser: its frames are recorded in Roblox Studio by
   // ../airfield-rbx/tools/art/capture_clip.py (a chase-cam landing, see clip.server.luau there) straight into
   // verify/clips-raw/airfield-roblox, then encoded here with --reencode.
@@ -268,7 +378,7 @@ async function capture(browser, slug, g, ff) {
   const server = await serve(root, g.api);
   const base = `http://127.0.0.1:${server.address().port}/`;
   const ctx = await browser.newContext({
-    viewport: { width: g.view[0], height: g.view[1] }, deviceScaleFactor: g.dpr, isMobile: true, hasTouch: true, reducedMotion: "no-preference",
+    viewport: { width: g.view[0], height: g.view[1] }, deviceScaleFactor: g.dpr, isMobile: true, hasTouch: true, reducedMotion: "no-preference", ...g.context,
   });
   await ctx.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/i, (route) => route.abort()); // offline: nothing leaves localhost
   if (g.init) await ctx.addInitScript(g.init);

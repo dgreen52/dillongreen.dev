@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linework case study · Dillon Green</title>
+<meta name="description" content="Case study: Linework, an open-source CAD viewer and editor that runs in the browser. DXF, DWG, MicroStation DGN and PDF; wire tracing, sheet sets, lossless DGN editing; nothing is uploaded.">
+<meta name="author" content="Dillon Green">
+<link rel="canonical" href="https://dillongreen.dev/linework.html">
+<meta name="theme-color" content="#06080b">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dillon Green">
+<meta property="og:title" content="Linework: an open-source CAD viewer and editor in the browser">
+<meta property="og:description" content="DXF, DWG, MicroStation DGN and PDF in a browser tab: trace wiring, measure, mark up and edit, with nothing uploaded. 338 automated tests, a 150 KB startup budget, GPL-3.0.">
+<meta property="og:url" content="https://dillongreen.dev/linework.html">
+<meta property="og:image" content="https://dillongreen.dev/assets/og/linework.png?v=52483b7eb0">
+<meta name="twitter:image:alt" content="Linework case study: an open-source CAD viewer and editor that runs in the browser">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Linework case study: an open-source CAD viewer and editor that runs in the browser">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Linework case study · Dillon Green">
+<meta name="twitter:description" content="DXF, DWG, MicroStation DGN and PDF in a browser tab: trace wiring, measure, mark up and edit, with nothing uploaded. 338 automated tests, a 150 KB startup budget, GPL-3.0.">
+<meta name="twitter:image" content="https://dillongreen.dev/assets/og/linework.png?v=52483b7eb0">
+
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/archivo.woff2?v=e3a28eade2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono.woff2?v=83c005d49d" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=e87a2befb6">
+<script src="assets/js/theme.js?v=39ed3b7b76"></script>
+</head>
+<body>
+<svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-l" viewBox="0 0 16 16"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 5.5 7 5.5 7-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 20 20"><path d="M16.5 12.2A6.8 6.8 0 0 1 7.8 3.5a6.8 6.8 0 1 0 8.7 8.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Dillon Green, home"><span class="brand-mark" aria-hidden="true">DG</span><span>Dillon Green</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="/projects/">Projects</a>
+      <a class="hide-md" href="/arcade/">Arcade</a>
+      <a class="hide-sm" href="/studio/">Studio</a>
+      <a class="hide-sm" href="/guestbook/">Guestbook</a>
+      <a class="hide-lg" href="./#practice">How I work</a>
+      <a class="hide-lg" href="./#experience">Experience</a>
+      <a class="hide-sm" href="Dillon_Green_Resume.pdf">Resume</a>
+      <button class="theme-btn term-btn" type="button" data-term aria-label="Open terminal" title="Terminal (press ` or /)">&gt;_</button>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch color theme">
+        <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <button class="theme-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" title="Menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article>
+    <header class="cs-hero">
+      <div class="wrap">
+        <a class="back" href="./#work"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg>ALL WORK</a>
+        <p class="kicker"><b>CASE STUDY</b> Open source · GPL-3.0</p>
+        <h1>Linework: CAD drawings in a browser tab</h1>
+        <p class="lead">Linework opens DXF, DWG, MicroStation DGN and PDF drawings in the browser. You can trace wiring, measure, mark up and edit, then save back to DXF or DGN, without installing anything or uploading a file. I designed and built it with AI coding agents under my review, and the source is on GitHub.</p>
+        <div class="cta cs-cta">
+          <a class="btn btn-primary" href="https://linework.dillongreen.dev" rel="noopener" data-project="linework">Open Linework <svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
+          <a class="btn" href="https://github.com/dgreen52/linework" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>Source on GitHub</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Formats</dt><dd>4<small>DXF · DWG · DGN · PDF</small></dd></div>
+          <div><dt>Uploads</dt><dd>0<small>drawings never leave the device</small></dd></div>
+          <div><dt>Tests</dt><dd>338<small>276 unit · 62 end-to-end</small></dd></div>
+          <div><dt>Startup</dt><dd>149 KB<small>gzip, under a tested 150 KB cap</small></dd></div>
+          <div><dt>Codebase</dt><dd>15.5k<small>lines of JS, zero dependencies</small></dd></div>
+          <div><dt>Big drawings</dt><dd>53k<small>entities, panning at 60 fps</small></dd></div>
+          <div><dt>Wire trace</dt><dd>&lt;50 ms<small>on that 53k drawing, test-gated</small></dd></div>
+          <div><dt>Works</dt><dd>Offline<small>installable web app</small></dd></div>
+        </dl>
+        <figure class="cs-media">
+          <div class="clip-frame clip-box" data-clip-webm="/assets/clips/linework.webm?v=32d528df23" data-clip-mp4="/assets/clips/linework.mp4?v=c9344888bf"><img src="assets/img/more/linework-trace.webp?v=c63f324bb7" srcset="assets/img/more/linework-trace-480.webp?v=3355b3609f 480w, assets/img/more/linework-trace.webp?v=c63f324bb7 960w" sizes="(max-width: 1199px) calc(100vw - 34px), 1100px" width="960" height="540" decoding="async" alt="Linework tracing a wire on a schematic: the PWR 28V net glows magenta from connector J1 to a terminal block, a relay, a lamp and an off-sheet link to sheet 2, with the net's length and five ends listed in a side panel."><span class="clip-hud" aria-hidden="true">▶ Live capture</span></div>
+          <figcaption>Live capture: a 28 V feed traced on sheet 1, then followed through its off-sheet reference onto sheet 2. The drawings are invented test sheets.</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <section class="cs-section" aria-labelledby="h-problem">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>01</b></p><h2 id="h-problem">Problem</h2></header>
+        <div class="prose">
+          <p>Most people who open a CAD drawing aren't drafting. They need to <strong>read it: follow a wire, check a dimension, red-line a correction.</strong></p>
+          <p>The drawings come as DGN, DWG and DXF files from desktop CAD packages that are expensive per seat and slow to install. Many online viewers work by uploading the file to someone's server, which rules them out for drawings that aren't public, and free tools that read MicroStation's DGN format are rare.</p>
+          <p>Linework's goal: open any of them in seconds, on any device, with no install and no upload, and make the everyday jobs of reading, measuring, marking up and small edits fast.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-does">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>02</b></p><h2 id="h-does">What it does</h2></header>
+        <div>
+          <ul class="feature-list">
+            <li><h3>Four formats, one viewer</h3><p>DXF R12–2018, DWG R13–2018, MicroStation DGN v7 in 2D and 3D, and PDF pages, where vector paths become real drawing items. The format is detected from the file's bytes, never its extension.</p></li>
+            <li><h3>Wire tracing</h3><p>Click a wire and everything connected to it lights up. Junction dots and T-joins connect; plain crossings don't. A panel lists the net's length, its ends (the pin on each part) and its labels.</p></li>
+            <li><h3>Sheet sets</h3><p>Open a folder and every sheet is indexed in the background. References like "SHEET 2" become links to that sheet, and text search runs across the whole set.</p></li>
+            <li><h3>Real editing</h3><p>Move, rotate, reshape, retype and draw, plus find and replace, MicroStation-style key-ins (XY=, DL=, DI=, AA=), mirror, scale, array and copy and paste between drawings.</p></li>
+            <li><h3>Lossless DGN saves</h3><p>Everything you didn't touch stays byte-for-byte where it was, and every save is read back before it's written. More on how below.</p></li>
+            <li><h3>Compare and print</h3><p>Revision compare shows what changed between two versions of a drawing. Vector printing to scale, from Letter to ANSI D or A4 to A1.</p></li>
+            <li><h3>Measure and mark up</h3><p>Distance, length and area with snaps. Clouds, arrows, callouts and notes are kept in a sidecar file, never written into the drawing.</p></li>
+            <li><h3>Offline and private</h3><p>Installable, works with no connection, and nothing is uploaded: no account, no server, no tracking.</p></li>
+          </ul>
+          <figure class="cs-media">
+            <div class="clip-frame"><img src="assets/img/more/linework.webp?v=f071b4cbca" srcset="assets/img/more/linework-480.webp?v=a12e9d79fe 480w, assets/img/more/linework.webp?v=f071b4cbca 960w" sizes="(max-width: 899px) calc(100vw - 34px), 760px" width="960" height="540" loading="lazy" decoding="async" alt="Linework in dark mode: a house floor plan with dimensions, room labels and red markup: revision clouds, arrows and a callout."></div>
+            <figcaption>Markup on a sample floor plan: revision clouds, arrows and a callout.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-arch">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>03</b></p><h2 id="h-arch">Architecture</h2></header>
+        <div>
+          <div class="prose">
+            <p>Linework is <strong>plain JavaScript modules with no framework, no build step and no runtime dependencies.</strong> The page hands each file to a Web Worker, which detects the format, parses it into one common model, expands blocks, builds a spatial index and batches the geometry for drawing. It posts the result back as transferable typed arrays, so the page never freezes while a big file loads.</p>
+            <p>Drawing is Canvas 2D. Each chunk of the drawing keeps one Path2D per style, so panning and zooming only change a transform and never rebuild geometry. Edits go into a live overlay and rebuild only the batches they touch. The DWG and PDF readers are big (2.1 MB and 0.66 MB compressed), so they load only when a file needs them, into caches that survive app updates.</p>
+          </div>
+          <figure class="diagram">
+            <!-- wide layout -->
+            <svg class="d-large" viewBox="0 0 1000 510" role="img" aria-labelledby="arch-t arch-d">
+              <title id="arch-t">Linework architecture</title>
+              <desc id="arch-d">Everything runs in the browser tab on the user's device. Files the user opens go to a parse worker, which uses the built-in DXF and DGN readers or loads the DWG reader (LibreDWG compiled to WebAssembly) or the PDF reader (pdf.js) on demand. The worker detects the format, builds one model, a spatial index and render batches, and sends them to the page as typed arrays. The page draws with Canvas 2D and runs the tracing, measuring, markup and editing tools. Saves are written back as DXF or as a patched DGN. A service worker keeps the app and the readers available offline. The only network traffic is the app's own files.</desc>
+              <defs>
+                <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow" d="M0 0 10 5 0 10z"/></marker>
+                <marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow a" d="M0 0 10 5 0 10z"/></marker>
+              </defs>
+              <rect class="d-group" x="10" y="50" width="980" height="420" rx="16"/>
+              <text class="d-g" x="30" y="76">BROWSER TAB · YOUR DEVICE</text>
+
+              <!-- left: files in and out, offline -->
+              <rect class="d-box" x="30" y="90" width="220" height="80" rx="10"/>
+              <text class="d-t" x="48" y="124">Your files</text>
+              <text class="d-s" x="48" y="148">open · drag · Open folder</text>
+              <rect class="d-box" x="30" y="230" width="220" height="80" rx="10"/>
+              <text class="d-t" x="48" y="264">Saved files</text>
+              <text class="d-s" x="48" y="288">DXF R2000 · DGN v7 patch</text>
+              <rect class="d-box" x="30" y="350" width="220" height="80" rx="10"/>
+              <text class="d-t" x="48" y="384">Service worker</text>
+              <text class="d-s" x="48" y="408">offline shell + readers</text>
+
+              <!-- core -->
+              <rect class="d-core" x="330" y="90" width="340" height="150" rx="12"/>
+              <text class="d-t" x="352" y="124">Parse worker</text>
+              <text class="d-s" x="352" y="150">format from the bytes, not the name</text>
+              <text class="d-s" x="352" y="172">read → one common model</text>
+              <text class="d-s" x="352" y="194">blocks · spatial index</text>
+              <text class="d-s" x="352" y="216">render batches</text>
+
+              <rect class="d-core" x="330" y="300" width="340" height="150" rx="12"/>
+              <text class="d-t" x="352" y="334">Page</text>
+              <text class="d-s" x="352" y="360">Canvas 2D · Path2D per chunk</text>
+              <text class="d-s" x="352" y="382">pan and zoom = a transform</text>
+              <text class="d-s" x="352" y="404">trace · measure · markup</text>
+              <text class="d-s" x="352" y="426">edits → live overlay</text>
+
+              <path class="d-line a" d="M500 240 V296" marker-end="url(#aha)"/>
+              <text class="d-s" x="512" y="274">typed arrays</text>
+
+              <!-- right: readers -->
+              <rect class="d-box" x="750" y="90" width="230" height="70" rx="10"/>
+              <text class="d-t" x="768" y="120">DXF · DGN v7</text>
+              <text class="d-s" x="768" y="144">built-in readers</text>
+              <rect class="d-box" x="750" y="180" width="230" height="70" rx="10"/>
+              <text class="d-t" x="768" y="210">DWG reader</text>
+              <text class="d-s" x="768" y="234">LibreDWG wasm · on demand</text>
+              <rect class="d-box" x="750" y="270" width="230" height="70" rx="10"/>
+              <text class="d-t" x="768" y="300">PDF reader</text>
+              <text class="d-s" x="768" y="324">pdf.js · on demand</text>
+
+              <path class="d-line" d="M250 130 H326" marker-end="url(#ah)"/>
+              <path class="d-line" d="M750 125 H674" marker-end="url(#ah)"/>
+              <path class="d-line" d="M750 215 H720 V150 H674" marker-end="url(#ah)"/>
+              <path class="d-line" d="M750 305 H700 V180 H674" marker-end="url(#ah)"/>
+              <path class="d-line" d="M330 330 H292 V270 H254" marker-end="url(#ah)" stroke-dasharray="4 4"/>
+              <path class="d-line" d="M250 390 H326" marker-end="url(#ah)"/>
+
+              <text class="d-s" x="750" y="384">solid: data in</text>
+              <text class="d-s" x="750" y="404">dashed: files written</text>
+              <text class="d-g" x="30" y="498">NETWORK: ONLY THE APP'S OWN FILES · CSP connect-src 'self'</text>
+            </svg>
+
+            <!-- narrow layout -->
+            <svg class="d-small" viewBox="0 0 340 610" role="img" aria-labelledby="arch-t2">
+              <title id="arch-t2">Linework architecture: files and on-demand readers feed a parse worker, which sends typed arrays to a Canvas 2D page; saves go back out as DXF or patched DGN, and a service worker keeps it all offline. Nothing leaves the device.</title>
+              <defs>
+                <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow" d="M0 0 10 5 0 10z"/></marker>
+                <marker id="aha2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-arrow a" d="M0 0 10 5 0 10z"/></marker>
+              </defs>
+              <text class="d-g" x="0" y="14">IN</text>
+              <rect class="d-box" x="0" y="24" width="164" height="62" rx="8"/>
+              <text class="d-t" x="10" y="50">Your files</text>
+              <text class="d-s" x="10" y="70">open · folder</text>
+              <rect class="d-box" x="176" y="24" width="164" height="62" rx="8"/>
+              <text class="d-t" x="186" y="50">Readers</text>
+              <text class="d-s" x="186" y="70">DWG · PDF on demand</text>
+              <path class="d-line" d="M82 86 V120" marker-end="url(#ah2)"/>
+              <path class="d-line" d="M258 86 V120" marker-end="url(#ah2)"/>
+
+              <rect class="d-group" x="0" y="106" width="340" height="320" rx="12"/>
+              <rect class="d-core" x="16" y="124" width="308" height="112" rx="10"/>
+              <text class="d-t" x="30" y="152">Parse worker</text>
+              <text class="d-s" x="30" y="176">format from the bytes</text>
+              <text class="d-s" x="30" y="196">one model · spatial index</text>
+              <text class="d-s" x="30" y="216">render batches</text>
+              <path class="d-line a" d="M170 236 V274" marker-end="url(#aha2)"/>
+              <text class="d-s" x="182" y="260">typed arrays</text>
+              <rect class="d-core" x="16" y="278" width="308" height="112" rx="10"/>
+              <text class="d-t" x="30" y="306">Page</text>
+              <text class="d-s" x="30" y="330">Canvas 2D · Path2D</text>
+              <text class="d-s" x="30" y="350">trace · measure · edit</text>
+              <text class="d-s" x="30" y="370">pan/zoom = transform</text>
+              <text class="d-g" x="16" y="414">BROWSER TAB · YOUR DEVICE</text>
+
+              <text class="d-g" x="0" y="462">OUT · OFFLINE</text>
+              <rect class="d-box" x="0" y="472" width="164" height="70" rx="8"/>
+              <text class="d-t" x="10" y="500">Saved files</text>
+              <text class="d-s" x="10" y="522">DXF · DGN patch</text>
+              <rect class="d-box" x="176" y="472" width="164" height="70" rx="8"/>
+              <text class="d-t" x="186" y="500">Service worker</text>
+              <text class="d-s" x="186" y="522">offline caches</text>
+              <path class="d-line" d="M82 426 V468" marker-end="url(#ah2)" stroke-dasharray="3 4"/>
+              <path class="d-line" d="M258 472 V430" marker-end="url(#ah2)"/>
+              <text class="d-s" x="0" y="576">solid: data in · dashed: files written</text>
+              <text class="d-s" x="0" y="598">network: the app's own files only</text>
+            </svg>
+            <figcaption>Simplified. Every box runs on the user's device.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-hard">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>04</b></p><h2 id="h-hard">The hard parts</h2></header>
+        <div class="prose">
+          <p><strong>Editing a DGN without rewriting it.</strong> A DGN v7 file is a stream of binary elements, and a viewer that re-encodes the whole file from what it shows on screen quietly loses everything it doesn't understand. Linework patches the original instead. An edited element gets its "deleted" bit set in place, and its new version is appended, rebuilt from its original bytes, so text node headers, linkages, graphic groups and fills survive. Untouched elements stay byte-for-byte at the same offset; a save with no edits is byte-identical, and a test proves it. Every written file is also read back by GDAL as an independent check. Coordinates that don't fit the format are refused rather than clamped, the first save writes a backup, and the new file is read back by Linework before it replaces the original.</p>
+          <p><strong>A DWG reader you can rebuild.</strong> DWG support is LibreDWG, a GPL C library, compiled to WebAssembly in a GitHub Actions workflow from pinned sources with a pinned Emscripten toolchain. Separate runs on different machines produce the same bytes, which replaced an earlier prebuilt binary whose source couldn't be reproduced. The build turns off eval, so the strict Content Security Policy only has to allow <code>'wasm-unsafe-eval'</code>. Along the way it works around LibreDWG bugs, such as a polyline call that drops the last vertex.</p>
+          <p><strong>Staying small and fast.</strong> The code that has to load before anything appears is capped at 150 KB gzip by a test, and it's at 149 KB today, so anything new loads lazily. On a 53,100-entity drawing, loading produces no main-thread long tasks, panning holds a median 16.7 ms per frame, and building the wire-trace graph stays under a 300 ms test gate.</p>
+          <p><strong>Proving "nothing leaves your device".</strong> The CSP only allows connections back to the app's own origin. A unit test fails if any <code>http(s)://</code> URL or remote fetch appears in the app or the vendored reader glue, and the end-to-end tests run under the real production CSP, including a negative control that proves the policy reaches the worker.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-eng">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>05</b></p><h2 id="h-eng">Engineering practices</h2></header>
+        <div>
+          <div class="prose">
+            <p>Linework was built with AI coding agents under my direction, with the design, the review and each release owned by me. <strong>The tests are the contract:</strong> a change ships only when both suites pass and the size budgets hold.</p>
+          </div>
+          <div class="checks">
+            <div class="check"><div class="n">276</div><div class="t">Unit tests</div><p>Node's built-in runner, no dependencies: DGN round trips, writers, the trace graph and random-edit fuzzing.</p></div>
+            <div class="check"><div class="n">62</div><div class="t">Browser end-to-end tests</div><p>Playwright in headless Edge under the production CSP, with performance gates on a 53k-entity drawing.</p></div>
+            <div class="check"><div class="n">58</div><div class="t">Synthetic fixtures</div><p>Every test drawing is generated by a script. Real drawings never enter the repository.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" aria-labelledby="h-now">
+      <div class="wrap cs-grid">
+        <header><p class="kicker"><b>06</b></p><h2 id="h-now">Where it stands</h2></header>
+        <div class="prose">
+          <p><strong>Version 0.5.1 is live at <a href="https://linework.dillongreen.dev" rel="noopener" data-project="linework">linework.dillongreen.dev</a></strong> and open source under GPL-3.0 on <a href="https://github.com/dgreen52/linework" rel="noopener">GitHub</a>, along with a Node entry point for using the readers outside the browser.</p>
+          <p>Known limits, stated plainly: DGN v8 isn't supported yet; DWG and PDF files can be read but are saved as DXF or DGN; and saved files are checked with GDAL but haven't yet been tested in AutoCAD or MicroStation.</p>
+          <p class="disclaimer">All drawings shown are invented samples.</p>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="foot" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 id="contact-title">Let's talk.</h2>
+        <p>Working on something in aviation, aerospace or industrial software where knowing the domain matters as much as shipping fast? I'd like to hear about it.</p>
+      </div>
+      <div class="foot-links">
+        <a class="btn btn-primary" href="mailto:dillon@dillongreen.dev"><svg aria-hidden="true"><use href="#i-mail"/></svg>dillon@dillongreen.dev</a>
+        <a class="btn" href="https://github.com/dgreen52" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg>github.com/dgreen52</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Dillon Green · Seattle, WA</span><span class="kana eol" aria-hidden="true">// END_OF_LINE · 接続終了</span>
+      <nav class="foot-nav" aria-label="Site"><a href="./">Home</a><a href="/projects/">Projects</a><a href="/arcade/">Arcade</a><a href="/studio/">Studio</a><a href="/guestbook/">Guestbook</a><a href="/now/">Now</a><a href="/privacy.html">Privacy</a><a href="Dillon_Green_Resume.pdf">Resume (PDF)</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=6bb877ad89" defer></script>
+<script src="assets/js/projects-data.js?v=f31493d660" defer></script>
+<script src="assets/js/fun.js?v=6b5928b62e" defer></script>
+<script src="assets/js/clips.js?v=34d6dda0e5" defer></script>
+</body>
+</html>
