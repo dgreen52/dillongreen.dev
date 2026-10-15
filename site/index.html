@@ -59,7 +59,6 @@
       <a class="hide-md" href="/arcade/">Arcade</a>
       <a class="hide-sm" href="/studio/">Studio</a>
       <a class="hide-sm" href="/guestbook/">Guestbook</a>
-      <a class="hide-lg" href="#practice">How I work</a>
       <a class="hide-lg" href="#experience">Experience</a>
       <a class="hide-sm" href="Dillon_Green_Resume.pdf">Resume</a>
       <button class="theme-btn term-btn" type="button" data-term aria-label="Open terminal" title="Terminal (press ` or /)">&gt;_</button>
@@ -83,7 +82,7 @@
           <p class="role">Flight simulator engineer · Software &amp; automation</p>
         </div>
         <div>
-          <p class="lead">Flight simulator engineer with 10 years in aviation. I build production software with AI agents <em>and own the architecture, review and testing that keep it running.</em></p>
+          <p class="lead">Flight simulator engineer with 10 years in aviation. I also make tools, apps and games, mostly with Claude Code.</p>
           <div class="cta">
             <a class="btn btn-primary" href="Dillon_Green_Resume.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Download resume</a>
             <a class="btn" href="https://github.com/dgreen52" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
@@ -157,8 +156,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="kicker"><b>01</b> Featured work</p>
-        <h2 id="work-title">Production software for aviation, and products people use.</h2>
-        <p>Each of these was built by me directing AI coding agents, with the architecture, review and sign-off owned by me.</p>
+        <h2 id="work-title">Some things I've built.</h2>
       </div>
 
       <div class="work-list">
@@ -308,44 +306,11 @@
     </div>
   </section>
 
-  <!-- ============ HOW I WORK ============ -->
-  <section id="practice" aria-labelledby="practice-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker"><b>02</b> How I work</p>
-        <h2 id="practice-title">AI writes most of the lines. I'm accountable for all of them.</h2>
-        <p>My workflow, in concrete terms.</p>
-      </div>
-      <div class="practice rail" data-rail-label="How I work">
-        <div>
-          <span class="num">A · PARALLEL AGENTS</span>
-          <h3>I run agents like a small team</h3>
-          <p>I split work into scoped tasks and run several Claude Code agents in parallel: one on a data migration, one on tests, one on UI. Then I review and integrate what they hand back, the way a tech lead would.</p>
-        </div>
-        <div>
-          <span class="num">B · OWNERSHIP</span>
-          <h3>I own architecture and review</h3>
-          <p>I decide the data model, the boundaries and what ships. I read the diffs. When something breaks in production, it's my problem, and I can debug it without the agent.</p>
-        </div>
-        <div>
-          <span class="num">C · QUALITY GATES</span>
-          <h3>Tests are the contract</h3>
-          <p>Every project has automated suites and a gate that only ratchets up: 340+ checks on PAR (including headless-browser end-to-end tests on a CDP driver I wrote), 460+ on Cookfold, 330+ on Linework. Agents never read real records: when they need to look at data they get a scrubbed copy, and test suites run against throwaway copies that only report pass/fail and counts.</p>
-        </div>
-        <div>
-          <span class="num">D · THE FACTORY</span>
-          <h3>A pipeline for the routine work</h3>
-          <p>A personal "factory" uses the Anthropic API to score product ideas, draft store listings and summarize reviews, so my build time goes into the product itself.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ EXPERIENCE ============ -->
   <section id="experience" aria-labelledby="xp-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="kicker"><b>03</b> Experience</p>
+        <p class="kicker"><b>02</b> Experience</p>
         <h2 id="xp-title">10 years in aviation, 8 hands-on with aircraft and the simulators that train their crews.</h2>
       </div>
       <ol class="xp" reversed>
@@ -416,7 +381,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=6bb877ad89" defer></script>
+<script src="assets/js/site.js?v=9029521fa6" defer></script>
 <script src="assets/js/projects-data.js?v=332ff35d4d" defer></script>
 <script src="assets/js/clips.js?v=34d6dda0e5" defer></script>
 <script src="assets/js/status.js?v=8c070a03aa" defer></script>

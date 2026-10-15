@@ -714,7 +714,7 @@
       ],
       "status": "live",
       "status_label": "Live · You are here",
-      "pitch": "Framework-free portfolio: static HTML, CSS and JS on Cloudflare Pages, with Pages Functions and D1 for the guestbook and studio form, a strict CSP, cookieless analytics, an in-browser ARINC 429 decoder and a hidden terminal with MIRROR-OS easter eggs. Built by directing AI coding agents, held to automated checks: cross-engine mobile overflow and layout-shift tests in Chromium and WebKit, form and XSS tests, link checks.",
+      "pitch": "Framework-free portfolio: static HTML, CSS and JS on Cloudflare Pages, with Pages Functions and D1 for the guestbook and studio form, a strict CSP, cookieless analytics, an in-browser ARINC 429 decoder and a hidden terminal with MIRROR-OS easter eggs. Built with Claude Code and a pile of automated checks: cross-engine mobile overflow and layout-shift tests in Chromium and WebKit, form and XSS tests, link checks.",
       "tags": [
         "Cloudflare Pages",
         "D1",

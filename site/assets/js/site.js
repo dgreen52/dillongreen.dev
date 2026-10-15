@@ -90,8 +90,7 @@
     var here = location.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
     var LINKS = [
       ["Home", "/", "01"], ["Projects", "/projects/", "02"], ["Arcade", "/arcade/", "03"], ["Studio", "/studio/", "04"],
-      ["How I work", "/#practice", "05"], ["Experience", "/#experience", "06"],
-      ["Guestbook", "/guestbook/", "07"], ["Now", "/now/", "08"]
+      ["Experience", "/#experience", "05"], ["Guestbook", "/guestbook/", "06"], ["Now", "/now/", "07"]
     ];
     var NS = "http://www.w3.org/2000/svg";
     var icon = function (d) {

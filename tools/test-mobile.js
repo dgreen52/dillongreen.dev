@@ -109,7 +109,7 @@ function audit() {
     check(await page.evaluate(() => getComputedStyle(document.documentElement).overflow === "hidden"), "page scroll is locked while open");
     check(await page.evaluate(() => !!document.activeElement.closest("dialog.menu")), "focus moves into the sheet");
     const links = await page.$$eval("dialog.menu .menu-nav a", (as) => as.map((a) => a.textContent));
-    check(["Projects", "Arcade", "Studio", "How I work", "Experience", "Guestbook", "Now"].every((t) => links.some((l) => l.includes(t))), "sheet lists the nav links: " + links.join(", "));
+    check(["Projects", "Arcade", "Studio", "Experience", "Guestbook", "Now"].every((t) => links.some((l) => l.includes(t))), "sheet lists the nav links: " + links.join(", "));
     check(await page.isVisible('dialog.menu a[href$="Dillon_Green_Resume.pdf"]') && await page.isVisible('dialog.menu a[href^="mailto:"]'), "sheet has resume + email");
     check((await page.getAttribute('dialog.menu a[aria-current="page"]', "href")) === "/now/", "current page is marked");
     await page.screenshot({ path: path.join(OUT, "m-menu-open-390-dark.png") });
@@ -174,21 +174,6 @@ function audit() {
     await page.screenshot({ path: path.join(OUT, "m-more-open-390-dark.png") });
     await more.click();
     check(!(await page.isVisible("#x-par")) && (await more.getAttribute("aria-expanded")) === "false", "Less closes it again");
-    // rails
-    for (const sel of ["#practice .rail"]) {
-      const r = await page.evaluate((s) => { const el = document.querySelector(s); const kids = [...el.children].map((c) => c.getBoundingClientRect());
-        return { scroll: el.scrollWidth > el.clientWidth, role: el.getAttribute("role"), tab: el.tabIndex, label: el.getAttribute("aria-label"), peek: kids[1].left < innerWidth && kids[1].right > innerWidth }; }, sel);
-      check(r.scroll && r.role === "region" && r.tab === 0 && r.label, `${sel}: scrolls sideways, focusable labelled region`);
-      check(r.peek, `${sel}: next card peeks in from the right edge`);
-    }
-    await page.locator("#practice .rail").scrollIntoViewIfNeeded();
-    await page.focus("#practice .rail");
-    const before = await page.$eval("#practice .rail", (e) => e.scrollLeft);
-    await page.keyboard.press("ArrowRight"); await page.waitForTimeout(400);
-    const after = await page.$eval("#practice .rail", (e) => e.scrollLeft);
-    check(after > before, `arrow keys scroll the rail (${before} -> ${after})`);
-    await page.$eval("#practice .rail", (e) => e.scrollLeft = 0);
-    await page.locator("#practice").screenshot({ path: path.join(OUT, "m-rail-practice-390-dark.png") });
     check(await page.isVisible('.see-all a[href="/projects/"]'), "home links to all projects");
     await ctx.close();
   }

@@ -103,12 +103,10 @@ const check = (ok, label) => { if (!ok) fails++; console.log((ok ? "ok " : "!! "
     await page.screenshot({ path: path.join(OUT, "wk-menu-390-dark.png"), caret: "initial" });
     await page.tap(".menu-x");
     check(!(await page.isVisible("dialog.menu[open]")), "menu closes in WebKit");
-    // a More button and a rail
+    // a More button
     await page.locator('.project .more-btn[aria-controls^="x-par"]').scrollIntoViewIfNeeded();
     await page.tap('.project .more-btn[aria-controls^="x-par"]');
     check(await page.isVisible("#x-par"), "More expands in WebKit");
-    const rail = await page.$eval("#practice .rail", (e) => e.scrollWidth > e.clientWidth && getComputedStyle(e).scrollSnapType.includes("x"));
-    check(rail, "card rail scrolls sideways with snap in WebKit");
     await ctx.close();
   }
 
