@@ -70,11 +70,6 @@
   <ul><li>Decodes and builds ARINC 429 data words (BNR, BCD, ISO-5, parity, bit-order detection) against a label database compiled from cited OEM manuals.</li></ul>
 </div>
 <div class="item">
-  <div class="row"><span><span class="name">Smart Mirror</span> <span class="sub">— Raspberry Pi magic mirror (hardware build in progress)</span></span></div>
-  <div class="stack">Python · Raspberry Pi · systemd · Chromium kiosk · PIR sensor</div>
-  <ul><li>Zero-dependency Python server and browser UI behind a two-way mirror: self-starting kiosk, cached proxying that never blanks on network loss, Wi-Fi presence detection, motion-sensor screen wake and phone-to-mirror notes over QR.</li></ul>
-</div>
-<div class="item">
   <div class="row"><span><span class="name">Dragon Realm Online</span> <span class="sub">— Real-time multiplayer browser game (<a href="https://dragonrealm.dillon-eu-green.workers.dev/">play</a>)</span></span></div>
   <div class="stack">JavaScript · Canvas · Cloudflare Durable Objects · WebSockets · D1</div>
   <ul><li>Live position sync, chat, trading and duels over hibernating WebSockets, with a player market stored in D1 (~11k lines).</li></ul>
@@ -84,23 +79,25 @@
   <div class="stack">JavaScript · Canvas (isometric, art drawn in code) · Playwright</div>
   <ul><li>Clear planes to land into the wind, fix pilot-reported squawks and grow a grass strip into a towered airport; pure rules engine with automated tests and iPhone-landscape end-to-end checks.</li></ul>
 </div>
-<p class="also"><b>Also built:</b> Mixtape Drift (rhythm street racer with a WebAudio synth band), <a href="https://surprisepass.pages.dev">surprisepass</a> (live, Stripe payments), halfsies (receipt-OCR bill splitter), and butter and beepbeach (canvas games). Portfolio: <a href="https://dillongreen.dev">dillongreen.dev</a>.</p>
+<p class="also"><b>Also built:</b> Smart Mirror (Raspberry Pi magic mirror), Mixtape Drift (rhythm street racer with a WebAudio synth band), <a href="https://surprisepass.pages.dev">surprisepass</a> (live, Stripe payments), halfsies (receipt-OCR bill splitter), and butter and beepbeach (canvas games). Portfolio: <a href="https://dillongreen.dev">dillongreen.dev</a>.</p>
 <div class="item">
   <h2>Experience</h2>
   <div class="row"><span class="name">Alaska Airlines</span><span class="meta">Seattle, WA</span></div>
   <div class="row role"><span>Flight Simulator Engineer</span><span class="meta">June 2025 – Present</span></div>
   <ul>
-    <li>Engineer for Boeing 737, 787 and Airbus A330 full flight simulators on CAE XR, R4, R5 and L3Harris platforms, holding each device to FAA qualification standards.</li>
+    <li>Engineer for Boeing 737, 787 and Airbus A330 full flight simulators on CAE XR, R4, R5 and L3Harris platforms, holding each training device (FSTD) to FAA qualification standards under 14 CFR Part 60, including running and supporting QTG testing.</li>
     <li>Lead the summer intern team building a standalone MPIC test bench: 16 MPICs in a dedicated I/O chassis, driven by a repurposed Windows Server 2019 sim node on its own 48-port network. The bench tests and calibrates I/O and checks aircraft panels from CAE's OneUI without taking a training device offline; loading the aircraft simulation onto it is the next phase.</li>
+    <li>Have taken part in numerous simulator acceptances, FAA evaluations and initial qualifications, including in-plant acceptance at CAE in Montreal.</li>
     <li>Write code-level fixes across simulator platforms for faults that hardware or configuration changes can't resolve.</li>
-    <li>Design and implement MPIC interface modifications that improve system reliability.</li>
+    <li>Primary troubleshooter for IOS and interface faults (cockpit I/O to the simulation). Lead interface modifications end to end: hardware, cabling, drawings and interface software packages, including the 2KU ground control panel on five simulators.</li>
     <li>Built and deployed PAR, the department's parts, procurement and work-order platform (see Software Projects).</li>
-    <li>Work with regulatory and pilot-training teams to sustain FAA-mandated qualification.</li>
+    <li>Fly the 737, 787 and A330 simulators for the daily preflight check, and work with regulatory and pilot-training teams to sustain FAA-mandated qualification.</li>
+    <li>Work rotating shifts in a 24/7 training operation, troubleshooting across interface, IOS, motion and visual systems.</li>
   </ul>
-  <div class="row role"><span>Flight Simulator Technician III</span><span class="meta">2022 – June 2025</span></div>
+  <div class="row role"><span>Flight Simulator Technician II / III</span><span class="meta">Feb 2022 – June 2025</span></div>
   <ul>
     <li>Maintained and troubleshot CAE and L3Harris full flight simulators, clearing time-critical faults before scheduled training sessions.</li>
-    <li>Integrated new hardware through MPIC interface management; subject-matter expert for ISS/IOS issues.</li>
+    <li>Integrated new hardware through MPIC interface management; primary troubleshooter for ISS/IOS issues.</li>
     <li>Resolved recurring discrepancies from schematics, wiring diagrams and pilot handbooks; kept FAA qualification records.</li>
   </ul>
 </div>
@@ -123,7 +120,7 @@
   <li><b>Languages:</b> Python, JavaScript, Swift, SQL, PowerShell; working knowledge of C++, C#, Fortran</li>
   <li><b>Platforms:</b> Flask, SQLite/PostgreSQL, Cloudflare Workers, Capacitor (iOS &amp; Android), RevenueCat, GDAL</li>
   <li><b>Engineering practice:</b> automated regression and headless-browser testing, CI (Codemagic), data migration and reconciliation, backup/restore, Windows service deployment</li>
-  <li><b>Aviation:</b> Boeing 737/787 and Airbus A320/A330 systems, CAE XR/R4/R5 and L3Harris simulators, MPIC and ISS/IOS, ARINC 429, electrical schematics, FAA simulator qualification</li>
+  <li><b>Simulation &amp; aviation:</b> CAE XR/R4/R5 and L3Harris full flight simulators; MPIC interface and ISS/IOS; working knowledge of motion and visual systems; Boeing 737/787 and Airbus A320/A330 systems; ARINC 429; electrical schematics and vendor drawings; FAA simulator qualification (14 CFR Part 60, QTGs)</li>
   <li><b>Certification:</b> CAE XR Maintenance Certificate</li>
 </ul>
 </body>
