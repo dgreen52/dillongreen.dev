@@ -789,6 +789,50 @@
       ],
       "launch_line": "Pick a hero, make a room, send the link.",
       "desc": "tinyduel: 1v1 pixel platform fighter, online rooms (play tinyduel)"
+    },
+    {
+      "slug": "crittercup",
+      "name": "crittercup",
+      "aliases": [
+        "crittercup",
+        "critters"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "A pixel critter battler. Pick three, battle a friend through a room link, or take on six gyms and the Champion.",
+      "more": "Twelve original critters across six types, thirty moves, burns, sleep, paralysis and stat boosts. Both players pick a move each turn and the server plays the turn out, so it works fine on a phone or a slow connection. Single player has a stadium lobby with people to talk to, six gyms with a trainer and a leader each, badges, and a Champion at the end.",
+      "tags": [
+        "Multiplayer",
+        "Turn-based",
+        "Durable Objects",
+        "Pixel art"
+      ],
+      "thumb": {
+        "src": "more/crittercup.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "crittercup: a bear cub faces a snail across a stadium field, four type-colored move buttons along the bottom.",
+        "fit": "cover",
+        "focus": "50% 45%"
+      },
+      "url": "https://crittercup.dillon-eu-green.workers.dev/",
+      "live_label": "crittercup…workers.dev",
+      "play": true,
+      "arcade": {
+        "order": 7
+      },
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "launch_line": "Pick three. Good luck at the Kiln Gym.",
+      "desc": "crittercup: pixel critter battler, friend rooms and gyms (play crittercup)"
     }
   ]
 }

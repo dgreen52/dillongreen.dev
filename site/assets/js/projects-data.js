@@ -277,5 +277,20 @@
   "cats": [
    "games"
   ]
+ },
+ {
+  "slug": "crittercup",
+  "name": "crittercup",
+  "aliases": [
+   "crittercup",
+   "critters"
+  ],
+  "url": "https://crittercup.dillon-eu-green.workers.dev/",
+  "play": true,
+  "line": "Pick three. Good luck at the Kiln Gym.",
+  "desc": "crittercup: pixel critter battler, friend rooms and gyms (play crittercup)",
+  "cats": [
+   "games"
+  ]
  }
 ]; })();

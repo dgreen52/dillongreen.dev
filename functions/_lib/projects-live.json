@@ -85,5 +85,12 @@
   "url": "https://tinyduel.dillon-eu-green.workers.dev/",
   "kind": "workers",
   "service": "tinyduel"
+ },
+ {
+  "slug": "crittercup",
+  "name": "crittercup",
+  "url": "https://crittercup.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "crittercup"
  }
 ]
