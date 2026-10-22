@@ -78,5 +78,12 @@
   "url": "https://halfsies.dillon-eu-green.workers.dev",
   "kind": "workers",
   "service": "halfsies"
+ },
+ {
+  "slug": "tinyduel",
+  "name": "tinyduel",
+  "url": "https://tinyduel.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "tinyduel"
  }
 ]

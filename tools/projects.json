@@ -745,6 +745,50 @@
         }
       ],
       "desc": "dillongreen.dev itself (open site)"
+    },
+    {
+      "slug": "tinyduel",
+      "name": "tinyduel",
+      "aliases": [
+        "tinyduel",
+        "duel"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "A tiny pixel duel for two. Make a room, send the link, best of three.",
+      "more": "Slash, block, dash and throw fireballs. Raise your shield right before a hit to parry: slashes stun the attacker and fireballs bounce back. The server runs every match, so both players see the same fight. There's a practice bot for when nobody's around, and touch controls for phones.",
+      "tags": [
+        "Multiplayer",
+        "Durable Objects",
+        "Pixel art",
+        "Synth audio"
+      ],
+      "thumb": {
+        "src": "more/tinyduel.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "tinyduel: a frog and a knight trading hits next to the arena fence, damage numbers floating over them.",
+        "fit": "cover",
+        "focus": "70% 50%"
+      },
+      "url": "https://tinyduel.dillon-eu-green.workers.dev/",
+      "live_label": "tinyduel…workers.dev",
+      "play": true,
+      "arcade": {
+        "order": 6
+      },
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "launch_line": "Pick a hero, make a room, send the link.",
+      "desc": "tinyduel: 1v1 pixel duel, online rooms (play tinyduel)"
     }
   ]
 }
