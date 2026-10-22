@@ -273,7 +273,7 @@
   "url": "https://tinyduel.dillon-eu-green.workers.dev/",
   "play": true,
   "line": "Pick a hero, make a room, send the link.",
-  "desc": "tinyduel: 1v1 pixel duel, online rooms (play tinyduel)",
+  "desc": "tinyduel: 1v1 pixel platform fighter, online rooms (play tinyduel)",
   "cats": [
    "games"
   ]
