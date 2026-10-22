@@ -287,8 +287,8 @@
   ],
   "url": "https://crittercup.dillon-eu-green.workers.dev/",
   "play": true,
-  "line": "Pick three. Good luck at the Kiln Gym.",
-  "desc": "crittercup: pixel critter battler, friend rooms and gyms (play crittercup)",
+  "line": "Grab a starter from Coach Rook. Good luck at the Kiln Gym.",
+  "desc": "crittercup: pixel critter world with catching, gyms and live players (play crittercup)",
   "cats": [
    "games"
   ]

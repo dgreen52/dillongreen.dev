@@ -802,10 +802,11 @@
       ],
       "status": "live",
       "status_label": "Live",
-      "pitch": "A pixel critter battler. Pick three, battle a friend through a room link, or take on six gyms and the Champion.",
-      "more": "Twelve original critters across six types, thirty moves, burns, sleep, paralysis and stat boosts. Both players pick a move each turn and the server plays the turn out, so it works fine on a phone or a slow connection. Single player has a stadium lobby with people to talk to, six gyms with a trainer and a leader each, badges, and a Champion at the end.",
+      "pitch": "A pixel critter world. Pick a starter, catch critters in the tall grass, earn badges, and challenge the coworkers you bump into around town.",
+      "more": "Walk from Cupton out across three routes to Bayview, Voltworks and the Summit. Twelve original critters across six types and thirty moves, with burns, sleep, paralysis and stat boosts. Catch them with Cups, level them up, heal at the Critter Center, and take on six gyms and the Champion. Everyone online shares the same world, so you see other trainers walking around, can chat, and can challenge them to a Cup-rules battle. Your progress saves in the browser, and it plays on a phone with an on-screen pad.",
       "tags": [
         "Multiplayer",
+        "Open world",
         "Turn-based",
         "Durable Objects",
         "Pixel art"
@@ -831,8 +832,8 @@
           "style": "btn"
         }
       ],
-      "launch_line": "Pick three. Good luck at the Kiln Gym.",
-      "desc": "crittercup: pixel critter battler, friend rooms and gyms (play crittercup)"
+      "launch_line": "Grab a starter from Coach Rook. Good luck at the Kiln Gym.",
+      "desc": "crittercup: pixel critter world with catching, gyms and live players (play crittercup)"
     }
   ]
 }
