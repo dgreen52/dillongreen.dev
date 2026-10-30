@@ -92,5 +92,12 @@
   "url": "https://crittercup.dillon-eu-green.workers.dev/",
   "kind": "workers",
   "service": "crittercup"
+ },
+ {
+  "slug": "sixfold",
+  "name": "Sixfold",
+  "url": "https://sixfold.dillon-eu-green.workers.dev/",
+  "kind": "workers",
+  "service": "sixfold"
  }
 ]

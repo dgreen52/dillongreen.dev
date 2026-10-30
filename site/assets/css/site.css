@@ -1762,4 +1762,5 @@ html:not(.js) .ws-feed > .ws-msg { margin: 0; height: auto; border: 0; }
 .thumb img.focus-this-site { object-position: 50% 0%; }
 .thumb img.focus-tinyduel { object-position: 50% 55%; }
 .thumb img.focus-crittercup { object-position: 50% 45%; }
+.thumb img.focus-sixfold { object-position: 50% 50%; }
 /* /build:focus */

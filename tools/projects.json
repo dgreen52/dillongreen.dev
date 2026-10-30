@@ -834,6 +834,50 @@
       ],
       "launch_line": "Grab a starter from Coach Rook. Good luck at the Kiln Gym.",
       "desc": "crittercup: pixel critter world with catching, gyms and live players (play crittercup)"
+    },
+    {
+      "slug": "sixfold",
+      "name": "Sixfold",
+      "aliases": [
+        "sixfold",
+        "hexagon"
+      ],
+      "cats": [
+        "games"
+      ],
+      "status": "live",
+      "status_label": "Live",
+      "pitch": "Spin around a shape-shifting arena and slip through the gaps as the walls close in. How long can you last?",
+      "more": "You are a small triangle orbiting a pulsing hexagon. Walls close in from every side; slip through the gaps. The arena spins, flips, lurches, leans back, and later turns into a pentagon or a square mid-run. Three modes, a hyper version of each for anyone who lasts 60 seconds, ten wall patterns, and a soundtrack synthesized live in the browser that the whole arena pulses to.",
+      "tags": [
+        "Canvas",
+        "Web Audio",
+        "Procedural music",
+        "Arcade"
+      ],
+      "thumb": {
+        "src": "more/sixfold.webp",
+        "w": 960,
+        "h": 540,
+        "alt": "Sixfold: rings of bright green walls close in on a small hexagon at the center of a spinning, striped arena.",
+        "fit": "cover",
+        "focus": "50% 50%"
+      },
+      "url": "https://sixfold.dillon-eu-green.workers.dev/",
+      "live_label": "sixfold…workers.dev",
+      "play": true,
+      "arcade": {
+        "order": 8
+      },
+      "actions": [
+        {
+          "text": "Play",
+          "href": "@url",
+          "style": "btn"
+        }
+      ],
+      "launch_line": "Turn. Dodge. Survive. Sixty seconds unlocks hyper.",
+      "desc": "Sixfold: spin-to-survive arcade game in a shape-shifting arena (play Sixfold)"
     }
   ]
 }

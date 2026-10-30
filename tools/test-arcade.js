@@ -53,7 +53,7 @@ const GAME_HOST = /^https:\/\/[a-z0-9-]+\.dillon-eu-green\.workers\.dev\//;
     const { ctx, page, game } = await open({ width: 1440, height: 900 }, { reduced: true });
     const ids = await page.$$eval("[data-cab]", (cs) => cs.map((c) => c.id));
     check(ids.join() === GAMES.map((g) => g.slug).join(), `cabinets in arcade.order: ${ids.join(", ")}`);
-    check(ids.join() === "butter,beepbeach,mixtape,airfield,fernwood", "butter, beepbeach, Mixtape Drift, Little Airfield, Fernwood");
+    check(ids.join() === "butter,beepbeach,mixtape,airfield,fernwood,tinyduel,crittercup,sixfold", "all eight cabinets, in order");
     const embeds = await page.$$eval("[data-cab]", (cs) => cs.map((c) => c.getAttribute("data-embed")));
     check(embeds.every((u, i) => u === GAMES[i].url), "each cabinet embeds its projects.json URL");
     check((await frames(page)).length === 0 && game.requests.length === 0, "nothing from any game loads before Play (no frame, no request)");

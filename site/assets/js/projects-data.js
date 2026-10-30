@@ -292,5 +292,20 @@
   "cats": [
    "games"
   ]
+ },
+ {
+  "slug": "sixfold",
+  "name": "Sixfold",
+  "aliases": [
+   "sixfold",
+   "hexagon"
+  ],
+  "url": "https://sixfold.dillon-eu-green.workers.dev/",
+  "play": true,
+  "line": "Turn. Dodge. Survive. Sixty seconds unlocks hyper.",
+  "desc": "Sixfold: spin-to-survive arcade game in a shape-shifting arena (play Sixfold)",
+  "cats": [
+   "games"
+  ]
  }
 ]; })();
