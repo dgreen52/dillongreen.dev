@@ -37,7 +37,7 @@
   "url": "https://pocket429.dillongreen.dev",
   "line": "Opening pocket429 …",
   "anchor": "#p-429",
-  "desc": "ARINC 429 decoder, iOS app in App Store review (pocket429.dillongreen.dev)",
+  "desc": "ARINC 429 decoder for iPhone, on the App Store (pocket429.dillongreen.dev)",
   "cats": [
    "aviation",
    "apps"

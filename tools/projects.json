@@ -96,8 +96,8 @@
         "aviation",
         "apps"
       ],
-      "status": "review",
-      "status_label": "In App Store review",
+      "status": "live",
+      "status_label": "On the App Store",
       "pitch": "ARINC 429 decoder and word builder for avionics technicians, with on-device OCR.",
       "tags": [
         "JavaScript",
@@ -117,14 +117,19 @@
       "live_label": "pocket429.dillongreen.dev",
       "actions": [
         {
-          "text": "See it",
-          "href": "@url",
+          "text": "App Store",
+          "href": "https://apps.apple.com/app/id6821560823",
           "style": "btn"
+        },
+        {
+          "text": "Website",
+          "href": "@url",
+          "style": "link"
         }
       ],
       "home_anchor": "#p-429",
       "launch_line": "Opening pocket429 …",
-      "desc": "ARINC 429 decoder, iOS app in App Store review (pocket429.dillongreen.dev)"
+      "desc": "ARINC 429 decoder for iPhone, on the App Store (pocket429.dillongreen.dev)"
     },
     {
       "slug": "crumb",
